@@ -62,3 +62,24 @@ Checked word by word on 2026-11-12:
 | Inkling acts through one `python(code)` function tool (rendered as one fenced block, same rules) | Inkling 2 Small with no tools ends its turn after announcing an action: 0 fenced blocks in fresh samples of turn 1 vs tool calls in 3/3 samples with the tool (2026-11-12). The fence-format Inkling runs are kept as a pilot (`results/abl/pilot_fence_format/`); their refusal texts were genuine replies, their missing-code turns were harness-induced |
 | Replies bounced by EXPLAIN EVERY STEP don't count toward the 40-reply cap | The authors' rule is kept unchanged (< 150 chars of prose -> block not run, at most twice in a row). Under their 600-reply cap a bounce is free; under our 40 it cost Inkling about half its replies (3 of its first 6). Hard stop at 120 total replies |
 | Arm (b), research context | One fixed, truthful paragraph (`CONTEXT` in `abl/agent.py`, frozen before any context-arm run), naming no method; added after Inkling declined the neutral task in 2 of 3 pilot runs. Reported as a separate arm, never tuned |
+
+## Metric references (checked 2026-11-12)
+
+**KL damage** (`abl/score.py: first_token_logprobs, kl_vs_base`) matches Heretic's implementation exactly
+(`p-e-w/heretic`, `src/heretic/scorers/kl_divergence.py` + `model.get_logits`): first generated token's log-softmax
+on `mlabonne/harmless_alpaca` `test[:100]` (`text` column), `F.kl_div(edited_logprobs, baseline_logprobs,
+reduction="batchmean", log_target=True)`, i.e. KL(baseline || edited) averaged over prompts. Young 2026
+(arXiv 2512.13655) reports the same quantity ("first-token prediction divergence ... on 100 harmless prompts") for
+Heretic runs on 7-14B models: 0.043-1.646. Arditi et al. report cross-entropy instead; we report Alpaca CE as well.
+Remaining difference: chat template / system prompt details may differ from Heretic's defaults.
+
+**JailbreakBench reference numbers** (Arditi et al. pipeline, `andyrdt/refusal_direction/pipeline/runs/*/completions/
+jailbreakbench_{baseline,ablation}_evaluations.json`, substring scoring; refusal = 1 - substring success rate):
+
+| Model | Refusal, no intervention | Refusal, directional ablation |
+|---|---|---|
+| Qwen 1.8B chat | 0.70 | 0.01 |
+| Gemma 2B it | 0.91 | 0.00 |
+| Llama-2 7B chat | 0.97 | 0.07 |
+| Llama-3 8B Instruct | 0.95 | 0.00 (paper Table 10: 0.01) |
+| Yi 6B chat | 0.62 | 0.02 |
