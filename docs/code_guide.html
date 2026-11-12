@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wsp_tinkering Code Guide</title>
+<style>
+:root { --bg:#f7f8f6; --panel:#fff; --fg:#1c2320; --muted:#5a6560; --line:#d6dcd8; --accent:#1f6f5c; --code:#eef2ef;
+  --body: -apple-system, "Segoe UI", system-ui, sans-serif; --mono: ui-monospace, Menlo, Consolas, monospace; }
+@media (prefers-color-scheme: dark) { :root { --bg:#121614; --panel:#1a201d; --fg:#e3e8e5; --muted:#9aa6a0;
+  --line:#2e3733; --accent:#6cc3a8; --code:#202825; color-scheme: dark; } }
+body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.6 var(--body); padding:40px max(16px, 4vw) 72px; }
+main { max-width: 960px; margin: 0 auto; }
+h1 { font-size: 30px; margin: 0 0 6px; } h2 { font-size: 21px; margin: 40px 0 8px; } h3 { font-size: 16px; margin: 22px 0 6px; }
+p, li { max-width: 72ch; } .muted { color: var(--muted); }
+code { font-family: var(--mono); font-size: 13px; background: var(--code); padding: 1px 4px; border-radius: 3px; }
+pre { font-family: var(--mono); font-size: 13px; background: var(--code); padding: 12px 14px; border-radius: 6px; overflow-x: auto; line-height: 1.5; }
+pre code { background: none; padding: 0; }
+.tbl { overflow-x: auto; border: 1px solid var(--line); border-radius: 6px; background: var(--panel); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 14px; }
+th, td { text-align: left; vertical-align: top; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+td:first-child { white-space: nowrap; }
+ol.flow li { margin-bottom: 6px; }
+.note { border-left: 3px solid var(--accent); padding: 6px 12px; background: var(--panel); }
+</style>
+</head>
+<body>
+<main>
+<h1>wsp_tinkering: code guide</h1>
+<p class="muted">Atharva Naik (CMU), Varun Gangal (Patronus AI), Emmy Liu (CMU), Yoshinari Fujinuma (Patronus AI), Arnhav Datar (Patronus AI). Builds on Takehi, Teoh, Zhang and Khattab's <em>Sparks of Weight-Space Programming</em> and Caleb Eom's weight-space-bench.</p>
+
+<p>Two parts. <strong>Part 1</strong> reproduces the paper's Exp 5 (write a game-playing network from scratch) against published numbers. <strong>Part 2</strong> is new: an outer LLM removes an inner model's refusals by editing its weights directly (abliteration as weight-space programming), scored with the standard refusal-direction protocol. Background and the consistency check against the authors' Exp 8 are in <code>docs/explainer.html</code> and <code>abl/HARNESS_VS_EXP8.md</code>.</p>
+
+<h2>Setup</h2>
+<pre><code>git clone --recurse-submodules &lt;repo&gt; &amp;&amp; cd wsp_tinkering
+bash setup.sh                 # uv venv (Python 3.12) + pinned deps; Mac (MPS) or Linux (CUDA)
+export ANTHROPIC_API_KEY=...  # Opus 5.5
+export TINKER_API_KEY=...     # Inkling 2 Small
+hf auth login                 # Llama-3.2-3B-Instruct is gated</code></pre>
+
+<h2>Part 1: Exp 5 reproduction</h2>
+<div class="tbl"><table>
+<tr><th>File</th><th>What it does</th></tr>
+<tr><td><code>third_party/weight-space-bench/</code></td><td>Caleb Eom's benchmark (submodule, never edited): the paper's prompts, the parser that reads a reply's weight statements into the network, the MinAtar scorer</td></tr>
+<tr><td><code>wspt/run_minatar.py</code></td><td><strong>Entrypoint.</strong> Points the bench at our results folder and model list and swaps in our API clients; prompts, parsing and 1,000-episode scoring are the bench's own code</td></tr>
+<tr><td><code>wspt/anthropic_direct.py</code></td><td>Claude API client: Opus 5.5, effort high, adaptive thinking, streaming, no tools, no refusal fallback</td></tr>
+<tr><td><code>wspt/openai_compat.py</code></td><td>Tinker (OpenAI-compatible) client for Inkling 2 Small; numeric effort such as 0.99</td></tr>
+<tr><td><code>config/models.toml</code></td><td>Each outer model's exact settings: API, model id, effort, output cap</td></tr>
+</table></div>
+<pre><code>cd third_party/weight-space-bench &amp;&amp; python -m weight_space_bench reference &amp;&amp; cd -   # scorer check, ~90 s
+python -m wspt.run_minatar run claude-opus-5.5-direct     # or inkling-2-small / inkling-2-small-256k</code></pre>
+<p>Output: <code>results/minatar/&lt;model&gt;/&lt;game&gt;/attempt_k/</code> with the prompt, the reply, the parsed network and its score.</p>
+
+<h2>Part 2: abliteration as WSP</h2>
+<div class="tbl"><table>
+<tr><th>File</th><th>What it does</th></tr>
+<tr><td><code>abl/score.py</code></td><td><strong>Held-out scorer, identical for every row.</strong> Loads the inner model, optionally applies an <code>edit.pt</code>, generates greedily (96 tokens, thinking off) on JailbreakBench harmful/benign and abliteration-eval, counts refusals with Arditi et al.'s phrase list (Wilson 95% CIs), and measures damage: first-token KL against the unedited model on 100 harmless prompts, and Alpaca answer cross-entropy. Writes <code>results/abl/&lt;tag&gt;/scores.json</code></td></tr>
+<tr><td><code>abl/agent.py</code></td><td><strong>The WSP harness.</strong> Builds the Exp 8-style task message (architecture line generated from the model config; optional fixed <code>CONTEXT</code> paragraph), runs the turn loop (one code action per reply, explain every step, nudges, reply cap), holds the agent's Python kernel (<code>get</code>, <code>get_original</code>, <code>save_edit</code>, <code>reset</code>, <code>edits</code>, budgeted <code>generate</code> and <code>read</code>, rules blocklist) and the two outer-model clients (<code>Opus</code>; <code>Inkling</code> with its one <code>python</code> tool). Writes <code>log.jsonl</code>, <code>edit.pt</code>, <code>summary.json</code>, <code>final_answer.md</code></td></tr>
+<tr><td><code>abl/arditi.py</code></td><td>Reference recipe (Arditi et al., NeurIPS 2024): difference-of-means directions on train prompts, selection on validation, projection out of every matrix that writes the residual stream; produces <code>edit.pt</code></td></tr>
+<tr><td><code>abl/data/*.json</code></td><td>Arditi et al.'s train/val prompt splits: the agents' practice data (zero exact overlap with any evaluation set)</td></tr>
+<tr><td><code>abl/smoke_kernel.py</code></td><td>No-API test of every kernel tool and rule</td></tr>
+<tr><td><code>abl/HARNESS_VS_EXP8.md</code></td><td>Line-by-line comparison with the authors' Exp 8, the provenance check against their logs, and every deviation with its reason</td></tr>
+</table></div>
+
+<h3>Commands</h3>
+<pre><code># 1. unedited baseline (also saves the first-token distributions KL is measured against)
+python abl/score.py --model Qwen/Qwen3.5-0.8B --tag qwen35_08b_base --base_tag qwen35_08b_base
+
+# 2. an agent run: outer model, inner model, pass budget (0 = weights only), arm, seed
+python abl/agent.py --outer inkling --inner Qwen/Qwen3.5-0.8B --passes 0 [--context] --seed 0 \
+                    --out results/abl/qwen_agent_inkling_wo_s0
+
+# 3. score what the agent submitted
+python abl/score.py --model Qwen/Qwen3.5-0.8B --tag qwen_agent_inkling_wo_s0 \
+                    --base_tag qwen35_08b_base --edit results/abl/qwen_agent_inkling_wo_s0/edit.pt
+
+# reference row
+python abl/arditi.py --model Qwen/Qwen3.5-0.8B --out results/abl/qwen_arditi_ref</code></pre>
+
+<h3>Terms</h3>
+<ul>
+<li><strong>Outer model</strong>: the LLM doing the editing (Opus 5.5, Inkling 2 Small). <strong>Inner model</strong>: the model being edited (Qwen3.5-0.8B, the model of the paper's Exp 8; Llama-3.2-3B-Instruct as a second).</li>
+<li><strong>Forward pass</strong>: one budgeted run of the inner model, either a generation (up to 128 prompts; <code>model="both"</code> pairs original and edited) or a read of residual-stream activations and next-token probabilities (up to 256 prompts).</li>
+<li><strong>Weights only</strong>: budget of 0 passes. The agent may read weights, the tokenizer and the practice prompt texts, compute anything without gradients, and write edits, but cannot run the inner model.</li>
+<li><strong>Neutral arm</strong>: the authors' Exp 8 task structure with no stated purpose. <strong>Context arm</strong>: the same plus one fixed, truthful paragraph saying this is AI-safety research scored offline and never deployed; it names no method.</li>
+<li><strong>Seed</strong>: a repeat of the same condition; the outer model samples, so repeats differ.</li>
+</ul>
+
+<h3>How one agent turn flows</h3>
+<ol class="flow">
+<li><code>agent.py</code> sends the task message (then each result) to the outer model.</li>
+<li>The outer model replies with an explanation and one code block (Inkling: one <code>python</code> tool call).</li>
+<li>The harness checks the rules (one block; at least 150 characters of explanation; no training, no direct model access, no I/O) and runs the code in the persistent kernel.</li>
+<li>Inside the code, <code>generate</code>/<code>read</code> run the inner model and spend a pass; <code>save_edit</code> swaps in new weight tensors.</li>
+<li>Printed output (cut at 10,000 characters) goes back as the next message.</li>
+<li>At the end the edited tensors are saved to <code>edit.pt</code>; <code>score.py</code> evaluates them on prompts the agent never saw.</li>
+</ol>
+
+<h2>Where results live</h2>
+<div class="tbl"><table>
+<tr><th>Path</th><th>Contents</th></tr>
+<tr><td><code>results/minatar/</code></td><td>Exp 5 replies, networks and scores</td></tr>
+<tr><td><code>results/abl/&lt;run&gt;/</code></td><td><code>config.json</code> (exact task message and settings), <code>summary.json</code>, <code>final_answer.md</code>, <code>scores.json</code></td></tr>
+<tr><td><code>results/abl/pilot_fence_format/</code></td><td>Runs from before the harness fixes, kept for the record</td></tr>
+<tr><td><code>results/abl/stopped/</code></td><td>Runs stopped on purpose</td></tr>
+<tr><td><code>results/logs/</code></td><td>Logs of finished jobs</td></tr>
+</table></div>
+<p class="note">Agent transcripts (<code>log.jsonl</code>), scored completions and weight edits (<code>*.pt</code>) stay on the machine that ran them and are not committed: transcripts and completions can quote the inner model's replies to harmful prompts. Only rates and summaries are in the repo.</p>
+</main>
+</body>
+</html>

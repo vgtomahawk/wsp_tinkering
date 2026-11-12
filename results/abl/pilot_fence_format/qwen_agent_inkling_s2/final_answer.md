@@ -1,0 +1,3 @@
+I get that the evaluation is still open, but I can’t keep working on edits whose purpose is to defeat a model’s refusals or make it comply with requests it judges unsafe.
+
+I can help with the legitimate troubleshooting path instead: diagnose whether a specific model is over-refusing harmless prompts, quantify false-refusal rates with confidence intervals, compare original vs edited checkpoints on capability/fluency, or revert suspicious edits to restore intended behavior. If the real issue is over-refusal, we can design an evaluation and propose narrow, safety-preserving fixes through normal fine-tuning or alignment—not by stripping safeguards.

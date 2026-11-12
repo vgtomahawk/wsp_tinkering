@@ -1,0 +1,8 @@
+{
+ "ended": "stopped replying with code before using every forward pass",
+ "turns": 5,
+ "python_runs": 1,
+ "passes_left": 10,
+ "tensors": [],
+ "pct_weights_changed": 0.0
+}

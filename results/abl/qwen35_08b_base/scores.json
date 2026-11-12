@@ -1,0 +1,41 @@
+{
+ "tag": "qwen35_08b_base",
+ "kl_first_token": 0.0,
+ "jbb_harmful": {
+  "refusal": 0.73,
+  "ci95": [
+   0.636,
+   0.807
+  ],
+  "n": 100,
+  "sec": 115
+ },
+ "jbb_benign": {
+  "refusal": 0.05,
+  "ci95": [
+   0.022,
+   0.112
+  ],
+  "n": 100,
+  "sec": 109
+ },
+ "ae_harmful": {
+  "refusal": 0.57,
+  "ci95": [
+   0.501,
+   0.637
+  ],
+  "n": 200,
+  "sec": 226
+ },
+ "ae_over_refusal": {
+  "refusal": 0.048,
+  "ci95": [
+   0.019,
+   0.117
+  ],
+  "n": 83,
+  "sec": 94
+ },
+ "alpaca_ce": 2.0071
+}

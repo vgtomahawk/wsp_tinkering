@@ -1,0 +1,478 @@
+{
+ "block": true,
+ "statements": 199,
+ "applied": 86,
+ "entries_written": 291,
+ "errors": [
+  {
+   "statement": "W1[62:92:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[92:122:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[61:91:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[91:121:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[122:152:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[152:182:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[121:151:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[151:181:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[182:212:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[212:242:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[181:211:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[211:241:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[242:272:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[272:302:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[241:271:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[271:301:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[302:332:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[332:362:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[301:331:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[331:361:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[362:392:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[392:422:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[361:391:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[391:421:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[422:452:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[452:482:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[421:451:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[451:481:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[482:512:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[512:542:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[481:511:6, 4] = [0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[511:541:6, 4] = [-0.8]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[61:91:6, 5] = [-0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[91:121:6, 5] = [0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[121:151:6, 5] = [-0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[151:181:6, 5] = [0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[181:211:6, 5] = [-0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[211:241:6, 5] = [0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[241:271:6, 5] = [-0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[271:301:6, 5] = [0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[301:331:6, 5] = [-0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[331:361:6, 5] = [0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[361:391:6, 5] = [-0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[391:421:6, 5] = [0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[421:451:6, 5] = [-0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[451:481:6, 5] = [0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[481:511:6, 5] = [-0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[511:541:6, 5] = [0.9]*5",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[62:120:6, 6] = [0.4]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[122:180:6, 6] = [0.4]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[182:240:6, 6] = [0.4]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[242:300:6, 6] = [0.4]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[302:360:6, 6] = [-0.4]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[362:420:6, 6] = [-0.4]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[422:480:6, 6] = [-0.4]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[482:540:6, 6] = [-0.4]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[61:120:6, 7] = [0.6]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[121:180:6, 7] = [0.6]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[181:240:6, 7] = [0.6]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[241:300:6, 7] = [0.6]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[301:360:6, 7] = [-0.6]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[361:420:6, 7] = [-0.6]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[421:480:6, 7] = [-0.6]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[481:540:6, 7] = [-0.6]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[60:120:6, 8] = [1.2]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[480:540:6, 9] = [1.2]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[60:120:6, 10] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[61:120:6, 10] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[62:120:6, 10] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[120:180:6, 11] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[121:180:6, 11] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790c890>"
+  },
+  {
+   "statement": "W1[122:180:6, 11] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1078d52d0>"
+  },
+  {
+   "statement": "W1[180:240:6, 12] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1076fb550>"
+  },
+  {
+   "statement": "W1[181:240:6, 12] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[182:240:6, 12] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1078d52d0>"
+  },
+  {
+   "statement": "W1[240:300:6, 13] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[241:300:6, 13] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790c890>"
+  },
+  {
+   "statement": "W1[242:300:6, 13] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1078d52d0>"
+  },
+  {
+   "statement": "W1[300:360:6, 14] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1076fb550>"
+  },
+  {
+   "statement": "W1[301:360:6, 14] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[302:360:6, 14] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1078d52d0>"
+  },
+  {
+   "statement": "W1[360:420:6, 15] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[361:420:6, 15] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790c890>"
+  },
+  {
+   "statement": "W1[362:420:6, 15] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[420:480:6, 16] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1076fb550>"
+  },
+  {
+   "statement": "W1[421:480:6, 16] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790c890>"
+  },
+  {
+   "statement": "W1[422:480:6, 16] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1078d52d0>"
+  },
+  {
+   "statement": "W1[480:540:6, 17] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790c890>"
+  },
+  {
+   "statement": "W1[481:540:6, 17] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[482:540:6, 17] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790c890>"
+  },
+  {
+   "statement": "W1[60:120:6, 18] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1078c9950>"
+  },
+  {
+   "statement": "W1[61:120:6, 18] = [1.1]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[120:180:6, 19] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1076fb550>"
+  },
+  {
+   "statement": "W1[121:180:6, 19] = [1.1]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790c890>"
+  },
+  {
+   "statement": "W1[180:240:6, 20] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[181:240:6, 20] = [1.1]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[240:300:6, 21] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1078c9950>"
+  },
+  {
+   "statement": "W1[241:300:6, 21] = [1.1]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790c890>"
+  },
+  {
+   "statement": "W1[300:360:6, 22] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1076fb550>"
+  },
+  {
+   "statement": "W1[301:360:6, 22] = [1.1]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[360:420:6, 23] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10780cd10>"
+  },
+  {
+   "statement": "W1[361:420:6, 23] = [1.1]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790c890>"
+  },
+  {
+   "statement": "W1[420:480:6, 24] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1078c9950>"
+  },
+  {
+   "statement": "W1[421:480:6, 24] = [1.1]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790e350>"
+  },
+  {
+   "statement": "W1[480:540:6, 25] = [1.0]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1076fb550>"
+  },
+  {
+   "statement": "W1[481:540:6, 25] = [1.1]*10",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x10790c890>"
+  },
+  {
+   "statement": "W3[10:18, 5] = [4.0]*8",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1076ed090>"
+  },
+  {
+   "statement": "W3[18:26, 0] = [0.0]*8",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1077da1d0>"
+  },
+  {
+   "statement": "W3[18:26, 1] = [-1.5]*8",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x107918c50>"
+  },
+  {
+   "statement": "W3[18:26, 2] = [1.8]*8",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1077da1d0>"
+  },
+  {
+   "statement": "W3[18:26, 3] = [-1.5]*8",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1076ed090>"
+  },
+  {
+   "statement": "W3[18:26, 4] = [1.8]*8",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x1077da1d0>"
+  },
+  {
+   "statement": "W3[18:26, 5] = [-0.7]*8",
+   "error": "ValueError: malformed node or string on line 1: <ast.BinOp object at 0x107918c50>"
+  }
+ ],
+ "cut_off": false,
+ "nonzero": {
+  "W1": 210,
+  "b1": 20,
+  "W2": 33,
+  "b2": 1,
+  "W3": 18,
+  "b3": 6
+ },
+ "nonzero_total": 288,
+ "max_abs": {
+  "W1": 3.0,
+  "b1": 3.200000047683716,
+  "W2": 3.0,
+  "b2": 2.0,
+  "W3": 9.0,
+  "b3": 26.200000762939453
+ }
+}

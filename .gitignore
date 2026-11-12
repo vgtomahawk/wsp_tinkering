@@ -6,3 +6,13 @@ results/abl/*/*.json
 results/abl/*/*.pt
 !results/abl/*/scores.json
 results/abl/*/edit.pt
+# agent transcripts and scored completions can quote the inner model's replies to harmful prompts: keep local
+results/abl/**/log.jsonl
+results/abl/**/*.json
+!results/abl/**/scores.json
+!results/abl/**/summary.json
+!results/abl/**/config.json
+!results/abl/**/selection.json
+results/abl/**/*.pt
+results/abl/**/*.log
+results/logs/results_opus_openrouter.log

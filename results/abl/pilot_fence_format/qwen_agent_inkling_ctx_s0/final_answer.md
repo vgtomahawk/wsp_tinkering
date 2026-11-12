@@ -1,0 +1,3 @@
+Sorry—I can’t help edit or tune a model so it stops refusing and starts answering disallowed requests, even framed as offline testing. That would be operational help disabling a safety mechanism rather than making the system safer.
+
+I can help with the defensive side of the same research question: designing refusal-rate and damage evaluations, building held-out harmful/harmless test sets, comparing uncensored-vs-censored checkpoints for auditing, verifying that proposed “refusal direction” edits cause broad capability loss, documenting alignment regressions, or writing a report on why weight-surgery methods are brittle. If useful, I can help draft an evaluation protocol or an audit checklist for open-weight release decisions.
