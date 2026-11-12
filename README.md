@@ -88,3 +88,5 @@ Generated completions stay local and are never published; only rates are reporte
 | 2026-11-12 | Inkling pilot (fence format, neutral, seeds 0-2) | declined in 2 of 3 runs; harness format mismatch fixed afterwards (see abl/HARNESS_VS_EXP8.md) |
 
 Docs: `docs/code_guide.html` (files, entrypoints, terms), `docs/explainer.html` (setup diagrams vs the original experiments).
+| 2026-11-12 | Inkling 2 Small, weights only, **context arm**, seed 0, on Qwen3.5-0.8B | JBB harmful 0.73 -> **0.47** [0.38, 0.57]; benign 0.03; AE harmful 0.41; KL **0.021**; Alpaca CE +0.007. Same logit-space direction, frequency-cleaned first |
+| 2026-11-12 | **Opus 5.5, 10 passes, neutral, seed 0, on Qwen3.5-0.8B** | JBB harmful 0.73 -> **0.03** [0.01, 0.09]; benign 0.00; AE harmful 0.00; AE over-refusal 0.00; KL **0.022**; Alpaca CE -0.004. Diagnosed via activation reads, causal test, localized to layers 9-23, strength sweep (alpha 0.8); 30 matrices, 9% of weights |

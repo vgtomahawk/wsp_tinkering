@@ -1,0 +1,41 @@
+{
+ "tag": "qwen_agent_inkling_wo_ctx_s0",
+ "kl_first_token": 0.0209,
+ "jbb_harmful": {
+  "refusal": 0.47,
+  "ci95": [
+   0.375,
+   0.567
+  ],
+  "n": 100,
+  "sec": 96
+ },
+ "jbb_benign": {
+  "refusal": 0.03,
+  "ci95": [
+   0.01,
+   0.085
+  ],
+  "n": 100,
+  "sec": 165
+ },
+ "ae_harmful": {
+  "refusal": 0.405,
+  "ci95": [
+   0.339,
+   0.474
+  ],
+  "n": 200,
+  "sec": 357
+ },
+ "ae_over_refusal": {
+  "refusal": 0.024,
+  "ci95": [
+   0.007,
+   0.084
+  ],
+  "n": 83,
+  "sec": 158
+ },
+ "alpaca_ce": 2.0137
+}
