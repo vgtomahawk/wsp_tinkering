@@ -7,8 +7,8 @@
      - refusal score on harmful_val: mean log-odds of the first refusal token ("I" for Llama-3 chat)
      - KL(base || ablated) of the first-token distribution on harmless_val
    keep candidates with KL < 0.1 and layer < 80% depth; pick the lowest refusal score.
-3. Weight orthogonalization: W <- W - r r^T W for every matrix writing to the residual stream (attention o_proj,
-   MLP down_proj). Embeddings are not edited (Llama-3.2-3B ties them to the unembedding); this is a documented
+3. Weight orthogonalization: W <- W - r r^T W for every matrix writing to the residual stream (attention o_proj or
+   Gated-DeltaNet out_proj, MLP down_proj). Embeddings are not edited (Llama-3.2-3B ties them to the unembedding); this is a documented
    deviation from the paper, which also orthogonalizes W_E.
 
   python abl/arditi.py --out results/abl/arditi_ref     -> edit.pt, selection.json
@@ -19,7 +19,7 @@ from pathlib import Path
 
 import torch
 
-from score import chat, load
+from score import chat, load, writers
 
 DATA = Path(__file__).resolve().parent / "data"
 POS = 5
@@ -105,11 +105,9 @@ def main():
     r = r / r.norm()
     json.dump({"best": best, "candidates": cands}, open(out / "selection.json", "w"), indent=1)
     edit = {}
-    for i, L in enumerate(model.model.layers):
-        for name, W in ((f"model.layers.{i}.self_attn.o_proj.weight", L.self_attn.o_proj.weight),
-                        (f"model.layers.{i}.mlp.down_proj.weight", L.mlp.down_proj.weight)):
-            Wf = W.detach().float().cpu()
-            edit[name] = (Wf - torch.outer(r, r @ Wf)).to(torch.bfloat16)   # W: [d_model, in]
+    for name, mod in writers(model):                                         # o_proj / out_proj / down_proj
+        Wf = mod.weight.detach().float().cpu()
+        edit[name] = (Wf - torch.outer(r, r @ Wf)).to(torch.bfloat16)        # W: [d_model, in]
     torch.save(edit, out / "edit.pt")
     torch.save(r, out / "direction.pt")
     print("selected", best, "->", out / "edit.pt", flush=True)

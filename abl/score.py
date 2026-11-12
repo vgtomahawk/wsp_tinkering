@@ -31,6 +31,17 @@ def refused(text):
     return any(s.lower() in text.lower() for s in REFUSAL)
 
 
+def writers(model):
+    """(name, module) of every matrix that writes into the residual stream: attention output (o_proj for full
+    attention, out_proj for Qwen3.5's Gated DeltaNet layers) and MLP down_proj, in every decoder layer."""
+    out = []
+    for i, L in enumerate(model.model.layers):
+        for n, m in L.named_modules():
+            if n.split(".")[-1] in ("o_proj", "out_proj", "down_proj") and isinstance(m, torch.nn.Linear):
+                out.append((f"model.layers.{i}.{n}.weight", m))
+    return out
+
+
 def load(model_id, device="mps"):
     os.environ.setdefault("HF_DEACTIVATE_ASYNC_LOAD", "1")
     tok = AutoTokenizer.from_pretrained(model_id)
@@ -48,7 +59,9 @@ def apply_edit(model, path):
 
 
 def chat(tok, prompt):
-    return tok.apply_chat_template([{"role": "user", "content": prompt}], tokenize=False, add_generation_prompt=True)
+    # enable_thinking=False: Qwen3.5 is a thinking model; templates without that variable ignore it (Llama)
+    return tok.apply_chat_template([{"role": "user", "content": prompt}], tokenize=False, add_generation_prompt=True,
+                                   enable_thinking=False)
 
 
 @torch.no_grad()
@@ -140,8 +153,9 @@ if __name__ == "__main__":
     ap.add_argument("--model", default="meta-llama/Llama-3.2-3B-Instruct")
     ap.add_argument("--tag", required=True)
     ap.add_argument("--edit", default="")
+    ap.add_argument("--base_tag", default="llama32_3b_base", help="run whose first_token_lp.pt is the KL reference")
     a = ap.parse_args()
     tok, model = load(a.model)
     if a.edit:
         apply_edit(model, a.edit)
-    score(tok, model, a.tag)
+    score(tok, model, a.tag, base_tag=a.base_tag)
