@@ -1,0 +1,19 @@
+claude-opus-5.5-direct: asking 9 replies
+  claude-opus-5.5-direct breakout #1: reply saved
+  claude-opus-5.5-direct breakout #2: reply saved
+  claude-opus-5.5-direct breakout #3: reply saved
+  claude-opus-5.5-direct seaquest #2: reply saved
+  claude-opus-5.5-direct seaquest #1: reply saved
+  claude-opus-5.5-direct seaquest #3: reply saved
+  claude-opus-5.5-direct asterix #2: reply saved
+  claude-opus-5.5-direct asterix #3: reply saved
+  claude-opus-5.5-direct asterix #1: reply saved
+  claude-opus-5.5-direct breakout #1: score 12.9 +/- 0.3 (165/165 statements, 1868 nonzero weights)
+  claude-opus-5.5-direct breakout #2: score 502.0 +/- 5.9 (232/232 statements, 1703 nonzero weights)
+  claude-opus-5.5-direct breakout #3: score 0.5 +/- 0.0 (0/0 statements, 0 nonzero weights)
+  claude-opus-5.5-direct seaquest #1: score 0.1 +/- 0.0 (0/0 statements, 0 nonzero weights)
+  claude-opus-5.5-direct seaquest #2: score 0.1 +/- 0.0 (0/0 statements, 0 nonzero weights)
+  claude-opus-5.5-direct seaquest #3: score 0.1 +/- 0.0 (0/0 statements, 0 nonzero weights)
+  claude-opus-5.5-direct asterix #1: score 12.4 +/- 0.5 (134/134 statements, 566 nonzero weights)
+  claude-opus-5.5-direct asterix #2: score 21.2 +/- 0.6 (117/117 statements, 946 nonzero weights)
+  claude-opus-5.5-direct asterix #3: score 28.7 +/- 0.7 (81/81 statements, 621 nonzero weights)

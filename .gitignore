@@ -1,0 +1,4 @@
+.venv/
+__pycache__/
+*.pyc
+results/minatar/*/*/attempt_*/network.npz

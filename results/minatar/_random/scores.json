@@ -1,0 +1,24 @@
+{
+ "_settings": "1935577ee051",
+ "breakout": {
+  "mean": 0.54,
+  "se": 0.02504050772302804,
+  "episodes": 1000,
+  "max": 6.0,
+  "mean_length": 11.538
+ },
+ "seaquest": {
+  "mean": 0.092,
+  "se": 0.011298834615289478,
+  "episodes": 1000,
+  "max": 4.0,
+  "mean_length": 30.168
+ },
+ "asterix": {
+  "mean": 0.497,
+  "se": 0.026883335241627174,
+  "episodes": 1000,
+  "max": 5.0,
+  "mean_length": 71.381
+ }
+}

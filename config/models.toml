@@ -1,0 +1,14 @@
+# Outer models for our runs. Same fields as third_party/weight-space-bench/config/models.toml, plus:
+#   api   = "anthropic" -> Claude API directly (wspt/anthropic_direct.py), with `model` = Claude model id
+#   (no api) -> OpenRouter via `slug`, exactly as the bench does it
+# Keep reasoning_effort / max_output_tokens equal to the bench's rows when the goal is to match its numbers.
+
+[[model]]
+name = "claude-opus-5.5-direct"
+label = "Claude Opus 5.5 (Claude API)"
+api = "anthropic"
+model = "claude-opus-5-5"
+slug = "anthropic/claude-opus-5.5"   # the bench's row this one mirrors (published score 48.5)
+group = "Anthropic"
+reasoning_effort = "high"
+max_output_tokens = 64000
