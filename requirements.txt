@@ -1,0 +1,11 @@
+# wsp_tinkering: Mac (Apple silicon, macOS 14) and Linux. torch 2.14.0: 2.15 needs macOS 15 for MPS.
+torch==2.14.0
+transformers==5.20.2
+accelerate==1.15.0
+datasets
+numpy
+requests
+matplotlib
+MinAtar==1.0.15
+anthropic>=2.8
+openai>=2

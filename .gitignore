@@ -2,3 +2,7 @@
 __pycache__/
 *.pyc
 results/minatar/*/*/attempt_*/network.npz
+results/abl/*/*.json
+results/abl/*/*.pt
+!results/abl/*/scores.json
+results/abl/*/edit.pt

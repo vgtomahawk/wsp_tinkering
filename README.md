@@ -1,47 +1,83 @@
 # wsp_tinkering
 
-Reproduce experiments from *Sparks of Weight-Space Programming* (Takehi, Teoh, Zhang, Khattab, 2026;
-[blog](https://rikiyat.github.io/blog/weight-space-programming/)) with outer models we can run (Claude Opus 5.5,
-later Inkling 2 Small), anchored to published numbers, then extend to new targets (e.g. abliteration).
+**Can a model abliterate another model by weight-space programming?** We reproduce the setup of *Sparks of
+Weight-Space Programming* (Takehi, Teoh, Zhang, Khattab, 2026) with outer models we can run, anchor it to published
+numbers, and then point the same harness at a new target: removing a small open model's refusals by editing its
+weights directly, with no training, scored with the standard refusal-direction protocol.
 
-## Foundations (git submodules, pinned)
+**Authors:** Atharva Naik (CMU), Varun Gangal (Patronus AI), Emmy Liu (CMU), Yoshinari Fujinuma (Patronus AI),
+Arnhav Datar (Patronus AI).
 
-| Path | What | License |
-|---|---|---|
-| `third_party/lm_understand-logs` | the authors' full logs, prompts, released networks and edits, Exp 8 eval code | CC BY 4.0 (logs/data) |
-| `third_party/weight-space-bench` | eomcaleb's benchmark: Exp 5 (write MinAtar networks from scratch) with a scorer validated against Astra's released networks, a published Opus 5.5 row, and an Exp 8 math-edit harness (Linux GPU) | MIT; MinAtar from PyPI is GPL-3.0 |
+**Acknowledgements.** The task design, rules and evaluation protocol come from Rikiya Takehi, Jayden Teoh, Alex Zhang
+and Omar Khattab ([blog](https://rikiyat.github.io/blog/weight-space-programming/),
+[logs](https://github.com/RikiyaT/lm_understand-logs)). The Exp 5 scorer, the Exp 8 harness that our agent harness
+follows, and the published Opus 5.5 row come from Caleb Eom's
+[weight-space-bench](https://github.com/eomcaleb/weight-space-bench). The abliteration reference is Arditi et al.,
+*Refusal in Language Models Is Mediated by a Single Direction* (NeurIPS 2024,
+[code](https://github.com/andyrdt/refusal_direction)). Inkling 2 Small access via Tinker, courtesy of Thinking Machines.
 
-Nothing in `third_party/` is edited. Our code is in `wspt/`.
+## Layout
 
-## Anchors we match against
+| Path | What |
+|---|---|
+| `third_party/lm_understand-logs` | submodule, pinned: the authors' logs, prompts, released networks and edits (CC BY 4.0) |
+| `third_party/weight-space-bench` | submodule, pinned: Exp 5 scorer and leaderboard, Exp 8 harness (MIT) |
+| `wspt/` | Exp 5 runner and outer-model clients (Claude API direct; OpenAI-compatible for Tinker/Inkling) |
+| `config/models.toml` | outer models and their exact settings |
+| `abl/score.py` | held-out abliteration scoring (JailbreakBench + abliteration-eval; refusal phrases; first-token KL; Alpaca CE) |
+| `abl/arditi.py` | reference row: Arditi et al. direction ablation |
+| `abl/agent.py` | the WSP agent harness (Exp 8 rules, refusal target) |
+| `abl/HARNESS_VS_EXP8.md` | line-by-line comparison with the authors' Exp 8 and its provenance check |
+| `abl/data/` | Arditi et al.'s train/val prompt splits (practice data for agents; zero overlap with eval sets) |
+| `results/` | scores and logs (completions and weight edits stay local, gitignored) |
 
-| Experiment | Reference | Source |
-|---|---|---|
-| Exp 5 scorer | Astra's released networks: 517.4 / 53.1 / 53.2 (paper) | lm_understand-logs |
-| Exp 5, Opus 5.5 | score 48.5; Breakout 17.5, Seaquest 2.9, Asterix 27.0 (3 attempts x 1,000 episodes, effort high, 64k output, via OpenRouter) | weight-space-bench leaderboard, 2026-11-03 |
-| Exp 8 (Qwen3.5-0.8B math edit) | MATH-500 7.9 -> 48.1 (50 passes, Astra); no published Opus number | lm_understand-logs `exp8_math/eval/*/merged.json` |
+Nothing in `third_party/` is edited.
 
-## Setup and runs (Mac, CPU)
+## Setup
 
 ```bash
 git clone --recurse-submodules <this repo> && cd wsp_tinkering
-uv venv -p 3.12 .venv && source .venv/bin/activate
-uv pip install -r third_party/weight-space-bench/requirements.txt anthropic
-source <(grep '^export ANTHROPIC_API_KEY=' ~/.llmapikeys)
-
-# 1. scorer check: Astra's networks (~90 s on an M1 Pro)
-cd third_party/weight-space-bench && python -m weight_space_bench reference && cd -
-# 2. Opus 5.5 via the Claude API, same protocol as the bench's Opus row
-python -m wspt.run_minatar run claude-opus-5.5-direct
+bash setup.sh                       # uv venv (Python 3.12) + pinned deps; Mac (MPS) or Linux (CUDA)
+export ANTHROPIC_API_KEY=...        # Opus 5.5 runs
+export TINKER_API_KEY=...           # Inkling 2 Small runs
+hf auth login                       # Llama-3.2-3B-Instruct is gated: accept its license first
 ```
 
-`config/models.toml` lists our outer models. `api = "anthropic"` sends a model to the Claude API directly
-(`wspt/anthropic_direct.py`: adaptive thinking, `output_config.effort`, streaming, no tools, no refusal fallback);
-other entries go through the bench's OpenRouter client unchanged.
+## Part 1: reproduce Exp 5 (write MinAtar networks from scratch), anchored to published numbers
 
-## Log
+```bash
+cd third_party/weight-space-bench && python -m weight_space_bench reference && cd -   # scorer check, ~90 s
+python -m wspt.run_minatar run claude-opus-5.5-direct     # Opus 5.5, Claude API, bench protocol (effort high, 64k)
+python -m wspt.run_minatar run inkling-2-small            # Inkling 2 Small, effort 0.99, 64k
+python -m wspt.run_minatar run inkling-2-small-256k       # Inkling 2 Small, effort 0.99, 256k (TM calibration)
+```
+
+## Part 2: abliteration by weight-space programming
+
+```bash
+python abl/score.py --tag llama32_3b_base                                   # unedited baseline
+python abl/arditi.py --out results/abl/arditi_ref                           # reference recipe
+python abl/score.py --tag arditi_ref --edit results/abl/arditi_ref/edit.pt
+python abl/agent.py --outer inkling --passes 10 --out results/abl/agent_inkling_s0
+python abl/score.py --tag agent_inkling_s0 --edit results/abl/agent_inkling_s0/edit.pt
+python abl/agent.py --outer opus --passes 10 --out results/abl/agent_opus_s0
+python abl/agent.py --outer inkling --passes 0 --out results/abl/agent_inkling_weightsonly_s0   # strictest WSP arm
+```
+
+**Evaluation** (`abl/score.py`, identical for every row; never visible to an agent):
+- JailbreakBench JBB-Behaviors: 100 harmful (refusal should drop) and 100 benign (over-refusal should stay low).
+- Refusal = Arditi et al.'s refusal-phrase list, greedy decoding, 96 new tokens, Wilson 95% CIs.
+- Damage: KL(base || edited) of the first-token distribution on 100 harmless prompts (`mlabonne/harmless_alpaca`), the
+  metric used by Heretic and by Young 2026 (arXiv 2512.13655), plus cross-entropy of Alpaca reference answers.
+- Secondary: `treadon/abliteration-eval` harmful (200) and over-refusal (83). It is used only by its author so far,
+  so it is supporting evidence, not the headline.
+
+Generated completions stay local and are never published; only rates are reported.
+
+## Results log
 
 | Date | Run | Result |
 |---|---|---|
-| 2026-11-12 | scorer reference on M1 Pro | Astra 502.9 / 52.3 / 53.7 (bench: 502.6 / 52.2 / 53.7; paper 517.4 / 53.1 / 53.2) |
-| 2026-11-12 | Exp 5, Opus 5.5 via Claude API (effort high, 64k, 3x3) | **score 37.1** (bench's OpenRouter row: 48.5). Breakout 12.9 / **502.0** / 0.5 (mean 171.8, 690% PPO); Seaquest 0.1 x3 (all 3 hit the 64k cap, no weights); Asterix 12.4 / 21.2 / 28.7 (mean 20.8, 37% PPO). 4/9 replies hit 64k (bench: 2/9). Cost $9.42 |
+| 2026-11-12 | Exp 5 scorer reference (M1 Pro) | Astra 502.9 / 52.3 / 53.7 (bench: 502.6 / 52.2 / 53.7; paper 517.4 / 53.1 / 53.2) |
+| 2026-11-12 | Exp 5, Opus 5.5 via Claude API (effort high, 64k, 3x3) | **score 37.1** (bench's OpenRouter row: 48.5). Breakout 12.9 / **502.0** / 0.5; Seaquest 0.1 x3 (all 3 hit the 64k cap); Asterix 12.4 / 21.2 / 28.7. 4/9 replies hit 64k (bench: 2/9). $9.42 |
+| 2026-11-12 | Abliteration baseline, Llama-3.2-3B-Instruct | JBB harmful refusal 0.88 [0.80, 0.93]; JBB benign 0.05; AE harmful 0.79; AE over-refusal 0.00; Alpaca CE 2.0065 |

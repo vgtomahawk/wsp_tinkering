@@ -1,0 +1,22 @@
+thinkingmachines/Inkling-2-Small                 effort=0.1     answer='400'                              reasoning_chars=   627 out_tok=   288 finish=stop 3s
+thinkingmachines/Inkling-2-Small                 effort=0.99    answer='400'                              reasoning_chars=   393 out_tok=   163 finish=stop 1s
+thinkingmachines/Inkling-2-Small                 effort='high'  answer='400'                              reasoning_chars=   300 out_tok=   132 finish=stop 3s
+thinkingmachines/Inkling-2-Small                 effort='bogus' ERROR Error code: 422
+thinkingmachines/Inkling-2-Small                 effort=5.0     ERROR Error code: 422
+thinkingmachines/Inkling-2-Small:peft:262144     effort=0.1     answer='400'                              reasoning_chars=   335 out_tok=   140 finish=stop 1s
+thinkingmachines/Inkling-2-Small:peft:262144     effort=0.99    answer='400'                              reasoning_chars=   372 out_tok=   150 finish=stop 4s
+thinkingmachines/Inkling-2-Small:peft:262144     effort='high'  answer='400'                              reasoning_chars=   312 out_tok=   138 finish=stop 1s
+thinkingmachines/Inkling-2-Small:peft:262144     effort='bogus' ERROR Error code: 422
+thinkingmachines/Inkling-2-Small:peft:262144     effort=5.0     ERROR Error code: 422
+HARD thinkingmachines/Inkling-2-Small                 effort=0.1   run1 answer='25'             reasoning_chars=   1933 out_tok=   885 finish=stop
+HARD thinkingmachines/Inkling-2-Small                 effort=0.1   run2 answer='25'             reasoning_chars=   1854 out_tok=   811 finish=stop
+HARD thinkingmachines/Inkling-2-Small                 effort=0.5   run1 answer='25'             reasoning_chars=   3111 out_tok=  1341 finish=stop
+HARD thinkingmachines/Inkling-2-Small                 effort=0.5   run2 answer='25'             reasoning_chars=   3587 out_tok=  1524 finish=stop
+HARD thinkingmachines/Inkling-2-Small                 effort=0.99  run1 answer='25'             reasoning_chars=   3987 out_tok=  1703 finish=stop
+HARD thinkingmachines/Inkling-2-Small                 effort=0.99  run2 answer='25'             reasoning_chars=   5450 out_tok=  2312 finish=stop
+HARD thinkingmachines/Inkling-2-Small:peft:262144     effort=0.1   run1 answer='25'             reasoning_chars=   2792 out_tok=  1155 finish=stop
+HARD thinkingmachines/Inkling-2-Small:peft:262144     effort=0.1   run2 answer='25'             reasoning_chars=   1979 out_tok=   809 finish=stop
+HARD thinkingmachines/Inkling-2-Small:peft:262144     effort=0.5   run1 answer='25'             reasoning_chars=   2818 out_tok=  1150 finish=stop
+HARD thinkingmachines/Inkling-2-Small:peft:262144     effort=0.5   run2 answer='25'             reasoning_chars=   4134 out_tok=  1748 finish=stop
+HARD thinkingmachines/Inkling-2-Small:peft:262144     effort=0.99  run1 answer='25'             reasoning_chars=   3324 out_tok=  1497 finish=stop
+HARD thinkingmachines/Inkling-2-Small:peft:262144     effort=0.99  run2 answer='25'             reasoning_chars=   4119 out_tok=  1744 finish=stop

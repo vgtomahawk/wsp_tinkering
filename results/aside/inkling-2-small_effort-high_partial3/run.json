@@ -1,0 +1,51 @@
+{
+ "model": {
+  "name": "inkling-2-small",
+  "label": "Inkling 2 Small (Tinker)",
+  "api": "openai_compat",
+  "base_url": "https://tinker.thinkingmachines.dev/services/tinker-prod/oai/api/v1",
+  "key_env": "TINKER_API_KEY",
+  "model": "thinkingmachines/Inkling-2-Small:peft:262144",
+  "slug": "thinkingmachines/Inkling-2-Small:peft:262144",
+  "group": "Thinking Machines",
+  "reasoning_effort": "high",
+  "max_output_tokens": 64000,
+  "price_in": 0.3,
+  "price_out": 1.0
+ },
+ "settings_hash": "1935577ee051",
+ "config": {
+  "task": {
+   "games": [
+    "breakout",
+    "seaquest",
+    "asterix"
+   ],
+   "attempts": 3,
+   "concurrency": 6
+  },
+  "eval": {
+   "episodes": 1000,
+   "max_steps": 10000,
+   "seed": 0,
+   "workers": 0
+  },
+  "reference": {
+   "ppo500": {
+    "breakout": 25.344,
+    "seaquest": 88.884,
+    "asterix": 55.204
+   },
+   "ppo100": {
+    "breakout": 15.779,
+    "seaquest": 5.617,
+    "asterix": 25.82
+   },
+   "astra": {
+    "breakout": 517.411,
+    "seaquest": 53.11,
+    "asterix": 53.178
+   }
+  }
+ }
+}

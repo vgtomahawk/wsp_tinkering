@@ -12,3 +12,42 @@ slug = "anthropic/claude-opus-5.5"   # the bench's row this one mirrors (publish
 group = "Anthropic"
 reasoning_effort = "high"
 max_output_tokens = 64000
+
+[[model]]
+# eomcaleb's row, verbatim: same OpenRouter client and request as the published 48.5
+name = "claude-opus-5.5"
+label = "Claude Opus 5.5 (OpenRouter, bench protocol)"
+slug = "anthropic/claude-opus-5.5"
+group = "Anthropic"
+reasoning_effort = "high"
+max_output_tokens = 64000
+
+[[model]]
+# Inkling 2 Small on Tinker. The 256K-context variant: the 64K base can't fit a 64k answer plus the ~5k prompt.
+name = "inkling-2-small"
+label = "Inkling 2 Small (Tinker)"
+api = "openai_compat"
+base_url = "https://tinker.thinkingmachines.dev/services/tinker-prod/oai/api/v1"
+key_env = "TINKER_API_KEY"
+model = "thinkingmachines/Inkling-2-Small:peft:262144"
+slug = "thinkingmachines/Inkling-2-Small:peft:262144"
+group = "Thinking Machines"
+reasoning_effort = 0.99   # numeric effort (0.99 = xhigh); textual levels may be ignored by Inkling 2
+max_output_tokens = 64000
+price_in = 0.30
+price_out = 1.00
+
+[[model]]
+# Thinking Machines' calibration settings: effort 0.99, up to 256k output (fits the 262,144 context with the prompt)
+name = "inkling-2-small-256k"
+label = "Inkling 2 Small (Tinker, 256k output)"
+api = "openai_compat"
+base_url = "https://tinker.thinkingmachines.dev/services/tinker-prod/oai/api/v1"
+key_env = "TINKER_API_KEY"
+model = "thinkingmachines/Inkling-2-Small:peft:262144"
+slug = "thinkingmachines/Inkling-2-Small:peft:262144"
+group = "Thinking Machines"
+reasoning_effort = 0.99
+max_output_tokens = 256000
+price_in = 0.30
+price_out = 1.00

@@ -1,0 +1,11 @@
+W1112 10:07:17.619000 92812 torch/distributed/elastic/multiprocessing/redirects.py:35] NOTE: Redirects are currently not supported in MacOs.
+Loading weights:   0%|          | 0/254 [00:00<?, ?it/s]Loading weights: 100%|██████████| 254/254 [00:00<00:00, 4580.79it/s]
+Generating train split:   0%|          | 0/25058 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 25058/25058 [00:00<00:00, 580748.00 examples/s]
+Generating test split:   0%|          | 0/6265 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 6265/6265 [00:00<00:00, 1995846.47 examples/s]
+kl_first_token 0.0
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
+jbb_harmful {'refusal': 0.88, 'ci95': [0.802, 0.93], 'n': 100, 'sec': 98}
+jbb_benign {'refusal': 0.05, 'ci95': [0.022, 0.112], 'n': 100, 'sec': 90}
+ae_harmful {'refusal': 0.79, 'ci95': [0.728, 0.841], 'n': 200, 'sec': 177}
+ae_over_refusal {'refusal': 0.0, 'ci95': [0.0, 0.044], 'n': 83, 'sec': 98}
+alpaca_ce 2.0065

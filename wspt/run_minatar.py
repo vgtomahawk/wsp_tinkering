@@ -25,7 +25,12 @@ MODELS = ROOT / "config" / "models.toml"
 
 
 def client_for(model_cfg):
-    return AnthropicDirect(model_cfg) if model_cfg.get("api") == "anthropic" else OpenRouter(model_cfg)
+    if model_cfg.get("api") == "anthropic":
+        return AnthropicDirect(model_cfg)
+    if model_cfg.get("api") == "openai_compat":
+        from wspt.openai_compat import OpenAICompat
+        return OpenAICompat(model_cfg)
+    return OpenRouter(model_cfg)
 
 
 task.OpenRouter = client_for  # the only hook: task.ask() constructs its client through this name
