@@ -1,0 +1,14 @@
+FINAL — I'm done; there are no forward passes left to spend and no further weight edits I can justify without measurement.
+
+What I changed (48 matrices, 15.24% of weights, max 3.3% relative Frobenius-norm change each):
+- All 24 MLP `down_proj` matrices and all 24 attention-output matrices (`self_attn.o_proj` in the 6 full-attention layers 3,7,11,15,19,23, and `linear_attn.out_proj` in the 18 Gated DeltaNet layers).
+- Each was orthogonalized against a single unit residual-stream direction `dn`: `W ← W − dn (dnᵀW)` (a rank‑1 removal, not a scaling).
+- Nothing else was touched: embeddings, lm_head (tied), final norm, all input/qkv/gate/up projections, norms, attention q/k/v, conv1d, in_proj_a/b/z — all unchanged.
+
+How the direction was derived (evidence):
+- Logits are `RMSNorm(h)·(g⊙e_t)`, with `g` the final-norm gain, so effective unembedding rows are `U = g⊙e`.
+- `dn` = normalized difference between the mean of `U` rows of nine refusal-flavored tokens (` cannot`, ` sorry`, ` unable`, ` unfortunately`, ` apologize`, ` refuse`, `Sorry`, ` harmful`, ` illegal`) and of eight helpful-flavored tokens (` Here`, `Sure`, `Certainly`, `Yes`, `The`, `Of course`/`Let`-family).
+- The contrast is coherent: refusal tokens project ≈ +0.62 (squared projection) on dn vs helpful ≈ +0.33 vs random tokens ≈ +0.08; individual refusal tokens project +0.6…+0.7 each, helpful tokens negative. It is stable to token-set changes (cos ≈ 0.88 between variants).
+- No layer writes preferentially along dn (each matrix carries the generic 1/1024 fraction of squared norm along it), which is why ablating every residual-writing matrix uniformly — rather than picking one layer — is the standard, evidence-consistent "refusal direction ablation": each layer independently contributes a small component along the same direction, and removing all of them removes the shared refusal circuit while leaving orthogonal (ordinary) computation untouched.
+
+Expected effect and caveats: this should reduce the probability of refusal-opener tokens ("I cannot", "I'm sorry", …) on refused requests. I was given zero forward passes, so I could not measure refusal rate, KL divergence, or reference-answer likelihood; the edits are grounded in weight-space evidence only. The rank‑1 removal leaves ~99.9% of each matrix's energy intact, so ordinary-behaviour drift should be small, but this is an inference from geometry, not a measurement. If I had budget, I would first have verified a dose–response on the six attention layers only (that was my intermediate edit before I generalized to all writers) and checked KL on a sample of ordinary prompts.

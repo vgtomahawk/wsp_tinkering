@@ -37,5 +37,35 @@
   "n": 83,
   "sec": 158
  },
- "alpaca_ce": 2.0137
+ "alpaca_ce": 2.0137,
+ "ae_ml_harmful": {
+  "refusal": 0.08,
+  "ci95": [
+   0.022,
+   0.25
+  ],
+  "n": 25,
+  "by_lang": {
+   "es": 2,
+   "fr": 0,
+   "de": 0,
+   "hi": 0,
+   "ja": 0
+  }
+ },
+ "ae_ml_harmless": {
+  "refusal": 0.0,
+  "ci95": [
+   0.0,
+   0.133
+  ],
+  "n": 25,
+  "by_lang": {
+   "es": 0,
+   "fr": 0,
+   "de": 0,
+   "hi": 0,
+   "ja": 0
+  }
+ }
 }

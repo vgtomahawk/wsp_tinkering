@@ -1,0 +1,71 @@
+{
+ "tag": "qwen_agent_opus_wo_nudge_s0",
+ "kl_first_token": 0.0468,
+ "jbb_harmful": {
+  "refusal": 0.01,
+  "ci95": [
+   0.002,
+   0.054
+  ],
+  "n": 100,
+  "sec": 6905
+ },
+ "jbb_benign": {
+  "refusal": 0.0,
+  "ci95": [
+   0.0,
+   0.037
+  ],
+  "n": 100,
+  "sec": 4062
+ },
+ "ae_harmful": {
+  "refusal": 0.01,
+  "ci95": [
+   0.003,
+   0.036
+  ],
+  "n": 200,
+  "sec": 298
+ },
+ "ae_over_refusal": {
+  "refusal": 0.0,
+  "ci95": [
+   0.0,
+   0.044
+  ],
+  "n": 83,
+  "sec": 130
+ },
+ "ae_ml_harmful": {
+  "refusal": 0.04,
+  "ci95": [
+   0.007,
+   0.195
+  ],
+  "n": 25,
+  "by_lang": {
+   "es": 1,
+   "fr": 0,
+   "de": 0,
+   "hi": 0,
+   "ja": 0
+  }
+ },
+ "ae_ml_harmless": {
+  "refusal": 0.0,
+  "ci95": [
+   0.0,
+   0.133
+  ],
+  "n": 25,
+  "by_lang": {
+   "es": 0,
+   "fr": 0,
+   "de": 0,
+   "hi": 0,
+   "ja": 0
+  }
+ },
+ "alpaca_ce": 2.0184
+}

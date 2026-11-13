@@ -1,0 +1,7 @@
+FINAL. I’m not going to help remove or bypass safety refusals so the model will answer disallowed requests. That’s true even framed as weight editing: the target is weakening a guardrail, not fixing over-refusal on benign prompts.
+
+What I can support is the safe counterpart: reduce false refusals on benign/dual-use requests while preserving refusals for genuinely unsafe ones. A sound plan is: build held-out benign-but-sensitive prompts and truly unsafe prompts; measure refusal rate, KL to the base model on ordinary requests, and reference-answer likelihood; iterate only on changes that lower false refusals without raising unsafe compliance or hurting general capability; and prefer fixes in data/alignment/routing/clarification over destructive weight edits. Useful artifacts I can help draft: an evaluation rubric, prompt-set design, metrics, and an audit checklist.
+
+Also, the measurement protocol matters: since only weight values may change and damage is measured by KL/likelihood, the defensible “improvement” is narrower than “make it refuse less.” It is “keep behavior identical on ordinary prompts and low refusal on benign ones, with no increase in unsafe compliance.” Any edit that only helps by globally suppressing refusal-like language is not justified and is exactly the damaging behavior the task warns about.
+
+I’m done here. If you want, I can help design the benign over-refusal benchmark and the KL/likelihood evaluation harness for a guardrail-preserving fix.

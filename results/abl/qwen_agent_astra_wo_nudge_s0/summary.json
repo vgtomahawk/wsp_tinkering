@@ -1,0 +1,19 @@
+{
+ "ended": "final answer after all forward passes",
+ "turns": 15,
+ "python_runs": 13,
+ "passes_left": 0,
+ "tensors": [
+  {
+   "name": "model.layers.15.self_attn.o_proj.weight",
+   "changed": 154164,
+   "rel_fro": 0.0025
+  },
+  {
+   "name": "model.layers.19.self_attn.o_proj.weight",
+   "changed": 162347,
+   "rel_fro": 0.0027
+  }
+ ],
+ "pct_weights_changed": 0.0421
+}
