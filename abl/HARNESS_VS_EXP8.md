@@ -83,3 +83,24 @@ jailbreakbench_{baseline,ablation}_evaluations.json`, substring scoring; refusal
 | Llama-2 7B chat | 0.97 | 0.07 |
 | Llama-3 8B Instruct | 0.95 | 0.00 (paper Table 10: 0.01) |
 | Yi 6B chat | 0.62 | 0.02 |
+
+## Passes: same definition as the authors' budgeted experiments
+
+| | Exp 8 (math, Qwen3.5-0.8B) | Exp 6 (Go) | Ours |
+|---|---|---|---|
+| Budgets | 10, 25, 50 | 0, 10, 25, 50 | 0, 10 |
+| One pass | one run of the network: generation or teacher-forced read | games pass or positions pass | generation or read |
+| Size per pass | 512 generations / 1,024 texts | 128 games / 256 positions | 128 generations / 256 prompts |
+| Paired original-vs-edited in one pass | yes ("both") | n/a | yes ("both") |
+| Failed request | not counted | | not counted |
+| Weight edits | free (Python) | free (Python) | free (Python) |
+| Running the network outside passes | forbidden | forbidden | forbidden (blocked) |
+| Budget 0 | n/a | no pass tool offered | tool refuses; task text states budget 0 |
+
+## Practice/evaluation overlap (normalised exact match: lower case, whitespace collapsed)
+
+- JailbreakBench harmful: 1 of 100 also in Arditi's `harmful_train` (the agents' practice requests). Effect on any
+  refusal rate is at most 0.01; results on the 99 clean items are reported alongside.
+- KL prompts (`mlabonne/harmless_alpaca` test, 100): 6 also in the agents' ordinary practice prompts. Alpaca CE
+  prompts (100): 5. Clean recomputations on the non-overlapping prompts are reported alongside.
+- JailbreakBench benign and every abliteration-eval split: 0.
