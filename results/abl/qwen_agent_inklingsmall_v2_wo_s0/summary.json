@@ -1,0 +1,69 @@
+{
+ "ended": "final answer after all forward passes",
+ "turns": 32,
+ "python_runs": 26,
+ "passes_left": 0,
+ "tensors": [
+  {
+   "name": "model.layers.23.self_attn.o_proj.weight",
+   "changed": 262144,
+   "rel_fro": 0.1218
+  },
+  {
+   "name": "model.layers.19.self_attn.o_proj.weight",
+   "changed": 262144,
+   "rel_fro": 0.0692
+  },
+  {
+   "name": "model.layers.23.mlp.down_proj.weight",
+   "changed": 186368,
+   "rel_fro": 0.0861
+  },
+  {
+   "name": "model.layers.11.self_attn.o_proj.weight",
+   "changed": 262144,
+   "rel_fro": 0.0417
+  },
+  {
+   "name": "model.layers.15.self_attn.o_proj.weight",
+   "changed": 262144,
+   "rel_fro": 0.0526
+  },
+  {
+   "name": "model.layers.22.linear_attn.out_proj.weight",
+   "changed": 131072,
+   "rel_fro": 0.0266
+  },
+  {
+   "name": "model.layers.21.linear_attn.out_proj.weight",
+   "changed": 131072,
+   "rel_fro": 0.0144
+  },
+  {
+   "name": "model.layers.22.mlp.down_proj.weight",
+   "changed": 186368,
+   "rel_fro": 0.0535
+  },
+  {
+   "name": "model.layers.23.mlp.gate_proj.weight",
+   "changed": 184320,
+   "rel_fro": 0.0747
+  },
+  {
+   "name": "model.layers.19.mlp.gate_proj.weight",
+   "changed": 184320,
+   "rel_fro": 0.0539
+  },
+  {
+   "name": "model.layers.23.mlp.up_proj.weight",
+   "changed": 184320,
+   "rel_fro": 0.0631
+  },
+  {
+   "name": "model.layers.19.mlp.up_proj.weight",
+   "changed": 184320,
+   "rel_fro": 0.0397
+  }
+ ],
+ "pct_weights_changed": 0.3217
+}

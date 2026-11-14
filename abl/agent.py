@@ -429,6 +429,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--outer", choices=["inkling", "opus", "astra"], required=True)
     ap.add_argument("--effort", default="", help="override the outer model's effort (e.g. max for Astra)")
+    ap.add_argument("--inkling_model", default="thinkingmachines/Inkling-2-Small:peft:262144",
+                    help="Tinker model id for --outer inkling (e.g. thinkingmachines/Inkling-Small, the older model)")
     ap.add_argument("--inner", default="meta-llama/Llama-3.2-3B-Instruct")
     ap.add_argument("--passes", type=int, default=10, help="forward-pass budget (Exp 8: 10/25/50; bench default 10)")
     ap.add_argument("--turns", type=int, default=40, help="reply cap (bench: 600; ours is time-limited)")
@@ -446,7 +448,7 @@ def main():
     k = Kernel(tok, model, a.passes, grade=(a.protocol == "v2"))
     cfg = model.config
     if a.outer == "inkling":
-        outer = Inkling(**({"effort": float(a.effort)} if a.effort else {}))
+        outer = Inkling(model=a.inkling_model, **({"effort": float(a.effort)} if a.effort else {}))
     elif a.outer == "astra":
         outer = Astra(**({"effort": a.effort} if a.effort else {}))
     else:

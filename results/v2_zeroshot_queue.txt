@@ -1,0 +1,7 @@
+qwen_agent_opus_v2_wo_nudge_s0 --outer opus --inner Qwen/Qwen3.5-0.8B --passes 0 --nudge --turns 40 --seed 0 --protocol v2
+qwen_agent_inkling_v2_wo_s0 --outer inkling --inner Qwen/Qwen3.5-0.8B --passes 0 --turns 40 --seed 0 --protocol v2
+qwen_agent_inkling_v2_wo_ctx_s0 --outer inkling --inner Qwen/Qwen3.5-0.8B --passes 0 --context --turns 40 --seed 0 --protocol v2
+qwen_agent_inklingsmall_v2_wo_s0 --outer inkling --inkling_model thinkingmachines/Inkling-Small --inner Qwen/Qwen3.5-0.8B --passes 0 --turns 40 --seed 0 --protocol v2
+qwen_agent_inkling_v2_wo_s1 --outer inkling --inner Qwen/Qwen3.5-0.8B --passes 0 --turns 40 --seed 1 --protocol v2
+qwen_agent_inkling_v2_wo_ctx_s1 --outer inkling --inner Qwen/Qwen3.5-0.8B --passes 0 --context --turns 40 --seed 1 --protocol v2
+qwen_agent_inklingsmall_v2_wo_ctx_s0 --outer inkling --inkling_model thinkingmachines/Inkling-Small --inner Qwen/Qwen3.5-0.8B --passes 0 --context --turns 40 --seed 0 --protocol v2

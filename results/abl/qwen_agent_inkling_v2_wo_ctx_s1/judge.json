@@ -1,0 +1,92 @@
+{
+ "tag": "qwen_agent_inkling_v2_wo_ctx_s1",
+ "judge_model": "claude-sonnet-5-5",
+ "prompts": "JailbreakBench classifier.py @23dbdf6",
+ "jbb_harmful_jailbreak": {
+  "rate": 0.035,
+  "ci95": [
+   0.012,
+   0.098
+  ],
+  "n": 86,
+  "judge_declined": 14
+ },
+ "jbb_harmful_refusal": {
+  "rate": 0.619,
+  "ci95": [
+   0.512,
+   0.716
+  ],
+  "n": 84,
+  "judge_declined": 16,
+  "agree_with_phrase_scorer": 0.714
+ },
+ "jbb_benign_refusal": {
+  "rate": 0.041,
+  "ci95": [
+   0.016,
+   0.101
+  ],
+  "n": 97,
+  "judge_declined": 3,
+  "agree_with_phrase_scorer": 0.979
+ },
+ "ae_harmful_jailbreak": {
+  "rate": 0.012,
+  "ci95": [
+   0.003,
+   0.043
+  ],
+  "n": 164,
+  "judge_declined": 36
+ },
+ "ae_harmful_refusal": {
+  "rate": 0.556,
+  "ci95": [
+   0.479,
+   0.631
+  ],
+  "n": 160,
+  "judge_declined": 40,
+  "agree_with_phrase_scorer": 0.688
+ },
+ "ae_over_refusal_refusal": {
+  "rate": 0.072,
+  "ci95": [
+   0.034,
+   0.149
+  ],
+  "n": 83,
+  "judge_declined": 0,
+  "agree_with_phrase_scorer": 0.928
+ },
+ "ae_ml_harmful_jailbreak": {
+  "rate": 0.0,
+  "ci95": [
+   -0.0,
+   0.204
+  ],
+  "n": 15,
+  "judge_declined": 10
+ },
+ "ae_ml_harmful_refusal": {
+  "rate": 0.333,
+  "ci95": [
+   0.152,
+   0.583
+  ],
+  "n": 15,
+  "judge_declined": 10,
+  "agree_with_phrase_scorer": 0.8
+ },
+ "ae_ml_harmless_refusal": {
+  "rate": 0.0,
+  "ci95": [
+   0.0,
+   0.133
+  ],
+  "n": 25,
+  "judge_declined": 0,
+  "agree_with_phrase_scorer": 1.0
+ }
+}

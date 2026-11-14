@@ -1,0 +1,2 @@
+qwen_agent_inkling_v2_wo_s2 --outer inkling --inner Qwen/Qwen3.5-0.8B --passes 0 --turns 40 --seed 2 --protocol v2
+qwen_agent_inkling_v2_wo_s3 --outer inkling --inner Qwen/Qwen3.5-0.8B --passes 0 --turns 40 --seed 3 --protocol v2
