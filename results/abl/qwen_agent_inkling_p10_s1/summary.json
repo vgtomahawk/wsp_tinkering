@@ -1,0 +1,99 @@
+{
+ "ended": "final answer after all forward passes",
+ "turns": 35,
+ "python_runs": 29,
+ "passes_left": 0,
+ "tensors": [
+  {
+   "name": "model.layers.15.self_attn.o_proj.weight",
+   "changed": 1722251,
+   "rel_fro": 0.0306
+  },
+  {
+   "name": "model.layers.15.mlp.down_proj.weight",
+   "changed": 3034798,
+   "rel_fro": 0.0312
+  },
+  {
+   "name": "model.layers.16.linear_attn.out_proj.weight",
+   "changed": 1754943,
+   "rel_fro": 0.0332
+  },
+  {
+   "name": "model.layers.16.mlp.down_proj.weight",
+   "changed": 3016681,
+   "rel_fro": 0.0322
+  },
+  {
+   "name": "model.layers.17.linear_attn.out_proj.weight",
+   "changed": 1735384,
+   "rel_fro": 0.034
+  },
+  {
+   "name": "model.layers.17.mlp.down_proj.weight",
+   "changed": 3050965,
+   "rel_fro": 0.0341
+  },
+  {
+   "name": "model.layers.18.linear_attn.out_proj.weight",
+   "changed": 1727366,
+   "rel_fro": 0.0332
+  },
+  {
+   "name": "model.layers.18.mlp.down_proj.weight",
+   "changed": 3036563,
+   "rel_fro": 0.0329
+  },
+  {
+   "name": "model.layers.19.self_attn.o_proj.weight",
+   "changed": 1720090,
+   "rel_fro": 0.0299
+  },
+  {
+   "name": "model.layers.19.mlp.down_proj.weight",
+   "changed": 2988588,
+   "rel_fro": 0.0314
+  },
+  {
+   "name": "model.layers.20.linear_attn.out_proj.weight",
+   "changed": 1708614,
+   "rel_fro": 0.032
+  },
+  {
+   "name": "model.layers.20.mlp.down_proj.weight",
+   "changed": 3011101,
+   "rel_fro": 0.0302
+  },
+  {
+   "name": "model.layers.21.linear_attn.out_proj.weight",
+   "changed": 1728646,
+   "rel_fro": 0.0327
+  },
+  {
+   "name": "model.layers.21.mlp.down_proj.weight",
+   "changed": 3011577,
+   "rel_fro": 0.0306
+  },
+  {
+   "name": "model.layers.22.linear_attn.out_proj.weight",
+   "changed": 1709877,
+   "rel_fro": 0.0312
+  },
+  {
+   "name": "model.layers.22.mlp.down_proj.weight",
+   "changed": 2996962,
+   "rel_fro": 0.0309
+  },
+  {
+   "name": "model.layers.23.self_attn.o_proj.weight",
+   "changed": 1706391,
+   "rel_fro": 0.0311
+  },
+  {
+   "name": "model.layers.23.mlp.down_proj.weight",
+   "changed": 3014041,
+   "rel_fro": 0.0304
+  }
+ ],
+ "pct_weights_changed": 5.6719
+}
