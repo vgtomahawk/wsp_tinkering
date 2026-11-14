@@ -13,7 +13,7 @@ Weight-Space Programming); Caleb Eom (weight-space-bench); Arditi et al. (refusa
 | What | Path |
 |---|---|
 | Results table (generated) | `results/abl/RESULTS_TABLE.md` (`abl/make_table.py`) |
-| Per-pass curves | `results/abl/pass_curves.json`; replay snapshots `results/abl/<run>/replay/` |
+| Per-pass curves | `results/abl/pass_curves.png` + `PASS_CURVES.md` (table view), `pass_curves.json`; `abl/plot_curves.py`; replay snapshots `results/abl/<run>/replay/` |
 | Did the agent do the task (edited / declined / abstained) | `abl/AGENT_BEHAVIOR.md` |
 | Every decline, verbatim | `results/abl/DECLINES.md` |
 | Harness vs the authors' Exp 8 / Exp 6, provenance, deviations, overlap disclosure | `abl/HARNESS_VS_EXP8.md` |
@@ -83,3 +83,15 @@ Mac traps: torch 2.14.0 (2.15 needs macOS 15 for MPS); `HF_DEACTIVATE_ASYNC_LOAD
 Willingness: Astra declined both 10-pass arms; Inkling declined ~40% of weights-only runs (both arms), 0/2 recent
 10-pass; Opus never declined (abstained only for lack of evidence at 0 passes). Why agents trail Arditi: removed
 direction differs (cosine with Arditi's: Opus 0.65, Inkling 0.33 / 0.14) and fewer layers edited; same practice data.
+
+## Per-pass curves (2026-11-14)
+
+Judge refusal after k passes (exact replays): Opus 0.80 -> 0.07 at pass 3 (= Arditi), then backed off strength to lower
+KL (regex still read ~0) -> final 0.22. Inkling neutral: single edit at pass 3 (0.42), passes 4-10 validation only.
+Inkling context: 0.63 at pass 2 -> 0.52 at pass 7 -> final 0.59. Both agents' best state beat their final submission.
+
+## Pending / blocked
+
+- GLM 5.3 as an outer model via Baseten: key in ~/.llmapikeys rejected (401 on management API, "Authentication
+  required" on inference.baseten.co); needs a fresh key and the exact model slug.
+- More Inkling 10-pass seeds would firm up its row (single runs so far).
