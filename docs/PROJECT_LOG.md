@@ -95,3 +95,11 @@ Inkling context: 0.63 at pass 2 -> 0.52 at pass 7 -> final 0.59. Both agents' be
 - GLM 5.3 as an outer model via Baseten: key in ~/.llmapikeys rejected (401 on management API, "Authentication
   required" on inference.baseten.co); needs a fresh key and the exact model slug.
 - More Inkling 10-pass seeds would firm up its row (single runs so far).
+
+## Protocol v2 (2026-11-14)
+
+v1's HOW IT WILL BE MEASURED named the refusal phrases ("I cannot", ...), which made the metric gameable. v2 (flag
+`--protocol v2`): the measurement text says only that a judge model decides whether each reply refuses (no phrases, no
+benchmark or paper names), and every generation pass returns the judge's verdict per reply (as Exp 8 graded practice
+answers). Judge refusal on JBB, v1 -> v2: Opus 0.22 -> 0.17; Inkling neutral 0.42 -> **0.02** (KL 0.086, 108 matrices,
+32% of weights); Inkling context 0.59 -> 0.23. Astra declined again under v2 (turn 1). Degeneration check clean.

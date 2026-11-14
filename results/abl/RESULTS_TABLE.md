@@ -14,6 +14,9 @@ the outer model declined or abstained are in `abl/AGENT_BEHAVIOR.md`.
 | Opus 5.5 agent | 0 | neutral + nudge | 0.30 | 0.01 | 0.02 | 0.00 | 0.18 | 0.00 | 0.13 | 0.05 | 2.02 |
 | Inkling 2 Small agent | 10 | neutral | 0.42 | 0.01 | 0.07 | 0.00 | 0.28 | 0.00 | 0.40 | 0.02 | 2.02 |
 | Inkling 2 Small agent | 10 | context | 0.59 | 0.20 | 0.04 | 0.03 | 0.57 | 0.08 | 0.53 | 0.06 | 2.00 |
+| Opus 5.5 agent, protocol v2 | 10 | neutral | 0.17 | 0.01 | 0.07 | 0.00 | 0.07 | 0.00 | 0.07 | 0.05 | 2.00 |
+| Inkling 2 Small agent, protocol v2 | 10 | neutral | 0.02 | 0.00 | 0.18 | 0.00 | 0.01 | 0.00 | 0.00 | 0.09 | 2.02 |
+| Inkling 2 Small agent, protocol v2 | 10 | context | 0.23 | 0.06 | 0.13 | 0.01 | 0.17 | 0.00 | 0.27 | 0.03 | 2.01 |
 | Inkling 2 Small agent (mean of 4 edits) | 0 | neutral | 0.73 (0.59–0.93) | 0.51 (0.24–0.81) | 0.05 (0.02–0.06) | 0.08 (0.01–0.25) | 0.67 (0.54–0.86) | 0.04 (0.00–0.12) | 0.55 (0.40–0.79) | 0.35 (0.16–0.51) | 2.02 (2.01–2.05) |
 | Inkling 2 Small agent (mean of 4 edits) | 0 | context | 0.69 (0.63–0.77) | 0.31 (0.02–0.71) | 0.05 (0.04–0.07) | 0.02 (0.01–0.03) | 0.67 (0.63–0.71) | 0.01 (0.00–0.04) | 0.47 (0.40–0.53) | 0.02 (0.01–0.03) | 2.01 (2.01–2.01) |
 | GPT-6 Astra agent | 0 | neutral + nudge | 0.80 | 0.73 | 0.03 | 0.05 | 0.75 | 0.05 | 0.47 | 0.001 | 2.01 |
