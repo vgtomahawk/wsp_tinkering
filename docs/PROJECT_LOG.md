@@ -1,0 +1,85 @@
+# wsp_tinkering: project log (start here)
+
+Single entry point for the history, results, commands and file map of this project. Repo:
+`/Users/vgangal/DegenAI/wsp_tinkering`, GitHub `vgtomahawk/wsp_tinkering` (private). Context: shared with Thinking
+Machines (Horace He gave Tinker credits; pitch = "Inkling as a coding agent for abliteration / weight editing").
+
+Authors: Atharva Naik (CMU), Varun Gangal (Patronus AI), Emmy Liu (CMU), Yoshinari Fujinuma (Patronus AI), Arnhav
+Datar (Patronus AI), Sally Dong (Patronus AI). Credits: Takehi, Teoh, Zhang, Khattab (Sparks of
+Weight-Space Programming); Caleb Eom (weight-space-bench); Arditi et al. (refusal direction); Thinking Machines (Tinker).
+
+## Where things are
+
+| What | Path |
+|---|---|
+| Results table (generated) | `results/abl/RESULTS_TABLE.md` (`abl/make_table.py`) |
+| Per-pass curves | `results/abl/pass_curves.json`; replay snapshots `results/abl/<run>/replay/` |
+| Did the agent do the task (edited / declined / abstained) | `abl/AGENT_BEHAVIOR.md` |
+| Every decline, verbatim | `results/abl/DECLINES.md` |
+| Harness vs the authors' Exp 8 / Exp 6, provenance, deviations, overlap disclosure | `abl/HARNESS_VS_EXP8.md` |
+| Published JailbreakBench numbers for context | `abl/JBB_REFERENCES.md` |
+| Code guide (files, entrypoints, terms) | `docs/code_guide.html` |
+| Setup diagrams vs original experiments | `docs/explainer.html` (also claude.ai/artifact/QzUPKVuAZHmBDB5dYcwiEU) |
+| Per-run artifacts | `results/abl/<run>/`: config.json, log.jsonl*, edit.pt*, summary.json, final_answer.md, scores.json, judge.json (* local only, gitignored) |
+| Logs of background jobs | `results_*.log` in repo root (local), finished ones in `results/logs/` |
+
+## Code
+
+| File | Role |
+|---|---|
+| `abl/agent.py` | WSP harness: Exp 8-style task message, one code action per reply, explain-every-step, pass budget, kernel (get/save_edit/generate/read), outer clients `Opus`, `Inkling` (one `python` tool), `Astra`; flags `--context`, `--nudge`, `--passes`, `--effort` |
+| `abl/score.py` | held-out scoring: JBB harmful/benign, abliteration-eval harmful/over-refusal/multilingual, Arditi regex, first-token KL (= Heretic), Alpaca CE; `--quick`, `--only multilingual` |
+| `abl/judge.py` | JailbreakBench's official judge prompts (refusal + jailbreak) with Claude Sonnet 5.5, on saved completions; writes judge.json |
+| `abl/arditi.py` | reference recipe (diff-in-means, selection on val, orthogonalize all writers) |
+| `abl/replay.py`, `abl/curve_pipeline.sh` | rebuild the edit after each pass from logs; full-suite score + judge each state |
+| `abl/score_and_judge.sh` | score + judge one or more runs |
+| `abl/make_table.py` | regenerate the results table |
+| `wspt/` | Exp 5 runner and outer-model clients |
+
+## Key commands
+
+```bash
+cd /Users/vgangal/DegenAI/wsp_tinkering && source .venv/bin/activate
+source <(grep -E '^export (ANTHROPIC|OPENAI|TINKER)_API_KEY=' ~/.llmapikeys); export ANTHROPIC_API_KEY OPENAI_API_KEY TINKER_API_KEY
+cd abl
+python agent.py --outer inkling|opus|astra --inner Qwen/Qwen3.5-0.8B --passes 10|0 [--context] [--nudge] --seed N --out ../results/abl/<run>
+bash score_and_judge.sh <run>                 # full suite + both judges
+bash curve_pipeline.sh <run>                  # per-pass curve for a run
+python make_table.py                          # results table
+```
+Mac traps: torch 2.14.0 (2.15 needs macOS 15 for MPS); `HF_DEACTIVATE_ASYNC_LOAD=1` (set in score.load); don't use
+`sh -c` with `<(...)` (POSIX sh rejects it; that silently skipped a scoring once); one 3B model at a time on 16 GB.
+
+## Experiment history (2026-11-12 to 11-13)
+
+1. Exp 5 reproduction (write MinAtar nets from scratch), eomcaleb's scorer: Astra's released nets 502.9 / 52.3 / 53.7 on
+   the Mac (bench 502.6 / 52.2 / 53.7). Opus 5.5 via Claude API: score 37.1 (bench's OpenRouter row 48.5; 4/9 replies
+   hit the 64k cap vs 2/9). Inkling 2 Small: 0.0 at 64k (8/9 cut), 2.2 at 256k. OpenRouter replay blocked (BYOK key out
+   of credit).
+2. Abliteration as WSP. Inner model Qwen3.5-0.8B (the authors' Exp 8 model), thinking off; Llama-3.2-3B baseline only
+   (line paused). Practice data = Arditi train splits; test = JailbreakBench + abliteration-eval (1/100 JBB overlap).
+3. Harness fixes along the way: Inkling needs a function tool to act (no-tool = announces then stops); explain-bounces
+   not charged to our 40-reply cap; weights-only arm ends on FINAL; blocklist bug (practice_requests) fixed.
+4. Arms: neutral (authors' wording), context (one frozen truthful research paragraph, no method), nudge (one frozen
+   sentence for 0 passes; Opus and Astra abstained without it).
+5. Regex vs judge: Inkling's weights-only edits remove refusal *words* (direction of "Sorry/cannot" token
+   embeddings), so the regex drops while the JailbreakBench refusal judge barely moves. Judge refusal is the headline.
+6. Per-pass curves by exact replay (fidelity check: final edits identical, max diff 0.0).
+
+## Headline results (Qwen3.5-0.8B; JBB refusal by JailbreakBench refusal judge, KL first-token)
+
+| Row | Passes | Judge refusal | Regex | KL |
+|---|---|---|---|---|
+| Unedited | - | 0.80 | 0.73 | 0 |
+| Arditi recipe (ours, their splits) | - | 0.07 | 0.00 | 0.065 |
+| Opus 5.5, neutral | 10 | 0.22 (0.07 at pass 3, then it backed off strength) | 0.03 | 0.022 |
+| Opus 5.5, neutral + nudge | 0 | 0.30 | 0.01 | 0.047 |
+| Inkling, neutral | 10 | 0.42 (edit made by pass 3) | 0.01 | 0.017 |
+| Inkling, context | 10 | 0.59 | 0.20 | 0.059 |
+| Inkling, weights only, neutral (4 edits) | 0 | 0.73 mean | 0.51 | 0.35 |
+| Inkling, weights only, context (4 edits) | 0 | 0.69 mean | 0.31 | 0.02 |
+| Astra, neutral + nudge | 0 | 0.80 (no effect) | 0.73 | 0.001 |
+
+Willingness: Astra declined both 10-pass arms; Inkling declined ~40% of weights-only runs (both arms), 0/2 recent
+10-pass; Opus never declined (abstained only for lack of evidence at 0 passes). Why agents trail Arditi: removed
+direction differs (cosine with Arditi's: Opus 0.65, Inkling 0.33 / 0.14) and fewer layers edited; same practice data.

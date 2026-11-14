@@ -5,6 +5,8 @@ Weight-Space Programming* (Takehi, Teoh, Zhang, Khattab, 2026) with outer models
 numbers, and then point the same harness at a new target: removing a small open model's refusals by editing its
 weights directly, with no training, scored with the standard refusal-direction protocol.
 
+**Start here: [`docs/PROJECT_LOG.md`](docs/PROJECT_LOG.md)** (history, results, commands, file map).
+
 **Authors:** Atharva Naik (CMU), Varun Gangal (Patronus AI), Emmy Liu (CMU), Yoshinari Fujinuma (Patronus AI),
 Arnhav Datar (Patronus AI), Sally Dong (Patronus AI).
 
