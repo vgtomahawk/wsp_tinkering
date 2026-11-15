@@ -28,7 +28,7 @@ def main():
     cfg = json.load(open(run / "config.json"))
     rows = [json.loads(l) for l in open(run / "log.jsonl")]
     tok, model = load(a.inner)
-    k = Kernel(tok, model, cfg["passes"])
+    k = Kernel(tok, model, cfg["passes"], grade=(cfg.get("protocol") == "v2"))   # v2 passes are judge-graded
     out = run / "replay"
     out.mkdir(exist_ok=True)
     states, used_after = [], []          # (passes_used, edit dict) after each executed cell
