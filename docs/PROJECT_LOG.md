@@ -3,8 +3,7 @@
 Single entry point for the history, results, commands and file map of this project. GitHub
 `vgtomahawk/wsp_tinkering`. Inkling runs used Tinker credits provided by Thinking Machines.
 
-Authors: Atharva Naik (CMU), Varun Gangal (Patronus AI), Emmy Liu (CMU), Yoshinari Fujinuma (Patronus AI), Arnhav
-Datar (Patronus AI), Sally Dong (Patronus AI). Credits: Takehi, Teoh, Zhang, Khattab (Sparks of
+Authors: Varun Gangal (Patronus AI), Yoshinari Fujinuma (Patronus AI), Atharva Naik (CMU), Arnhav Datar (Patronus AI), Emmy Liu (CMU), Sally Dong (Patronus AI). Credits: Takehi, Teoh, Zhang, Khattab (Sparks of
 Weight-Space Programming); Caleb Eom (weight-space-bench); Arditi et al. (refusal direction); Thinking Machines (Tinker).
 
 ## Where things are

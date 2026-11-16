@@ -14,8 +14,7 @@ The README sections below record the first runs (2026-11-12); final numbers use 
 selects Inkling 2 Small, Inkling Small or plain Inkling), `astra` (GPT-6 Astra, OpenAI), `baseten` (open-weights
 models on Baseten, default `zai-org/GLM-5.3`).
 
-**Authors:** Atharva Naik (CMU), Varun Gangal (Patronus AI), Emmy Liu (CMU), Yoshinari Fujinuma (Patronus AI),
-Arnhav Datar (Patronus AI), Sally Dong (Patronus AI).
+**Authors:** Varun Gangal (Patronus AI), Yoshinari Fujinuma (Patronus AI), Atharva Naik (CMU), Arnhav Datar (Patronus AI), Emmy Liu (CMU), Sally Dong (Patronus AI).
 
 **Acknowledgements.** The task design, rules and evaluation protocol come from Rikiya Takehi, Jayden Teoh, Alex Zhang
 and Omar Khattab ([blog](https://rikiyat.github.io/blog/weight-space-programming/),
