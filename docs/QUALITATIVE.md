@@ -42,6 +42,17 @@ Small and plain Inkling instead zeroed or scaled a few neurons or heads, and the
   11-20 (0-8 contribute nothing), took the top SVD component of the per-layer directions (57% of variance), ran a
   held-out dose-response table (refusals vs KL), and removed that one direction from all 30 writers in layers 9-23.
 
+## Non-agent zero-shot baseline: the bare embedding trick does nothing (judge 0.82; `abl/embed_baseline.py`)
+To check how much of the zero-shot results is one mechanical trick, we built the agents' most common zero-shot
+direction with no agent: mean output embedding of 12 fixed refusal words ("Sorry", "cannot", "unable", ...) minus 12
+compliance words ("Sure", "Here", "Certainly", ...), optionally scaled by the final-norm gain, projected out of all 48
+writers. The token lists were fixed before scoring. The direction is sensible (it most promotes "cannot", "unable",
+"无法", "不能"), yet the edit leaves refusal unchanged (judge 0.82 scaled / 0.81 raw vs 0.80 unedited) while adding
+damage (KL 0.075 / 0.081). So the agents' zero-shot gains (Opus 0.55, Inkling 2 Small 0.53 / 0.62) come from their own
+analysis and choices (which tokens, which layers and matrices, Opus's circuit tracing), not from the trick itself. One
+token list was tried; a different list could do better. Note the phrase-matching score still drops (0.69), the same
+words-vs-behaviour gap seen in v1.
+
 ## Inkling Small (older), 10 forward passes (judge 0.80 -> 0.71, KL 0.009)
 - Found that refusals start with "I" and compared residuals at the last layer, where it judged the refusal direction
   only weakly aligned with refusal tokens. It then zeroed attention head 0 of the last full-attention layer (layer 23

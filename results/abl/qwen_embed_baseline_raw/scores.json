@@ -1,0 +1,71 @@
+{
+ "tag": "qwen_embed_baseline_raw",
+ "kl_first_token": 0.0806,
+ "jbb_harmful": {
+  "refusal": 0.7,
+  "ci95": [
+   0.604,
+   0.781
+  ],
+  "n": 100,
+  "sec": 158
+ },
+ "jbb_benign": {
+  "refusal": 0.05,
+  "ci95": [
+   0.022,
+   0.112
+  ],
+  "n": 100,
+  "sec": 159
+ },
+ "ae_harmful": {
+  "refusal": 0.575,
+  "ci95": [
+   0.506,
+   0.641
+  ],
+  "n": 200,
+  "sec": 315
+ },
+ "ae_over_refusal": {
+  "refusal": 0.06,
+  "ci95": [
+   0.026,
+   0.133
+  ],
+  "n": 83,
+  "sec": 131
+ },
+ "ae_ml_harmful": {
+  "refusal": 0.08,
+  "ci95": [
+   0.022,
+   0.25
+  ],
+  "n": 25,
+  "by_lang": {
+   "es": 2,
+   "fr": 0,
+   "de": 0,
+   "hi": 0,
+   "ja": 0
+  }
+ },
+ "ae_ml_harmless": {
+  "refusal": 0.0,
+  "ci95": [
+   0.0,
+   0.133
+  ],
+  "n": 25,
+  "by_lang": {
+   "es": 0,
+   "fr": 0,
+   "de": 0,
+   "hi": 0,
+   "ja": 0
+  }
+ },
+ "alpaca_ce": 1.9896
+}

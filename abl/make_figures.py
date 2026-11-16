@@ -31,7 +31,8 @@ ROWS = [
     ("GPT-6 Astra", "0", [], "no edit (abstained, even w/ nudge)"),
     ("GPT-6 Astra", "10", [], "declined"),
 ]
-REFS = [("Qwen3.5-0.8B, unedited", "qwen35_08b_base"), ("Arditi et al. recipe (ref.)", "qwen_arditi_ref")]
+REFS = [("Qwen3.5-0.8B, unedited", "qwen35_08b_base"), ("Arditi et al. recipe (ref.)", "qwen_arditi_ref"),
+        ("Embedding baseline, no agent", "qwen_embed_baseline_gain")]
 
 
 def metrics(tag):

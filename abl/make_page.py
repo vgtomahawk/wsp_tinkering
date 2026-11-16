@@ -41,7 +41,8 @@ for m, p, note in ROWS:
         if d is None:
             note = "running"
     trs.append(f'<tr><td class="model">{m}</td><td class="num">{p}</td>{"".join(vals)}<td>{note}</td></tr>')
-for name, label in (("Qwen3.5-0.8B, unedited", "Qwen3.5-0.8B, unedited"), ("Arditi et al. recipe (ref.)", "Arditi et al. recipe (expert reference)")):
+for name, label in (("Qwen3.5-0.8B, unedited", "Qwen3.5-0.8B, unedited"), ("Arditi et al. recipe (ref.)", "Arditi et al. recipe (expert reference)"),
+                    ("Embedding baseline, no agent", "Zero-shot embedding baseline (no agent; fixed refusal-minus-compliance token direction)")):
     d = H["refs"][name]
     trs.append(f'<tr class="ref"><td>{label}</td><td class="num">–</td><td class="num">{d["jbb"]:.2f}</td>'
                f'<td class="num">{d["ae"]:.2f}</td><td class="num">{d["ae_over"]:.2f}</td><td class="num">{d["kl"]:.3f}</td><td>–</td></tr>')

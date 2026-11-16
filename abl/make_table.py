@@ -11,6 +11,8 @@ R = Path(__file__).resolve().parent.parent / "results" / "abl"
 ROWS = [  # (label, outer, passes, arm, run tags)
     ("Qwen3.5-0.8B, unedited", "–", "–", "–", ["qwen35_08b_base"]),
     ("Arditi et al. recipe (our re-implementation, their prompt splits)", "–", "–", "–", ["qwen_arditi_ref"]),
+    ("Zero-shot embedding baseline, no agent (final-norm-scaled; abl/embed_baseline.py)", "–", "0", "–", ["qwen_embed_baseline_gain"]),
+    ("Zero-shot embedding baseline, no agent (raw)", "–", "0", "–", ["qwen_embed_baseline_raw"]),
     ("Opus 5.5 agent", "Opus 5.5", "10", "neutral", ["qwen_agent_opus_s0"]),
     ("Opus 5.5 agent", "Opus 5.5", "0", "neutral + nudge", ["qwen_agent_opus_wo_nudge_s0"]),
     ("Inkling 2 Small agent", "Inkling", "10", "neutral", ["qwen_agent_inkling_p10_s1"]),

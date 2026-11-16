@@ -127,3 +127,6 @@ Regenerate: `python abl/make_figures.py && python abl/plot_curves.py v2 && pytho
 - GLM 5.3 results (2026-11-16): 10 passes 0.21 (0.24, 0.17; KL 0.019 / 0.10; ae over-refusal 0.00), zero-shot 0.74
   (0.80, 0.69). Never declined. Cites Arditi et al. by name in 3 of 4 final answers (recalled the recipe; prompt names
   none). Writers-only projection, 17-18 turns per run.
+- Non-agent zero-shot embedding baseline (2026-11-16, `abl/embed_baseline.py`; fixed refusal-minus-compliance token
+  direction, projected out of all 48 writers): judge 0.82 (gain-scaled) / 0.81 (raw), KL 0.075 / 0.081. No effect, so
+  the agents' zero-shot gains are not the bare trick. Reference row in table/figures/page.

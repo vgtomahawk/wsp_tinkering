@@ -121,6 +121,12 @@
    "ae": 0.025,
    "ae_over": 0.0,
    "kl": 0.0653
+  },
+  "Embedding baseline, no agent": {
+   "jbb": 0.819,
+   "ae": 0.735,
+   "ae_over": 0.06,
+   "kl": 0.0751
   }
  }
 }
