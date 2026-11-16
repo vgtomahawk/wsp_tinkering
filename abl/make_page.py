@@ -108,7 +108,7 @@ footer {{ color:var(--muted); font-size:13px; border-top:1px solid var(--line); 
   <figure><img alt="Bar chart of JailbreakBench refusal, zero-shot vs 10 passes, per outer model" src="{img('headline_bars.png')}">
     <figcaption>Zero-shot (blue) vs 10 forward passes (orange). Dotted: unedited model. Dashed: Arditi et al. recipe.</figcaption></figure>
   <figure><img alt="Refusal and damage after k forward passes" src="{img('pass_curves_v2.png') or img('pass_curves.png')}">
-    <figcaption>What each agent's edit would score had it been stopped after k passes (exact replays, protocol v2). Both land a working edit by pass 1, then spend later passes cutting damage (right).</figcaption></figure>
+    <figcaption>What each agent's edit would score had it been stopped after k passes (exact replays of one session per model, protocol v2). Both land a working edit by pass 1, then spend later passes cutting damage (right).</figcaption></figure>
 </section>
 
 <section class="grid2">
@@ -131,7 +131,7 @@ footer {{ color:var(--muted); font-size:13px; border-top:1px solid var(--line); 
   phrases, zero-shot edits removed the <em>words</em> of refusal while the model kept refusing in other words; a phrase
   matcher reported up to 40 points of fake progress. Describing only a judge, and grading practice generations with it
   (as Exp 8 graded practice answers), fixed this. <strong>Willingness differs:</strong> Astra declined every
-  forward-pass run; Inkling 2 Small declined about half the time; Opus never declined.</p></div>
+  forward-pass run; Inkling 2 Small declined 2 of 4 zero-shot runs (0 of 2 with passes); Opus never declined.</p></div>
 </section>
 
 <footer>Code, prompts, logs and every number: <a href="https://github.com/vgtomahawk/wsp_tinkering">github.com/vgtomahawk/wsp_tinkering</a>

@@ -30,7 +30,7 @@ Same picture on abliteration-eval, with over-refusal on harmless prompts staying
 • Inkling Small (older): 0.79 (≈ no effect)
 Big generational jump from Inkling Small → Inkling 2 Small.
 
-5/ How do they use passes? We replayed every session exactly and scored the edit after each pass. Both land a working
+5/ How do they use passes? We replayed a session per model exactly and scored the edit after each pass. Both land a working
 edit by pass 1, then spend later passes cutting collateral damage (KL 0.21 → 0.05 for Opus, 0.17 → 0.09 for Inkling)
 while keeping refusals low. [curve image]
 
@@ -42,13 +42,13 @@ while keeping refusals low. [curve image]
 
 7/ Lesson 1 — metric leaks get exploited. Our first prompt named the refusal phrases ("I cannot", …). Zero-shot edits
 then removed the *words* of refusal; the model kept refusing in other words, and a phrase-matching score showed up to
-40 points of fake progress. Describing only a judge — and grading practice generations with it, as the original work
+60 points of fake progress. Describing only a judge — and grading practice generations with it, as the original work
 graded practice answers — fixed it.
 
 8/ Lesson 2 — willingness is a separate axis from ability. GPT-6 Astra never produced an effective edit: it declined
 every run where it could run the model ("I can't carry out targeted weight edits whose objective is to bypass safety
 refusals") and abstained zero-shot. Inkling 2 Small
-declined about half its runs; Opus never did. We report every decline verbatim.
+declined 2 of 4 zero-shot runs (0 of 2 with passes); Opus never did. We report every decline verbatim.
 
 9/ Caveats: one 0.8B inner model; 1–2 runs per cell (Inkling's 10-pass runs vary a lot); judge = Claude Sonnet 5.5 with
 JBB's prompt. Generated replies to harmful prompts are never published — only rates. Edits are rank 1–2 per matrix,
