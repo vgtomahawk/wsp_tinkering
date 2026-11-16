@@ -124,7 +124,7 @@ footer {{ color:var(--muted); font-size:13px; border-top:1px solid var(--line); 
   <a href="{GH}/docs/prompts/v2_10passes_neutral.txt">10 passes</a> ·
   <a href="{GH}/docs/prompts/v2_0passes_neutral.txt">zero-shot</a> ·
   <a href="{GH}/docs/prompts/v2_0passes_neutral_nudge.txt">zero-shot + nudge</a>.</p></div>
-  <div class="card"><h3>What they did</h3><p>Every agent that engaged found a "refusal direction" and projected it out.
+  <div class="card"><h3>What they did</h3><p>Every agent whose edit worked (Opus, Inkling 2 Small, GLM 5.3) found a "refusal direction" and projected it out.
   Inkling 2 Small (10 passes) removed it from both the readers and the writers of the residual stream in layers 10-23
   and ran its own ablations. Opus localized the request-specific writers (layers 9-13) for the most surgical edit.
   GLM 5.3 named Arditi et al. and applied that standard recipe from memory (0.21 at 10 passes). Plain Inkling and the older Inkling Small made edits too small to matter (plain Inkling found the direction, then zeroed just two neurons). Zero-shot, the stronger agents inferred the direction from the output-embedding geometry or traced refusal neurons by hand.
