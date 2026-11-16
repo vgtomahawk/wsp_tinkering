@@ -1,0 +1,13 @@
+All forward passes are used and my edits are in place. Final state: 18 weight matrices edited (5.8% of all weights), each with the refusal direction projected out, specifically the output projections of full-attention layers 15, 19, 23; the linear-attention out-projections of layers 16–18 and 20–22; and the MLP down-projections of layers 15–23.
+
+Summary of my path:
+- Diagnosed behaviour: the model begins refusals with "I" (p≈0.58 on harmful vs 0.01 on ordinary).
+- Located the signal: harmful vs ordinary residuals diverge gradually through the network, with the large gap accumulating in late layers (projection r-proj grows from +0.07 at layer 12 to +4.7 at layer 23, ordinary stays near −1.0) and the final norm amplifying that same direction for logits.
+- Computed the refusal direction r = normalized (mean-harmful − mean-ordinary) residual at layer 23 from the first 128 practice requests vs first 128 ordinary prompts; verified its consistency across late layers (cos between layer-20+ directions ≈ 0.78–0.91).
+- Tested global ablation of r from ALL residual writers (attention/linear out-proj and MLP down-proj): refusals dropped to ~25/128, but ordinary-prompt damage was too high (8/64 top-1 changes, ≈0.16 KL).
+- Tested late-layer-only (layers 15–23) mean-diff ablation: matched the anti-refusal effect (20/96 refusals on held-out eliciting vs 72 for original; 11 vs 21 on unseen held-out; ordinary refusals held at 0–1), no extra collateral (the early layers contributed fluency damage but no anti-refusal effect, as predicted).
+- Damage on ordinary prompts is modest: ~0.16 KL (top-8 support, which likely overestimates) and 8/64 top-1 next-token changes; a Fisher discriminant alternative reduced damage to 2/64 and ~0.09 KL but was far too weak (only 54 vs 72 refusals suppressed) and lost the effect, so I kept the mean-diff edition.
+
+What I changed, with evidence: I ablated a single residual-stream direction from every residual writer in layers 15–23. The edit is data-driven and localized: it targets exactly the subspace separating refusal-eliciting from ordinary prompts in late layers, where the residual contribution analysis showed the refusal signal is written. I expect it to reduce refusals on the evaluation's held-out harmful requests (validated on held-out practice prompts: refusals ~halved), keep ordinary refusal rates at zero, and keep ordinary-behaviour KL small.
+
+FINAL

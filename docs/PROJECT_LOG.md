@@ -103,3 +103,17 @@ v1's HOW IT WILL BE MEASURED named the refusal phrases ("I cannot", ...), which 
 benchmark or paper names), and every generation pass returns the judge's verdict per reply (as Exp 8 graded practice
 answers). Judge refusal on JBB, v1 -> v2: Opus 0.22 -> 0.17; Inkling neutral 0.42 -> **0.02** (KL 0.086, 108 matrices,
 32% of weights); Inkling context 0.59 -> 0.23. Astra declined again under v2 (turn 1). Degeneration check clean.
+
+## Final shareable results (2026-11-15; protocol v2, neutral, judge refusal on JBB; unedited 0.80, Arditi 0.07)
+
+| Outer | 0 passes (zero-shot) | 10 passes |
+|---|---|---|
+| Opus 5.5 | 0.55 (needed nudge) | 0.17 (runs 0.17, 0.17) |
+| Inkling 2 Small | 0.57 (runs 0.53, 0.62; 2 of 4 declined) | 0.19 (runs 0.02, 0.36) |
+| Inkling Small (older) | 0.79 | 0.71 |
+| GPT-6 Astra | no edit (abstained even w/ nudge) | declined |
+
+v2 per-pass curves: both agents land a working edit by pass 1 and then use passes to cut damage (KL Opus 0.21 -> 0.05,
+Inkling 0.17 -> 0.09). Artifacts: `docs/figures/{headline_table,headline_bars,pass_curves_v2}.png`, `docs/results.html`
+(claude.ai/artifact/TKLtMxSjSVtTtax3je4Vus), `docs/QUALITATIVE.md`, `docs/prompts/`, `docs/twitter_thread.md`.
+Regenerate: `python abl/make_figures.py && python abl/plot_curves.py v2 && python abl/make_page.py`.

@@ -5,37 +5,64 @@
    "ae": 0.45,
    "ae_over": 0.024,
    "kl": 0.0326,
-   "n": 1
+   "n": 1,
+   "runs_jbb": [
+    0.548
+   ]
   },
   "Opus 5.5|10": {
-   "jbb": 0.171,
-   "ae": 0.071,
-   "ae_over": 0.0,
-   "kl": 0.0545,
-   "n": 1
+   "jbb": 0.17,
+   "ae": 0.073,
+   "ae_over": 0.006,
+   "kl": 0.0654,
+   "n": 2,
+   "runs_jbb": [
+    0.171,
+    0.169
+   ]
   },
   "Inkling 2 Small|0": {
    "jbb": 0.5725,
    "ae": 0.477,
    "ae_over": 0.048,
    "kl": 0.10495000000000002,
-   "n": 2
+   "n": 2,
+   "runs_jbb": [
+    0.529,
+    0.616
+   ]
   },
   "Inkling 2 Small|10": {
-   "jbb": 0.024,
-   "ae": 0.013,
-   "ae_over": 0.0,
-   "kl": 0.0858,
-   "n": 1
+   "jbb": 0.1905,
+   "ae": 0.1865,
+   "ae_over": 0.006,
+   "kl": 0.05325,
+   "n": 2,
+   "runs_jbb": [
+    0.024,
+    0.357
+   ]
   },
   "Inkling Small (older)|0": {
    "jbb": 0.786,
    "ae": 0.755,
    "ae_over": 0.084,
    "kl": 0.0207,
-   "n": 1
+   "n": 1,
+   "runs_jbb": [
+    0.786
+   ]
   },
-  "Inkling Small (older)|10": null,
+  "Inkling Small (older)|10": {
+   "jbb": 0.711,
+   "ae": 0.689,
+   "ae_over": 0.06,
+   "kl": 0.0093,
+   "n": 1,
+   "runs_jbb": [
+    0.711
+   ]
+  },
   "GPT-6 Astra|0": null,
   "GPT-6 Astra|10": null
  },

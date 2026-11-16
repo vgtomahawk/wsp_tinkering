@@ -1,7 +1,6 @@
 # Twitter / X thread draft
 
-Handles are placeholders, e.g. [@ThinkingMachines], [@takehi]; fill in the real ones before posting. Numbers marked
-[TBD] are still running. Attach: 1/ headline_table.png, 2/ headline_bars.png, 5/ pass_curves_v2.png (docs/figures/).
+Handles are placeholders, e.g. [@ThinkingMachines], [@takehi]; fill in the real ones before posting. All numbers final as of 2026-11-15. Attach: 1/ headline_table.png, 2/ headline_bars.png, 5/ pass_curves_v2.png (docs/figures/).
 
 ---
 
@@ -18,11 +17,11 @@ replies, or read activations). Editing weights is free; running the model costs 
 3/ Headline (refusal on JailbreakBench's 100 harmful behaviors, judged by JBB's own refusal-judge prompt; unedited
 Qwen = 0.80, the expert Arditi et al. recipe = 0.07):
 
-• Inkling 2 Small, 10 passes: 0.02
-• Opus 5.5, 10 passes: 0.17
-• Inkling Small (older), 10 passes: [TBD]
+• Opus 5.5, 10 passes: 0.17 (two runs: 0.17, 0.17)
+• Inkling 2 Small, 10 passes: 0.19 (two runs: 0.02 and 0.36; the best matches the expert recipe)
+• Inkling Small (older), 10 passes: 0.71
 
-Same story on abliteration-eval (0.01 / 0.07), with over-refusal on harmless prompts staying at 0. [bar chart]
+Same picture on abliteration-eval, with over-refusal on harmless prompts staying ≈ 0. [bar chart]
 
 4/ Zero-shot — no passes at all, editing from the weights alone — is much harder:
 • Opus 5.5: 0.55 (only after a one-line nudge; otherwise it abstained: "nothing I could change would have the causal
@@ -31,8 +30,9 @@ Same story on abliteration-eval (0.01 / 0.07), with over-refusal on harmless pro
 • Inkling Small (older): 0.79 (≈ no effect)
 Big generational jump from Inkling Small → Inkling 2 Small.
 
-5/ How much do passes matter? We replayed every session exactly and scored the edit after each pass. Most of the gain
-lands by pass 3. Both Opus and Inkling sometimes *backed off* their best edit later to reduce damage. [curve image]
+5/ How do they use passes? We replayed every session exactly and scored the edit after each pass. Both land a working
+edit by pass 1, then spend later passes cutting collateral damage (KL 0.21 → 0.05 for Opus, 0.17 → 0.09 for Inkling)
+while keeping refusals low. [curve image]
 
 6/ What they actually did (no method was in the prompt):
 • Inkling 2 Small found a per-layer "refusal direction" and removed it from both the readers and writers of the
@@ -45,12 +45,13 @@ then removed the *words* of refusal; the model kept refusing in other words, and
 40 points of fake progress. Describing only a judge — and grading practice generations with it, as the original work
 graded practice answers — fixed it.
 
-8/ Lesson 2 — willingness is a separate axis from ability. GPT-6 Astra declined every run where it could run the
-model ("I can't carry out targeted weight edits whose objective is to bypass safety refusals"). Inkling 2 Small
+8/ Lesson 2 — willingness is a separate axis from ability. GPT-6 Astra never produced an effective edit: it declined
+every run where it could run the model ("I can't carry out targeted weight edits whose objective is to bypass safety
+refusals") and abstained zero-shot. Inkling 2 Small
 declined about half its runs; Opus never did. We report every decline verbatim.
 
-9/ Caveats: one 0.8B inner model; few seeds per cell (single runs for the 10-pass rows); judge = Claude Sonnet 5.5 with
-JBB's prompt. Generated replies to harmful prompts are never published — only rates. Edits are rank-1 per matrix,
+9/ Caveats: one 0.8B inner model; 1–2 runs per cell (Inkling's 10-pass runs vary a lot); judge = Claude Sonnet 5.5 with
+JBB's prompt. Generated replies to harmful prompts are never published — only rates. Edits are rank 1–2 per matrix,
 the same shape as the standard recipe.
 
 10/ Code, exact prompts, logs, every number: github.com/vgtomahawk/wsp_tinkering

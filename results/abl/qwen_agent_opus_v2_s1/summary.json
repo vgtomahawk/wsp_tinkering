@@ -1,0 +1,159 @@
+{
+ "ended": "final answer after all forward passes",
+ "turns": 22,
+ "python_runs": 21,
+ "passes_left": 0,
+ "tensors": [
+  {
+   "name": "model.layers.9.mlp.down_proj.weight",
+   "changed": 3108689,
+   "rel_fro": 0.0355
+  },
+  {
+   "name": "model.layers.9.linear_attn.out_proj.weight",
+   "changed": 1768166,
+   "rel_fro": 0.0333
+  },
+  {
+   "name": "model.layers.10.mlp.down_proj.weight",
+   "changed": 3091426,
+   "rel_fro": 0.0348
+  },
+  {
+   "name": "model.layers.10.linear_attn.out_proj.weight",
+   "changed": 1794464,
+   "rel_fro": 0.0369
+  },
+  {
+   "name": "model.layers.11.mlp.down_proj.weight",
+   "changed": 3106150,
+   "rel_fro": 0.0341
+  },
+  {
+   "name": "model.layers.11.self_attn.o_proj.weight",
+   "changed": 1776828,
+   "rel_fro": 0.036
+  },
+  {
+   "name": "model.layers.12.mlp.down_proj.weight",
+   "changed": 3083643,
+   "rel_fro": 0.0349
+  },
+  {
+   "name": "model.layers.12.linear_attn.out_proj.weight",
+   "changed": 1758064,
+   "rel_fro": 0.0339
+  },
+  {
+   "name": "model.layers.13.mlp.down_proj.weight",
+   "changed": 3105561,
+   "rel_fro": 0.0347
+  },
+  {
+   "name": "model.layers.13.linear_attn.out_proj.weight",
+   "changed": 1757961,
+   "rel_fro": 0.0365
+  },
+  {
+   "name": "model.layers.14.mlp.down_proj.weight",
+   "changed": 3058547,
+   "rel_fro": 0.0319
+  },
+  {
+   "name": "model.layers.14.linear_attn.out_proj.weight",
+   "changed": 1757802,
+   "rel_fro": 0.0327
+  },
+  {
+   "name": "model.layers.15.mlp.down_proj.weight",
+   "changed": 3017852,
+   "rel_fro": 0.0294
+  },
+  {
+   "name": "model.layers.15.self_attn.o_proj.weight",
+   "changed": 1737827,
+   "rel_fro": 0.0298
+  },
+  {
+   "name": "model.layers.16.mlp.down_proj.weight",
+   "changed": 3040103,
+   "rel_fro": 0.0312
+  },
+  {
+   "name": "model.layers.16.linear_attn.out_proj.weight",
+   "changed": 1753282,
+   "rel_fro": 0.0322
+  },
+  {
+   "name": "model.layers.17.mlp.down_proj.weight",
+   "changed": 3084034,
+   "rel_fro": 0.0324
+  },
+  {
+   "name": "model.layers.17.linear_attn.out_proj.weight",
+   "changed": 1750589,
+   "rel_fro": 0.0324
+  },
+  {
+   "name": "model.layers.18.mlp.down_proj.weight",
+   "changed": 3043926,
+   "rel_fro": 0.0319
+  },
+  {
+   "name": "model.layers.18.linear_attn.out_proj.weight",
+   "changed": 1741225,
+   "rel_fro": 0.031
+  },
+  {
+   "name": "model.layers.19.mlp.down_proj.weight",
+   "changed": 3012747,
+   "rel_fro": 0.0298
+  },
+  {
+   "name": "model.layers.19.self_attn.o_proj.weight",
+   "changed": 1731486,
+   "rel_fro": 0.0295
+  },
+  {
+   "name": "model.layers.20.mlp.down_proj.weight",
+   "changed": 3033820,
+   "rel_fro": 0.0292
+  },
+  {
+   "name": "model.layers.20.linear_attn.out_proj.weight",
+   "changed": 1731227,
+   "rel_fro": 0.0306
+  },
+  {
+   "name": "model.layers.21.mlp.down_proj.weight",
+   "changed": 3006264,
+   "rel_fro": 0.0283
+  },
+  {
+   "name": "model.layers.21.linear_attn.out_proj.weight",
+   "changed": 1744443,
+   "rel_fro": 0.0307
+  },
+  {
+   "name": "model.layers.22.mlp.down_proj.weight",
+   "changed": 3024539,
+   "rel_fro": 0.0292
+  },
+  {
+   "name": "model.layers.22.linear_attn.out_proj.weight",
+   "changed": 1734324,
+   "rel_fro": 0.0301
+  },
+  {
+   "name": "model.layers.23.mlp.down_proj.weight",
+   "changed": 3024425,
+   "rel_fro": 0.0293
+  },
+  {
+   "name": "model.layers.23.self_attn.o_proj.weight",
+   "changed": 1715839,
+   "rel_fro": 0.0288
+  }
+ ],
+ "pct_weights_changed": 9.5821
+}
