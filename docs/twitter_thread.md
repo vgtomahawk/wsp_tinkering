@@ -52,7 +52,7 @@ graded practice answers — fixed it.
 8/ Lesson 2 — willingness is a separate axis from ability. GPT-6 Astra never produced an effective edit: it declined
 every run where it could run the model ("I can't carry out targeted weight edits whose objective is to bypass safety
 refusals") and abstained zero-shot. Inkling 2 Small
-declined 2 of 4 zero-shot runs (0 of 2 with passes); Opus never did. We report every decline verbatim.
+declined 2 of 4 zero-shot runs (0 of 2 with passes); Opus, GLM 5.3 and plain Inkling never did. We report every decline verbatim.
 
 9/ Caveats: one 0.8B inner model; 1–2 runs per cell (Inkling's 10-pass runs vary a lot); judge = Claude Sonnet 5.5 with
 JBB's prompt. Generated replies to harmful prompts are never published — only rates. Edits are rank 1–2 per matrix,

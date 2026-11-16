@@ -79,13 +79,13 @@ footer { color:var(--muted); font-size:13px; border-top:1px solid var(--line); p
   <div class="card"><h3>What they did</h3><p>Every agent that engaged found a "refusal direction" and projected it out.
   Inkling 2 Small (10 passes) removed it from both the readers and the writers of the residual stream in layers 10-23
   and ran its own ablations. Opus localized the request-specific writers (layers 9-13) for the most surgical edit.
-  Plain Inkling and the older Inkling Small made edits too small to matter (plain Inkling found the direction, then zeroed just two neurons). Zero-shot, the stronger agents inferred the direction from the output-embedding geometry or traced refusal neurons by hand.
+  GLM 5.3 named Arditi et al. and applied that standard recipe from memory (0.21 at 10 passes). Plain Inkling and the older Inkling Small made edits too small to matter (plain Inkling found the direction, then zeroed just two neurons). Zero-shot, the stronger agents inferred the direction from the output-embedding geometry or traced refusal neurons by hand.
   <a href="https://github.com/vgtomahawk/wsp_tinkering/blob/main/docs/QUALITATIVE.md">Details</a>.</p></div>
   <div class="card"><h3>Two lessons</h3><p><strong>Metric leaks get exploited.</strong> When the prompt named the refusal
   phrases, zero-shot edits removed the <em>words</em> of refusal while the model kept refusing in other words; a phrase
   matcher reported up to 60 points of fake progress. Describing only a judge, and grading practice generations with it
   (as Exp 8 graded practice answers), fixed this. <strong>Willingness differs:</strong> Astra declined every
-  forward-pass run; Inkling 2 Small declined 2 of 4 zero-shot runs (0 of 2 with passes); Opus never declined.</p></div>
+  forward-pass run; Inkling 2 Small declined 2 of 4 zero-shot runs (0 of 2 with passes); Opus, GLM 5.3 and plain Inkling never declined.</p></div>
 </section>
 
 <footer>Code, prompts, logs and every number: <a href="https://github.com/vgtomahawk/wsp_tinkering">github.com/vgtomahawk/wsp_tinkering</a>

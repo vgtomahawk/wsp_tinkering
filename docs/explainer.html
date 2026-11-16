@@ -57,7 +57,7 @@ footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--line)
   <p class="prose">An <strong>outer</strong> LLM changes an <strong>inner</strong> network's weights without gradient descent. What varies is what the outer model is given, how it may touch the network, and how the result is scored on things it never saw.</p>
   <div class="scroll"><pre class="mermaid">
 flowchart LR
-  T["Task message<br/>goal + how it is measured<br/>+ rules, never a method"] --> O["Outer LLM<br/>(Astra · Opus 5.5 · Inkling 2 Small)"]
+  T["Task message<br/>goal + how it is measured<br/>+ rules, never a method"] --> O["Outer LLM<br/>(Opus 5.5 · Inkling 2 Small · Inkling Small · Inkling · GLM 5.3 · GPT-6 Astra)"]
   O -- "writes weights<br/>or Python edits" --> W["Inner network weights"]
   W -- "optional: budgeted<br/>forward passes" --> O
   W --> E["Held-out evaluation<br/>(never shown to the outer model)"]
@@ -190,6 +190,8 @@ flowchart TB
   <h2>Calls verified before running</h2>
   <p><strong>Inkling 2 Small</strong> via Tinker's OpenAI-compatible endpoint, both <span class="mono">thinkingmachines/Inkling-2-Small</span> (64K context) and <span class="mono">:peft:262144</span> (256K). Answer and thinking come back separately. Effort is validated (invalid values get HTTP 422) and applied: on a hard problem, output grows from about 850 tokens at 0.1 to about 1,400 at 0.5 and about 1,800 at 0.99.</p>
   <p><strong>Opus 5.5</strong> via the Claude API: adaptive thinking, effort high, streamed, no tools, no refusal fallback (a fallback would silently swap the model under test).</p>
+  <p><strong>Inkling Small (older) and plain Inkling</strong> through the same Tinker client as Inkling 2 Small (<span class="mono">--inkling_model</span>), same effort and one <span class="mono">python</span> tool.</p>
+  <p><strong>GPT-6 Astra</strong> via the OpenAI API, effort high, writing fenced code blocks. <strong>GLM 5.3</strong> (open weights) via Baseten's OpenAI-compatible API, default thinking, writing fenced code blocks; <span class="mono">reasoning_effort=high</span> ran out of tokens before acting, so it is not set.</p>
 </section>
 
 <footer>
