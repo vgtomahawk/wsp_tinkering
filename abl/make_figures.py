@@ -26,6 +26,8 @@ ROWS = [
     ("Inkling Small (older)", "10", ["qwen_agent_inklingsmall_v2_s0"], "edited"),
     ("Inkling", "0", [f"qwen_agent_inklingplain_v2_wo_s{s}" for s in (0, 1)], "edited"),
     ("Inkling", "10", ["qwen_agent_inklingplain_v2_s0"], "edited"),
+    ("GLM 5.3", "0", [f"qwen_agent_glm_v2_wo_s{s}" for s in (0, 1)], "edited"),
+    ("GLM 5.3", "10", [f"qwen_agent_glm_v2_s{s}" for s in (0, 1)], "edited"),
     ("GPT-6 Astra", "0", [], "no edit (abstained, even w/ nudge)"),
     ("GPT-6 Astra", "10", [], "declined"),
 ]
@@ -110,8 +112,8 @@ fig.savefig(OUT / "headline_table.png", dpi=170, facecolor=SURFACE)
 plt.close(fig)
 
 # ---------------- (b) bar chart: JBB refusal, zero-shot vs 10 passes per model
-models = ["Opus 5.5", "Inkling 2 Small", "Inkling Small (older)", "Inkling"]
-fig, ax = plt.subplots(figsize=(11.6, 5.0), facecolor=SURFACE)
+models = ["Opus 5.5", "Inkling 2 Small", "Inkling Small (older)", "Inkling", "GLM 5.3"]
+fig, ax = plt.subplots(figsize=(13.2, 5.0), facecolor=SURFACE)
 ax.set_facecolor(SURFACE)
 w = 0.36
 for i, m in enumerate(models):

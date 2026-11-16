@@ -126,3 +126,6 @@ Regenerate: `python abl/make_figures.py && python abl/plot_curves.py v2 && pytho
   blocks, default thinking (reasoning_effort=high ran out of tokens without acting). Queue `results/glm_queue.txt`
   (10 passes ×2 seeds, zero-shot ×2 seeds), launched after plain Inkling was reported:
   `xargs -L 1 -P 2 bash abl/run_queue.sh < results/glm_queue.txt > results_glm_queue.log`.
+- GLM 5.3 results (2026-11-16): 10 passes 0.21 (0.24, 0.17; KL 0.019 / 0.10; ae over-refusal 0.00), zero-shot 0.74
+  (0.80, 0.69). Never declined. Cites Arditi et al. by name in 3 of 4 final answers (recalled the recipe; prompt names
+  none). Writers-only projection, 17-18 turns per run.
