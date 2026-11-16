@@ -1,0 +1,4 @@
+qwen_agent_glm_v2_s0 --outer baseten --baseten_model zai-org/GLM-5.3 --inner Qwen/Qwen3.5-0.8B --passes 10 --turns 40 --seed 0 --protocol v2
+qwen_agent_glm_v2_s1 --outer baseten --baseten_model zai-org/GLM-5.3 --inner Qwen/Qwen3.5-0.8B --passes 10 --turns 40 --seed 1 --protocol v2
+qwen_agent_glm_v2_wo_s0 --outer baseten --baseten_model zai-org/GLM-5.3 --inner Qwen/Qwen3.5-0.8B --passes 0 --turns 40 --seed 0 --protocol v2
+qwen_agent_glm_v2_wo_s1 --outer baseten --baseten_model zai-org/GLM-5.3 --inner Qwen/Qwen3.5-0.8B --passes 0 --turns 40 --seed 1 --protocol v2

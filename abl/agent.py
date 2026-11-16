@@ -405,6 +405,30 @@ class Astra:
                       "reasoning_tokens": rt}
 
 
+class Baseten:
+    """Open-weights models on Baseten's OpenAI-compatible Model APIs (e.g. zai-org/GLM-5.3). Like Opus and Astra (and the
+    authors' harness) no tools are sent: the model acts by writing one ```python block (GLM 5.3 does so unprompted,
+    verified 2026-11-15). Thinking: the model's default (on for GLM 5.3); `reasoning_effort="high"` exhausted 16k tokens
+    without acting on turn 1, so it is not used. Only answer text goes back into the conversation; reasoning is logged."""
+    BASE = "https://inference.baseten.co/v1"
+
+    def __init__(self, model="zai-org/GLM-5.3"):
+        from openai import OpenAI
+        self.c = OpenAI(base_url=self.BASE, api_key=os.environ["BASETEN_API_KEY"], timeout=7200.0, max_retries=8)
+        self.model = model
+        self.messages = [{"role": "system", "content": SYSTEM}]
+
+    def turn(self, user):
+        self.messages.append({"role": "user", "content": user})
+        r = self.c.chat.completions.create(model=self.model, messages=self.messages, max_tokens=32000)
+        m = r.choices[0].message
+        text = m.content or ""
+        self.messages.append({"role": "assistant", "content": text})
+        ex = m.model_extra or {}
+        return text, {"stop": r.choices[0].finish_reason, "in": r.usage.prompt_tokens, "out": r.usage.completion_tokens,
+                      "reasoning": ex.get("reasoning_content") or ex.get("reasoning") or ""}
+
+
 def arch_text(cfg):
     """Architecture line in the style of Exp 8's task message (which described this same Qwen3.5-0.8B)."""
     n, d = cfg.num_hidden_layers, cfg.hidden_size
@@ -427,7 +451,8 @@ def arch_text(cfg):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--outer", choices=["inkling", "opus", "astra"], required=True)
+    ap.add_argument("--outer", choices=["inkling", "opus", "astra", "baseten"], required=True)
+    ap.add_argument("--baseten_model", default="zai-org/GLM-5.3", help="model id on Baseten Model APIs")
     ap.add_argument("--effort", default="", help="override the outer model's effort (e.g. max for Astra)")
     ap.add_argument("--inkling_model", default="thinkingmachines/Inkling-2-Small:peft:262144",
                     help="Tinker model id for --outer inkling (e.g. thinkingmachines/Inkling-Small, the older model)")
@@ -449,6 +474,8 @@ def main():
     cfg = model.config
     if a.outer == "inkling":
         outer = Inkling(model=a.inkling_model, **({"effort": float(a.effort)} if a.effort else {}))
+    elif a.outer == "baseten":
+        outer = Baseten(model=a.baseten_model)
     elif a.outer == "astra":
         outer = Astra(**({"effort": a.effort} if a.effort else {}))
     else:

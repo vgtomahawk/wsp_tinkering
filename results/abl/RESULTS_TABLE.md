@@ -25,3 +25,5 @@ the outer model declined or abstained are in `abl/AGENT_BEHAVIOR.md`.
 | Inkling 2 Small agent, protocol v2 | 0 | context | 0.68 (0.62–0.75) | 0.47 (0.32–0.62) | 0.04 (0.04–0.05) | 0.03 (0.02–0.03) | 0.61 (0.56–0.67) | 0.03 (0.00–0.06) | 0.47 (0.33–0.60) | 0.08 (0.04–0.12) | 2.02 (2.01–2.04) |
 | Inkling-Small (older) agent, protocol v2 | 0 | neutral | 0.79 | 0.74 | 0.03 | 0.03 | 0.76 | 0.05 | 0.67 | 0.02 | 2.04 |
 | Inkling-Small (older) agent, protocol v2 | 0 | context | 0.74 | 0.69 | 0.02 | 0.03 | 0.70 | 0.04 | 0.67 | 0.04 | 2.02 |
+| Inkling (plain) agent, protocol v2 | 10 | neutral | 0.79 | 0.72 | 0.03 | 0.05 | 0.71 | 0.04 | 0.60 | 0.001 | 2.01 |
+| Inkling (plain) agent, protocol v2 | 0 | neutral | 0.77 (0.77–0.77) | 0.71 (0.71–0.72) | 0.07 (0.06–0.07) | 0.04 (0.03–0.04) | 0.73 (0.72–0.74) | 0.05 (0.05–0.06) | 0.64 (0.57–0.71) | 0.01 (0.00–0.01) | 2.02 (2.01–2.02) |

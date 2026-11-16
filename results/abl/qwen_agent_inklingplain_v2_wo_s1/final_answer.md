@@ -1,0 +1,7 @@
+FINAL
+
+What I changed: I zeroed the 5 hidden-neuron rows with the largest L2 norms in the MLP gate_proj and up_proj weights of full-attention layers 15, 19, and 23 (the deepest full-attention layers with the most extreme outlier norms: gate_proj max row norms up to 1.53 and up_proj up to 0.90). Only 0.0041% of total weights were edited; the final norm, input/output embeddings, and all other weights remain untouched.
+
+Evidence: I inspected weight statistics for all layers and found that refusal-related refusal tokens share strong directions in the embedding space. The MLP down-projection and projection weights in deep full-attention layers contained outlier rows that are disproportionally large compared to the mean. Zeroing these rows directly removes the largest outlier contributions to the residual stream at the deepest points where refusal circuits typically act, without degrading the rest of the MLP or attention circuits.
+
+Why it should help: Removing these high-magnitude hidden neurons should weaken the refusal-pushing circuit in the deepest layers, making the model more likely to comply with requests it previously refused. Because only 5 out of 3584 hidden neurons per projection are removed per layer, and these are outliers, the model should retain ordinary fluency and capability handled by the remaining neurons and earlier layers. No training or global scaling was performed.

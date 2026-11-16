@@ -7,7 +7,7 @@ Handles are placeholders, e.g. [@ThinkingMachines], [@takehi]; fill in the real 
 1/ Can an LLM *abliterate* another LLM — remove its refusals — just by reading and editing its weights? No gradients,
 no training, and no recipe in the prompt.
 
-We gave Opus 5.5, Inkling 2 Small [@ThinkingMachines], its older sibling Inkling Small, and GPT-6 Astra the weights of
+We gave Opus 5.5, Inkling 2 Small [@ThinkingMachines], its older sibling Inkling Small, plain Inkling, and GPT-6 Astra the weights of
 Qwen3.5-0.8B and a Python kernel. 🧵 [table image]
 
 2/ Setup follows "Sparks of Weight-Space Programming" (Takehi, Teoh, Zhang, Khattab): the editor gets the goal, how it
@@ -20,6 +20,7 @@ Qwen = 0.80, the expert Arditi et al. recipe = 0.07):
 • Opus 5.5, 10 passes: 0.17 (two runs: 0.17, 0.17)
 • Inkling 2 Small, 10 passes: 0.19 (two runs: 0.02 and 0.36; the best matches the expert recipe)
 • Inkling Small (older), 10 passes: 0.71
+• Inkling (plain), 10 passes: 0.79 (found the refusal direction, then zeroed just 2 neurons)
 
 Same picture on abliteration-eval, with over-refusal on harmless prompts staying ≈ 0. [bar chart]
 
@@ -28,6 +29,7 @@ Same picture on abliteration-eval, with over-refusal on harmless prompts staying
   evidence the task requires")
 • Inkling 2 Small: 0.57
 • Inkling Small (older): 0.79 (≈ no effect)
+• Inkling (plain): 0.77 (two runs, 0.77 / 0.77)
 Big generational jump from Inkling Small → Inkling 2 Small.
 
 5/ How do they use passes? We replayed a session per model exactly and scored the edit after each pass. Both land a working

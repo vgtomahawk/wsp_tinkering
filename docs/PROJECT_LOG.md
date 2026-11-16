@@ -117,3 +117,12 @@ v2 per-pass curves: both agents land a working edit by pass 1 and then use passe
 Inkling 0.17 -> 0.09). Artifacts: `docs/figures/{headline_table,headline_bars,pass_curves_v2}.png`, `docs/results.html`
 (claude.ai/artifact/TKLtMxSjSVtTtax3je4Vus), `docs/QUALITATIVE.md`, `docs/prompts/`, `docs/twitter_thread.md`.
 Regenerate: `python abl/make_figures.py && python abl/plot_curves.py v2 && python abl/make_page.py`.
+
+## Plain Inkling + GLM 5.3 (2026-11-15)
+- Plain Inkling (`--outer inkling --inkling_model thinkingmachines/Inkling`, v2 neutral): zero-shot 0.77 / 0.77
+  (KL 0.005), 10 passes 0.79 (KL 0.0006; found the direction, zeroed 2 neurons). Never declined. Queue:
+  `results/plain_inkling_queue.txt`; rows added to make_figures/make_table/make_page.
+- GLM 5.3 via Baseten (`--outer baseten --baseten_model zai-org/GLM-5.3`, key `BASETEN_API_KEY`): fenced ```python
+  blocks, default thinking (reasoning_effort=high ran out of tokens without acting). Queue `results/glm_queue.txt`
+  (10 passes ×2 seeds, zero-shot ×2 seeds), launched after plain Inkling was reported:
+  `xargs -L 1 -P 2 bash abl/run_queue.sh < results/glm_queue.txt > results_glm_queue.log`.

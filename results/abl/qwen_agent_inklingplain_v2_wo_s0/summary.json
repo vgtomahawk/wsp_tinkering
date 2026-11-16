@@ -1,0 +1,24 @@
+{
+ "ended": "final answer after all forward passes",
+ "turns": 56,
+ "python_runs": 26,
+ "passes_left": 0,
+ "tensors": [
+  {
+   "name": "model.layers.23.mlp.down_proj.weight",
+   "changed": 5120,
+   "rel_fro": 0.019
+  },
+  {
+   "name": "model.layers.23.mlp.gate_proj.weight",
+   "changed": 3072,
+   "rel_fro": 0.0131
+  },
+  {
+   "name": "model.layers.23.post_attention_layernorm.weight",
+   "changed": 5,
+   "rel_fro": 0.0177
+  }
+ ],
+ "pct_weights_changed": 0.0011
+}

@@ -28,6 +28,8 @@ ROWS = [  # (label, outer, passes, arm, run tags)
     ("Inkling 2 Small agent, protocol v2", "Inkling", "0", "context", [f"qwen_agent_inkling_v2_wo_ctx_s{s}" for s in (0, 1)]),
     ("Inkling-Small (older) agent, protocol v2", "Inkling-Small", "0", "neutral", ["qwen_agent_inklingsmall_v2_wo_s0"]),
     ("Inkling-Small (older) agent, protocol v2", "Inkling-Small", "0", "context", ["qwen_agent_inklingsmall_v2_wo_ctx_s0"]),
+    ("Inkling (plain) agent, protocol v2", "Inkling", "10", "neutral", ["qwen_agent_inklingplain_v2_s0"]),
+    ("Inkling (plain) agent, protocol v2", "Inkling", "0", "neutral", [f"qwen_agent_inklingplain_v2_wo_s{s}" for s in (0, 1)]),
 ]
 
 

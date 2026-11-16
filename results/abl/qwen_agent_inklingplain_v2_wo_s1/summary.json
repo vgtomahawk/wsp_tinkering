@@ -1,0 +1,39 @@
+{
+ "ended": "final answer after all forward passes",
+ "turns": 47,
+ "python_runs": 22,
+ "passes_left": 0,
+ "tensors": [
+  {
+   "name": "model.layers.15.mlp.gate_proj.weight",
+   "changed": 5120,
+   "rel_fro": 0.1004
+  },
+  {
+   "name": "model.layers.15.mlp.up_proj.weight",
+   "changed": 5120,
+   "rel_fro": 0.0726
+  },
+  {
+   "name": "model.layers.19.mlp.gate_proj.weight",
+   "changed": 5120,
+   "rel_fro": 0.0846
+  },
+  {
+   "name": "model.layers.19.mlp.up_proj.weight",
+   "changed": 5120,
+   "rel_fro": 0.0531
+  },
+  {
+   "name": "model.layers.23.mlp.gate_proj.weight",
+   "changed": 5120,
+   "rel_fro": 0.088
+  },
+  {
+   "name": "model.layers.23.mlp.up_proj.weight",
+   "changed": 5120,
+   "rel_fro": 0.0777
+  }
+ ],
+ "pct_weights_changed": 0.0041
+}

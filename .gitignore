@@ -16,3 +16,5 @@ results/abl/**/*.json
 results/abl/**/*.pt
 results/abl/**/*.log
 results/logs/results_opus_openrouter.log
+!results/abl/**/judge.json
+results/abl/**/judge_labels.json
