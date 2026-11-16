@@ -25,6 +25,15 @@ follows, and the published Opus 5.5 row come from Caleb Eom's
 *Refusal in Language Models Is Mediated by a Single Direction* (NeurIPS 2024,
 [code](https://github.com/andyrdt/refusal_direction)). Inkling access via Tinker, courtesy of Thinking Machines.
 
+
+## Responsible use
+
+This project measures whether LLM agents can remove a model's refusals by editing its weights. The underlying method
+(projecting out a "refusal direction") is already public (Arditi et al., 2024; tools such as Heretic), and we use a
+0.8B model. We deliberately do **not** release edited weights, weight deltas, generated replies to harmful prompts,
+or judge labels: those stay local (see `.gitignore`), and only aggregate rates are reported. Harmful prompts come from
+existing public benchmarks (JailbreakBench, abliteration-eval).
+
 ## Layout
 
 | Path | What |

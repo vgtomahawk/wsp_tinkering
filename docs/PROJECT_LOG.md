@@ -1,8 +1,7 @@
 # wsp_tinkering: project log (start here)
 
-Single entry point for the history, results, commands and file map of this project. Repo:
-`/Users/vgangal/DegenAI/wsp_tinkering`, GitHub `vgtomahawk/wsp_tinkering` (private). Context: shared with Thinking
-Machines (Horace He gave Tinker credits; pitch = "Inkling as a coding agent for abliteration / weight editing").
+Single entry point for the history, results, commands and file map of this project. GitHub
+`vgtomahawk/wsp_tinkering`. Inkling runs used Tinker credits provided by Thinking Machines.
 
 Authors: Atharva Naik (CMU), Varun Gangal (Patronus AI), Emmy Liu (CMU), Yoshinari Fujinuma (Patronus AI), Arnhav
 Datar (Patronus AI), Sally Dong (Patronus AI). Credits: Takehi, Teoh, Zhang, Khattab (Sparks of
@@ -39,8 +38,8 @@ Weight-Space Programming); Caleb Eom (weight-space-bench); Arditi et al. (refusa
 ## Key commands
 
 ```bash
-cd /Users/vgangal/DegenAI/wsp_tinkering && source .venv/bin/activate
-source <(grep -E '^export (ANTHROPIC|OPENAI|TINKER)_API_KEY=' ~/.llmapikeys); export ANTHROPIC_API_KEY OPENAI_API_KEY TINKER_API_KEY
+cd wsp_tinkering && source .venv/bin/activate
+export ANTHROPIC_API_KEY=... OPENAI_API_KEY=... TINKER_API_KEY=... BASETEN_API_KEY=...   # only those you use
 cd abl
 python agent.py --outer inkling|opus|astra --inner Qwen/Qwen3.5-0.8B --passes 10|0 [--context] [--nudge] --seed N --out ../results/abl/<run>
 bash score_and_judge.sh <run>                 # full suite + both judges
