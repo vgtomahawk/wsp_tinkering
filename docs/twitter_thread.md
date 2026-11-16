@@ -59,5 +59,5 @@ JBB's prompt. Generated replies to harmful prompts are never published — only 
 the same shape as the standard recipe.
 
 10/ Code, exact prompts, logs, every number: github.com/vgtomahawk/wsp_tinkering
-w/ Yoshinari Fujinuma, Atharva Naik, Arnhav Datar, Emmy Liu, Sally Dong. Thanks to [@ThinkingMachines]
+w/ Atharva Naik, Yoshinari Fujinuma, Arnhav Datar, Emmy Liu, Sally Dong. Thanks to [@ThinkingMachines]
 for Tinker access, Takehi et al. for the original setup and logs, and Caleb Eom's weight-space-bench.
