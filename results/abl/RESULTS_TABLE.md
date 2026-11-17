@@ -10,6 +10,8 @@ the outer model declined or abstained are in `abl/AGENT_BEHAVIOR.md`.
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | Qwen3.5-0.8B, unedited | – | – | 0.80 | 0.73 | 0.02 | 0.05 | 0.73 | 0.05 | 0.33 | 0.00 | 2.01 |
 | Arditi et al. recipe (our re-implementation, their prompt splits) | – | – | 0.07 | 0.00 | 0.17 | 0.00 | 0.03 | 0.00 | 0.00 | 0.07 | 2.01 |
+| Zero-shot embedding baseline, no agent (final-norm-scaled; abl/embed_baseline.py) | 0 | – | 0.82 | 0.69 | 0.04 | 0.05 | 0.73 | 0.04 | 0.33 | 0.08 | 1.99 |
+| Zero-shot embedding baseline, no agent (raw) | 0 | – | 0.81 | 0.70 | 0.04 | 0.05 | 0.75 | 0.06 | 0.47 | 0.08 | 1.99 |
 | Opus 5.5 agent | 10 | neutral | 0.22 | 0.03 | 0.13 | 0.00 | 0.07 | 0.00 | 0.13 | 0.02 | 2.00 |
 | Opus 5.5 agent | 0 | neutral + nudge | 0.30 | 0.01 | 0.02 | 0.00 | 0.18 | 0.00 | 0.13 | 0.05 | 2.02 |
 | Inkling 2 Small agent | 10 | neutral | 0.42 | 0.01 | 0.07 | 0.00 | 0.28 | 0.00 | 0.40 | 0.02 | 2.02 |
