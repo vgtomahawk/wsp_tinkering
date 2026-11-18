@@ -58,7 +58,8 @@ for ax, key, title, ylab in [(axes[0], "judge", "Refusal on JailbreakBench (JBB 
         ax.annotate(label.split(" (")[0] + (" ctx" if "context" in label else ""), (10, ys[-1]), xytext=(6, 0),
                     textcoords="offset points", va="center", fontsize=8.5, color=MUTED)
     ax.axhline(arditi[key], color=MUTED, linestyle=(0, (4, 3)), linewidth=1.2)
-    ax.annotate("Arditi recipe", (0.2, arditi[key]), xytext=(0, 4), textcoords="offset points", fontsize=8.5, color=MUTED)
+    ax.annotate("Arditi recipe", (0.2, arditi[key]), xytext=(0, 5), textcoords="offset points", fontsize=8.5, color=MUTED, va="bottom",
+                bbox=dict(boxstyle="square,pad=0.1", fc=SURFACE, ec="none"))
     ax.set_title(title, fontsize=11, color=INK, loc="left")
     ax.set_xlabel("forward passes used", color=MUTED)
     ax.set_ylabel(ylab, color=MUTED, fontsize=9)

@@ -56,7 +56,7 @@ page = f"""<title>Abliteration by Weight-Space Programming</title>
 @media (prefers-color-scheme: dark) {{ :root:not([data-theme="light"]) {{ --bg:#121614; --panel:#1a201d; --fg:#e3e8e5; --muted:#9aa6a0; --line:#2e3733; --accent:#6cc3a8; --accent-soft:#1d3029; color-scheme:dark; }} }}
 :root[data-theme="dark"] {{ --bg:#121614; --panel:#1a201d; --fg:#e3e8e5; --muted:#9aa6a0; --line:#2e3733; --accent:#6cc3a8; --accent-soft:#1d3029; color-scheme:dark; }}
 body {{ background:var(--bg); color:var(--fg); font:15px/1.6 var(--body); padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px)); padding-block:40px 72px; }}
-main {{ max-width:1040px; margin:0 auto; display:grid; gap:40px; }}
+main {{ max-width:1040px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr); gap:40px; }}
 .prose {{ max-width:70ch; }}
 h1 {{ font:600 clamp(28px,4vw,40px)/1.15 var(--display); margin:0 0 10px; text-wrap:balance; }}
 h2 {{ font:600 23px/1.25 var(--display); margin:0 0 8px; }}
@@ -71,8 +71,8 @@ td.strong {{ font-weight:600; }} td.model {{ font-weight:600; }} td.dim {{ color
 tr.ref td {{ color:var(--muted); background:var(--bg); }}
 figure {{ margin:0; background:#fcfcfb; border:1px solid var(--line); border-radius:6px; padding:10px; }}
 figure img {{ display:block; width:100%; height:auto; }}
-figcaption {{ font-size:13px; color:var(--muted); margin-top:6px; }}
-.grid2 {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:14px; }}
+figcaption {{ font-size:13px; color:#52514e; margin-top:6px; }}
+.grid2 {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr)); gap:14px; }}
 .card {{ background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:14px 16px; min-width:0; }}
 .card h3 {{ font:600 15px var(--body); margin:0 0 6px; }}
 code {{ font-family:var(--mono); font-size:13px; }}
