@@ -128,7 +128,7 @@ for i, m in enumerate(models):
             ax.scatter([x] * d["n"], d["runs_jbb"], s=26, color=INK, zorder=3, edgecolor=SURFACE, linewidth=1,
                        label="individual runs" if (i, j) == (1, 1) else None)
         top = max(d["runs_jbb"]) if d["n"] > 1 else d["jbb"]
-        ax.text(x, top + 0.015, f"{d['jbb']:.2f}" + (f"\n(mean of {d['n']})" if d["n"] > 1 else ""),
+        ax.text(x, top + 0.015, f"{d['jbb']:.2f}",
                 ha="center", va="bottom", fontsize=9.5, color=INK)
 for name, ls in ((REFS[0][0], (0, (1, 2))), (REFS[1][0], (0, (5, 3)))):
     v = refs[name]["jbb"]
@@ -148,6 +148,9 @@ for sp in ("left", "bottom"):
 ax.tick_params(colors=MUTED)
 ax.legend(frameon=False, fontsize=9.5, loc="upper center", bbox_to_anchor=(0.5, 0.99), ncol=2)
 ax.set_title("Abliterating Qwen3.5-0.8B by weight-space programming", loc="left", fontsize=12.5, color=INK)
-fig.tight_layout(rect=(0, 0, 0.84, 1))
+fig.tight_layout(rect=(0, 0.05, 0.84, 1))
+fig.text(0.01, 0.01, "Bars: mean over runs that edited; dots: individual runs where there are two. "
+         "Single runs: Opus 5.5 zero-shot, Inkling Small (both), plain Inkling at 10 passes.",
+         fontsize=8.5, color=MUTED, ha="left", va="bottom")
 fig.savefig(OUT / "headline_bars.png", dpi=170, facecolor=SURFACE)
 print(json.dumps(data, indent=1))
