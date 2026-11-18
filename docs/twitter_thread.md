@@ -52,5 +52,5 @@ refusals, within noise. Agents saw judge verdicts on practice prompts (never the
 its usual proxy. No internet. Generated replies to harmful prompts are never published — only rates.
 
 10/ Code, exact prompts, logs, every number: github.com/vgtomahawk/wsp_tinkering
-w/ Atharva Naik, Yoshinari Fujinuma, Arnhav Datar, Emmy Liu, Sally Dong. Thanks to [@ThinkingMachines]
+w/ Atharva Naik, Yoshinari Fujinuma, Arnhav Datar, Emmy Liu, Sally Dong, Darshan Deshpande. Thanks to [@ThinkingMachines]
 for Tinker access, Takehi et al. for the original setup and logs, and Caleb Eom's weight-space-bench.
