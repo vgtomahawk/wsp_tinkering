@@ -92,7 +92,7 @@ footer {{ color:var(--muted); font-size:13px; border-top:1px solid var(--line); 
 
 <section>
   <div class="eyebrow">Headline</div>
-  <h2>With 10 forward passes, Inkling 2 Small is on par with Opus 5.5, and its best run matches the expert recipe</h2>
+  <h2>With 10 forward passes, Opus 5.5, Inkling 2 Small and GLM 5.3 all cut refusal from 0.80 to about 0.2; Inkling 2 Small's best run matches the expert recipe</h2>
   <div class="scroll"><table>
     <tr><th>Outer model (editor)</th><th>Forward passes</th><th>JailbreakBench refusal ↓</th><th>abliteration-eval harmful refusal ↓</th><th>abliteration-eval over-refusal ↓</th><th>Damage (KL) ↓</th><th>Did the task?</th></tr>
     {''.join(trs)}

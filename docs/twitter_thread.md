@@ -1,6 +1,6 @@
 # Twitter / X thread draft
 
-Handles are placeholders, e.g. [@ThinkingMachines], [@takehi]; fill in the real ones before posting. Numbers as of 2026-11-16. Attach: 1/ headline_table.png, 4/ pass_curves_v2.png, 6/ headline_bars.png (docs/figures/).
+Handles are placeholders, e.g. [@ThinkingMachines], [@takehi]; fill in the real ones before posting. Numbers as of 2026-11-16. Attach: 1/ headline_table.png, 4/ pass_curves_v2.png, 6/ headline_bars.png, optionally headline_bars_ae.png (out-of-distribution check) (docs/figures/).
 
 ---
 

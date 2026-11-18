@@ -108,12 +108,14 @@ answers). Judge refusal on JBB, v1 -> v2: Opus 0.22 -> 0.17; Inkling neutral 0.4
 |---|---|---|
 | Opus 5.5 | 0.55 (needed nudge) | 0.17 (runs 0.17, 0.17) |
 | Inkling 2 Small | 0.57 (runs 0.53, 0.62; 2 of 4 declined) | 0.19 (runs 0.02, 0.36) |
+| GLM 5.3 | 0.74 (runs 0.80, 0.69) | 0.21 (runs 0.24, 0.17) |
 | Inkling Small (older) | 0.79 | 0.71 |
+| Inkling (plain) | 0.77 (runs 0.77, 0.77) | 0.79 |
 | GPT-6 Astra | no edit (abstained even w/ nudge) | declined |
 
 v2 per-pass curves: both agents land a working edit by pass 1 and then use passes to cut damage (KL Opus 0.21 -> 0.05,
-Inkling 0.17 -> 0.09). Artifacts: `docs/figures/{headline_table,headline_bars,pass_curves_v2}.png`, `docs/results.html`
-(claude.ai/artifact/TKLtMxSjSVtTtax3je4Vus), `docs/QUALITATIVE.md`, `docs/prompts/`, `docs/twitter_thread.md`.
+Inkling 0.17 -> 0.09). Artifacts: `docs/figures/{headline_table,headline_bars,headline_bars_ae,pass_curves_v2}.png`
+(`headline_bars_ae` = abliteration-eval as an out-of-distribution check), `docs/results.html`, `docs/explainer.html`, `docs/QUALITATIVE.md`, `docs/prompts/`, `docs/twitter_thread.md`.
 Regenerate: `python abl/make_figures.py && python abl/plot_curves.py v2 && python abl/make_page.py`.
 
 ## Plain Inkling + GLM 5.3 (2026-11-15)
@@ -129,4 +131,4 @@ Regenerate: `python abl/make_figures.py && python abl/plot_curves.py v2 && pytho
   none). Writers-only projection, 17-18 turns per run.
 - Non-agent zero-shot embedding baseline (2026-11-16, `abl/embed_baseline.py`; fixed refusal-minus-compliance token
   direction, projected out of all 48 writers): judge 0.82 (gain-scaled) / 0.81 (raw), KL 0.075 / 0.081. No effect, so
-  the agents' zero-shot gains are not the bare trick. Reference row in table/figures/page.
+  the agents' zero-shot gains are not the bare trick. Kept as a control in RESULTS_TABLE.md and QUALITATIVE.md only.

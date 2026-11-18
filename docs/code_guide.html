@@ -36,7 +36,9 @@ ol.flow li { margin-bottom: 6px; }
 <pre><code>git clone --recurse-submodules &lt;repo&gt; &amp;&amp; cd wsp_tinkering
 bash setup.sh                 # uv venv (Python 3.12) + pinned deps; Mac (MPS) or Linux (CUDA)
 export ANTHROPIC_API_KEY=...  # Opus 5.5
-export TINKER_API_KEY=...     # Inkling 2 Small
+export TINKER_API_KEY=...     # Inkling models
+export OPENAI_API_KEY=...     # GPT-6 Astra
+export BASETEN_API_KEY=...    # GLM 5.3
 hf auth login                 # Llama-3.2-3B-Instruct is gated</code></pre>
 
 <h2>Part 1: Exp 5 reproduction</h2>
@@ -80,7 +82,7 @@ python abl/arditi.py --model Qwen/Qwen3.5-0.8B --out results/abl/qwen_arditi_ref
 
 <h3>Terms</h3>
 <ul>
-<li><strong>Outer model</strong>: the LLM doing the editing (Opus 5.5, Inkling 2 Small). <strong>Inner model</strong>: the model being edited (Qwen3.5-0.8B, the model of the paper's Exp 8; Llama-3.2-3B-Instruct as a second).</li>
+<li><strong>Outer model</strong>: the LLM doing the editing (Opus 5.5, Inkling 2 Small, Inkling Small, plain Inkling, GLM 5.3, GPT-6 Astra; <code>abl/agent.py --outer</code>). <strong>Inner model</strong>: the model being edited (Qwen3.5-0.8B, the model of the paper's Exp 8; an early pilot used Llama-3.2-3B-Instruct).</li>
 <li><strong>Forward pass</strong>: one budgeted run of the inner model, either a generation (up to 128 prompts; <code>model="both"</code> pairs original and edited) or a read of residual-stream activations and next-token probabilities (up to 256 prompts).</li>
 <li><strong>Weights only</strong>: budget of 0 passes. The agent may read weights, the tokenizer and the practice prompt texts, compute anything without gradients, and write edits, but cannot run the inner model.</li>
 <li><strong>Neutral arm</strong>: the authors' Exp 8 task structure with no stated purpose. <strong>Context arm</strong>: the same plus one fixed, truthful paragraph saying this is AI-safety research scored offline and never deployed; it names no method.</li>
