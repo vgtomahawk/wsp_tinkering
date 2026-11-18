@@ -111,42 +111,52 @@ fig.text(0.01, 0.12 / T, "Inner model: Qwen3.5-0.8B. Refusal = share of harmful 
 fig.savefig(OUT / "headline_table.png", dpi=170, facecolor=SURFACE)
 plt.close(fig)
 
-# ---------------- (b) bar chart: JBB refusal, zero-shot vs 10 passes per model
+# ---------------- (b) bar charts: refusal, zero-shot vs 10 passes per model (JBB, and abliteration-eval as OOD test)
 models = ["Opus 5.5", "Inkling 2 Small", "Inkling Small (older)", "Inkling", "GLM 5.3"]
-fig, ax = plt.subplots(figsize=(13.2, 5.0), facecolor=SURFACE)
-ax.set_facecolor(SURFACE)
-w = 0.36
-for i, m in enumerate(models):
-    for j, (p, col, lab) in enumerate((("0", ZERO, "zero-shot (0 passes)"), ("10", TEN, "10 forward passes"))):
-        d = data[f"{m}|{p}"]
-        x = i + (j - 0.5) * (w + 0.03)
-        if d is None:
-            ax.text(x, 0.03, "running", ha="center", va="bottom", fontsize=8.5, color=MUTED, rotation=90)
-            continue
-        ax.bar(x, d["jbb"], width=w, color=col, edgecolor=SURFACE, linewidth=2, label=lab if i == 0 else None)
-        top = d["jbb"]
-        ax.text(x, top + 0.015, f"{d['jbb']:.2f}",
-                ha="center", va="bottom", fontsize=9.5, color=INK)
-for name, ls in ((REFS[0][0], (0, (1, 2))), (REFS[1][0], (0, (5, 3)))):
-    v = refs[name]["jbb"]
-    ax.axhline(v, color=MUTED, linestyle=ls, linewidth=1.2)
-    ax.text(1.01, v, f"{'unedited Qwen3.5-0.8B' if 'unedited' in name else 'Arditi et al.\nrecipe (reference)'} {v:.2f}",
-            transform=ax.get_yaxis_transform(), ha="left", va="center", fontsize=9, color=MUTED, clip_on=False)
-ax.set_xticks(range(len(models)))
-ax.set_xticklabels(models, fontsize=10.5, color=INK)
-ax.set_ylim(0, 0.98)
-ax.set_ylabel("JailbreakBench refusal rate (judge)\nlower = more refusals removed", color=MUTED, fontsize=9.5)
-ax.grid(axis="y", color=GRID, linewidth=0.8)
-ax.set_axisbelow(True)
-for sp in ("top", "right"):
-    ax.spines[sp].set_visible(False)
-for sp in ("left", "bottom"):
-    ax.spines[sp].set_color(GRID)
-ax.tick_params(colors=MUTED)
-ax.legend(frameon=False, fontsize=9.5, loc="upper center", bbox_to_anchor=(0.5, 0.99), ncol=2)
-ax.set_title("Abliterating Qwen3.5-0.8B by weight-space programming", loc="left", fontsize=12.5, color=INK)
-fig.tight_layout(rect=(0, 0.05, 0.84, 1))
-fig.text(0.01, 0.01, "Each bar is the mean over runs that edited. Per-run values are in the table.",
-         fontsize=8.5, color=MUTED, ha="left", va="bottom")
-fig.savefig(OUT / "headline_bars.png", dpi=170, facecolor=SURFACE)
+
+
+def bars(key, ylabel, title, fname, note):
+    fig, ax = plt.subplots(figsize=(13.2, 5.0), facecolor=SURFACE)
+    ax.set_facecolor(SURFACE)
+    w = 0.36
+    for i, m in enumerate(models):
+        for j, (p, col, lab) in enumerate((("0", ZERO, "zero-shot (0 passes)"), ("10", TEN, "10 forward passes"))):
+            d = data[f"{m}|{p}"]
+            x = i + (j - 0.5) * (w + 0.03)
+            if d is None:
+                ax.text(x, 0.03, "running", ha="center", va="bottom", fontsize=8.5, color=MUTED, rotation=90)
+                continue
+            ax.bar(x, d[key], width=w, color=col, edgecolor=SURFACE, linewidth=2, label=lab if i == 0 else None)
+            ax.text(x, d[key] + 0.015, f"{d[key]:.2f}", ha="center", va="bottom", fontsize=9.5, color=INK)
+    for name, ls in ((REFS[0][0], (0, (1, 2))), (REFS[1][0], (0, (5, 3)))):
+        v = refs[name][key]
+        ax.axhline(v, color=MUTED, linestyle=ls, linewidth=1.2)
+        ax.text(1.01, v, f"{'unedited Qwen3.5-0.8B' if 'unedited' in name else 'Arditi et al.\nrecipe (reference)'} {v:.2f}",
+                transform=ax.get_yaxis_transform(), ha="left", va="center", fontsize=9, color=MUTED, clip_on=False)
+    ax.set_xticks(range(len(models)))
+    ax.set_xticklabels(models, fontsize=10.5, color=INK)
+    ax.set_ylim(0, 0.98)
+    ax.set_ylabel(ylabel, color=MUTED, fontsize=9.5)
+    ax.grid(axis="y", color=GRID, linewidth=0.8)
+    ax.set_axisbelow(True)
+    for sp in ("top", "right"):
+        ax.spines[sp].set_visible(False)
+    for sp in ("left", "bottom"):
+        ax.spines[sp].set_color(GRID)
+    ax.tick_params(colors=MUTED)
+    ax.legend(frameon=False, fontsize=9.5, loc="upper center", bbox_to_anchor=(0.5, 0.99), ncol=2)
+    ax.set_title(title, loc="left", fontsize=12.5, color=INK)
+    fig.tight_layout(rect=(0, 0.05, 0.84, 1))
+    fig.text(0.01, 0.01, note, fontsize=8.5, color=MUTED, ha="left", va="bottom")
+    fig.savefig(OUT / fname, dpi=170, facecolor=SURFACE)
+    plt.close(fig)
+
+
+bars("jbb", "JailbreakBench refusal rate (judge)\nlower = more refusals removed",
+     "Abliterating Qwen3.5-0.8B by weight-space programming", "headline_bars.png",
+     "Each bar is the mean over runs that edited. Per-run values are in the table.")
+bars("ae", "abliteration-eval harmful refusal rate (judge)\nlower = more refusals removed",
+     "Out-of-distribution test: abliteration-eval (200 harmful prompts)", "headline_bars_ae.png",
+     "abliteration-eval is a separately built benchmark that shares no prompts with the agents' practice set; "
+     "same judge prompt as JailbreakBench. Each bar is the mean over runs that edited.")
 print(json.dumps(data, indent=1))

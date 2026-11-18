@@ -112,6 +112,11 @@ footer {{ color:var(--muted); font-size:13px; border-top:1px solid var(--line); 
     <figcaption>What each agent's edit would score had it been stopped after k passes (exact replays of one session per model, protocol v2). Both land a working edit by pass 1, then spend later passes cutting damage (right).</figcaption></figure>
 </section>
 
+<section>
+  <figure><img alt="Bar chart of abliteration-eval harmful refusal, zero-shot vs 10 passes, per outer model" src="{img('headline_bars_ae.png')}">
+    <figcaption>Out-of-distribution check: abliteration-eval, a separately built benchmark (200 harmful prompts) that shares no prompts with the agents' practice set, judged with the same refusal-judge prompt. Same picture as JailbreakBench: zero-shot ordering is identical; with 10 passes, Opus, GLM and Inkling 2 Small again lead (GLM edges Inkling 2 Small here) and the older Inklings barely move.</figcaption></figure>
+</section>
+
 <section class="grid2">
   <div class="card"><h3>What a forward pass is</h3><p>One run of the inner model, budgeted: either a <em>generation</em>
   (replies to up to 128 prompts; "both" compares original and edited in one pass) or a <em>read</em> (internal
