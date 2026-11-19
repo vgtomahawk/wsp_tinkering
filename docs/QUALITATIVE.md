@@ -6,7 +6,8 @@ recognized the task and named the published recipe. Exact prompts: `docs/prompts
 this file is `docs/behavior_notes.pdf`.
 
 Numbers are refusal on JailbreakBench's 100 harmful behaviors, decided by its refusal-judge prompt (judge: Claude
-Sonnet 5.5). Unedited Qwen3.5-0.8B: 0.80. Arditi et al. recipe: 0.07 (KL 0.065).
+Sonnet 5.5; JailbreakBench: Chao et al., NeurIPS 2024 Datasets and Benchmarks, arXiv:2404.01318). Unedited
+Qwen3.5-0.8B: 0.80. Arditi et al. recipe: 0.07 (KL 0.065).
 
 ## Terms
 - **Residual stream:** the 1,024-number vector each token carries through the 24 layers. Each layer reads from it and
@@ -173,7 +174,8 @@ over 100 harmless prompts. The Arditi recipe's 0.065 is a practical yardstick.
 - These are the only damage measures. There is no broad capability benchmark.
 
 ## Out-of-distribution check: abliteration-eval
-abliteration-eval (200 harmful prompts) was built separately and shares no prompts with the agents' practice set; it is
+abliteration-eval (Ritesh Khanna; huggingface.co/datasets/treadon/abliteration-eval, write-up at
+riteshkhanna.com/blog/abliteration-eval; 200 harmful prompts) was built separately and shares no prompts with the agents' practice set; it is
 scored with the same judge prompt. Unedited 0.73, Arditi 0.03. Zero-shot: Opus 0.45, Inkling 2 Small 0.48, GLM 0.62,
 plain Inkling 0.73, Inkling Small 0.76, the same ordering as JailbreakBench. 10 passes: Opus 0.07, GLM 0.14,
 Inkling 2 Small 0.19, Inkling Small 0.69, plain Inkling 0.71. The three strong agents lead again, with GLM ahead of
