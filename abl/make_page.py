@@ -78,6 +78,7 @@ figcaption {{ font-size:13px; color:#52514e; margin-top:6px; }}
 code {{ font-family:var(--mono); font-size:13px; }}
 a {{ color:var(--accent); }}
 footer {{ color:var(--muted); font-size:13px; border-top:1px solid var(--line); padding-top:16px; }}
+@media print {{ .scroll {{ overflow:visible; }} table {{ min-width:0; font-size:11.5px; }} th, td {{ padding:6px 7px; }} }}
 </style>
 <main>
 <header class="prose">

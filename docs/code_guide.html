@@ -23,6 +23,7 @@ th { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: v
 td:first-child { white-space: nowrap; }
 ol.flow li { margin-bottom: 6px; }
 .note { border-left: 3px solid var(--accent); padding: 6px 12px; background: var(--panel); }
+@media print { pre { white-space:pre-wrap; word-break:break-word; } }
 </style>
 </head>
 <body>
@@ -58,7 +59,11 @@ python -m wspt.run_minatar run claude-opus-5.5-direct     # or inkling-2-small /
 <div class="tbl"><table>
 <tr><th>File</th><th>What it does</th></tr>
 <tr><td><code>abl/score.py</code></td><td><strong>Held-out scorer, identical for every row.</strong> Loads the inner model, optionally applies an <code>edit.pt</code>, generates greedily (96 tokens, thinking off) on JailbreakBench harmful/benign and abliteration-eval, counts refusals with Arditi et al.'s phrase list (Wilson 95% CIs), and measures damage: first-token KL against the unedited model on 100 harmless prompts, and Alpaca answer cross-entropy. Writes <code>results/abl/&lt;tag&gt;/scores.json</code></td></tr>
-<tr><td><code>abl/agent.py</code></td><td><strong>The WSP harness.</strong> Builds the Exp 8-style task message (architecture line generated from the model config; optional fixed <code>CONTEXT</code> paragraph), runs the turn loop (one code action per reply, explain every step, nudges, reply cap), holds the agent's Python kernel (<code>get</code>, <code>get_original</code>, <code>save_edit</code>, <code>reset</code>, <code>edits</code>, budgeted <code>generate</code> and <code>read</code>, rules blocklist) and the two outer-model clients (<code>Opus</code>; <code>Inkling</code> with its one <code>python</code> tool). Writes <code>log.jsonl</code>, <code>edit.pt</code>, <code>summary.json</code>, <code>final_answer.md</code></td></tr>
+<tr><td><code>abl/agent.py</code></td><td><strong>The WSP harness.</strong> Builds the Exp 8-style task message (architecture line generated from the model config; optional fixed <code>CONTEXT</code> paragraph), runs the turn loop (one code action per reply, explain every step, nudges, reply cap), holds the agent's Python kernel (<code>get</code>, <code>get_original</code>, <code>save_edit</code>, <code>reset</code>, <code>edits</code>, budgeted <code>generate</code> and <code>read</code>, rules blocklist) and the the outer-model clients (<code>Opus</code>; <code>Inkling</code> with its one <code>python</code> tool, for all three Inkling models; <code>Astra</code>; <code>Baseten</code> for GLM 5.3). Writes <code>log.jsonl</code>, <code>edit.pt</code>, <code>summary.json</code>, <code>final_answer.md</code></td></tr>
+<tr><td><code>abl/judge.py</code></td><td><strong>Headline metric.</strong> JailbreakBench's refusal-judge and jailbreak-judge prompts, verbatim, run with Claude Sonnet 5.5 on every scored reply. Writes <code>results/abl/&lt;tag&gt;/judge.json</code></td></tr>
+<tr><td><code>abl/replay.py</code>, <code>abl/plot_curves.py</code></td><td>Exact replay of a finished session, saving the edit after each forward pass, and the per-pass curve</td></tr>
+<tr><td><code>abl/make_table.py</code>, <code>abl/make_figures.py</code>, <code>abl/make_page.py</code></td><td>Build the results table, figures and results page from every run's scores (nothing typed by hand)</td></tr>
+<tr><td><code>abl/zero_shot_directions.py</code>, <code>abl/embed_baseline.py</code></td><td>Zero-shot analysis: recover each edit's direction from its saved weights; the fixed word-list control</td></tr>
 <tr><td><code>abl/arditi.py</code></td><td>Reference recipe (Arditi et al., NeurIPS 2024): difference-of-means directions on train prompts, selection on validation, projection out of every matrix that writes the residual stream; produces <code>edit.pt</code></td></tr>
 <tr><td><code>abl/data/*.json</code></td><td>Arditi et al.'s train/val prompt splits: the agents' practice data (zero exact overlap with any evaluation set)</td></tr>
 <tr><td><code>abl/smoke_kernel.py</code></td><td>No-API test of every kernel tool and rule</td></tr>
