@@ -34,8 +34,10 @@ Datasets and Benchmarks, [arXiv:2404.01318](https://arxiv.org/abs/2404.01318)) a
 
 This project measures whether LLM agents can remove a model's refusals by editing its weights. The underlying method
 (projecting out a "refusal direction") is already public (Arditi et al., 2024; tools such as Heretic), and we use a
-0.8B model. We deliberately do **not** release edited weights, weight deltas, generated replies to harmful prompts,
-or judge labels: those stay local (see `.gitignore`), and only aggregate rates are reported. Harmful prompts come from
+0.8B model. We deliberately do **not** release edited weights, weight deltas, the edited model's replies to harmful
+prompts, or judge labels: those stay local (see `.gitignore`), and results are reported as aggregate rates. The one
+exception is `docs/examples.pdf`, which shows a few unedited refusals in full and only the opening words of the edited
+model's replies to harmful prompts. Harmful prompts come from
 existing public benchmarks (JailbreakBench, abliteration-eval).
 
 ## Layout
@@ -96,7 +98,7 @@ python abl/agent.py --outer inkling --passes 0 --out results/abl/agent_inkling_w
 - Secondary: `treadon/abliteration-eval` harmful (200) and over-refusal (83). It is used only by its author so far,
   so it is supporting evidence, not the headline.
 
-Generated completions stay local and are never published; only rates are reported.
+Generated completions stay local; results are reported as rates (apart from the redacted examples in `docs/examples.pdf`).
 
 ## Results log
 
