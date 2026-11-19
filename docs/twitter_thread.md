@@ -1,6 +1,6 @@
 # Twitter / X thread draft
 
-Handles are placeholders, e.g. [@ThinkingMachines], [@takehi]; fill in the real ones before posting. Numbers as of 2026-11-18. Attach (docs/figures/): 1/ headline_table.png, 4/ pass_curves_v2.png, 6/ headline_bars.png, 7/ headline_bars_ae.png (out-of-distribution check). Optional: figures/prompt_excerpt.png (what the agents are told; fits tweet 2), docs/examples.pdf (before/after replies) and docs/behavior_notes.pdf.
+Handles are placeholders, e.g. [@ThinkingMachines], [@takehi]; fill in the real ones before posting. Numbers as of 2026-11-18. Attach (docs/figures/): 1/ headline_table.png, 4/ pass_curves_v2.png, 6/ headline_bars.png, 7/ headline_bars_ae.png (out-of-distribution check). Optional: figures/prompt_excerpt_10passes.png (what the agents are told; fits tweet 2), figures/prompt_excerpt_zeroshot.png (fits tweet 6), docs/examples.pdf (before/after replies) and docs/behavior_notes.pdf.
 
 ---
 
