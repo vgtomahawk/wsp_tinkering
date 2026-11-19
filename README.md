@@ -31,7 +31,7 @@ follows, and the published Opus 5.5 row come from Caleb Eom's
 - Ritesh Khanna, ["Abliteration-Eval: A Benchmark for Uncensored LLMs"](https://riteshkhanna.com/blog/abliteration-eval), blog post, April 14, 2026.
 
 Company logos in `docs/figures/` (Anthropic, Thinking Machines, Z.ai, OpenAI) are their owners' trademarks, used only
-to identify which model produced each result; each is the company's own site icon (OpenAI's mark via Simple Icons).
+to identify which model produced each result; Anthropic and Z.ai are their site icons, Thinking Machines is its wordmark, and OpenAI's mark is via Simple Icons.
 
 
 ## Responsible use
