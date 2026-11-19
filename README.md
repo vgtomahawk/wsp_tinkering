@@ -24,10 +24,11 @@ and Omar Khattab ([blog](https://rikiyat.github.io/blog/weight-space-programming
 follows, and the published Opus 5.5 row come from Caleb Eom's
 [weight-space-bench](https://github.com/eomcaleb/weight-space-bench). The abliteration reference is Arditi et al.,
 *Refusal in Language Models Is Mediated by a Single Direction* (NeurIPS 2024,
-[code](https://github.com/andyrdt/refusal_direction)). Inkling access via Tinker, courtesy of Thinking Machines. Benchmarks: JailbreakBench (Chao et al., NeurIPS 2024
-Datasets and Benchmarks, [arXiv:2404.01318](https://arxiv.org/abs/2404.01318)) and abliteration-eval (Ritesh Khanna,
-[dataset](https://huggingface.co/datasets/treadon/abliteration-eval),
-[write-up](https://riteshkhanna.com/blog/abliteration-eval)).
+[code](https://github.com/andyrdt/refusal_direction)). Inkling access via Tinker, courtesy of Thinking Machines. Benchmarks:
+- JailbreakBench: Chao et al., "JailbreakBench: An Open Robustness Benchmark for Jailbreaking Large Language Models",
+  NeurIPS 2024 Datasets and Benchmarks Track, [arXiv:2404.01318](https://arxiv.org/abs/2404.01318).
+- abliteration-eval dataset: Ritesh Khanna, 2026, [huggingface.co/datasets/treadon/abliteration-eval](https://huggingface.co/datasets/treadon/abliteration-eval).
+- Ritesh Khanna, ["Abliteration-Eval: A Benchmark for Uncensored LLMs"](https://riteshkhanna.com/blog/abliteration-eval), blog post, April 14, 2026.
 
 
 ## Responsible use
