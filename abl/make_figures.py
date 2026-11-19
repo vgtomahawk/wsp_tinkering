@@ -148,7 +148,7 @@ def bars(key, ylabel, title, fname, note):
     for name, ls in ((REFS[0][0], (0, (1, 2))), (REFS[1][0], (0, (5, 3)))):
         v = refs[name][key]
         ax.axhline(v, color=MUTED, linestyle=ls, linewidth=1.2)
-        ax.text(1.01, v, f"{'unedited Qwen3.5-0.8B' if 'unedited' in name else 'Arditi et al.\nrecipe (reference)'} {v:.2f}",
+        ax.text(1.01, v, f"{'unedited' if 'unedited' in name else 'Arditi et al.'} {v:.2f}",
                 transform=ax.get_yaxis_transform(), ha="left", va="center", fontsize=9, color=MUTED, clip_on=False)
     ax.set_xticks(range(len(models)))
     ax.set_xticklabels(models, fontsize=10.5, color=INK)
@@ -168,7 +168,7 @@ def bars(key, ylabel, title, fname, note):
     ax.tick_params(colors=MUTED)
     ax.legend(frameon=False, fontsize=9.5, loc="upper center", bbox_to_anchor=(0.5, 0.99), ncol=2)
     ax.set_title(title, loc="left", fontsize=12.5, color=INK)
-    fig.tight_layout(rect=(0, 0.05, 0.84, 1))
+    fig.tight_layout(rect=(0, 0.05, 0.93, 1))
     fig.text(0.01, 0.01, note, fontsize=8.5, color=MUTED, ha="left", va="bottom")
     fig.savefig(OUT / fname, dpi=170, facecolor=SURFACE)
     plt.close(fig)
