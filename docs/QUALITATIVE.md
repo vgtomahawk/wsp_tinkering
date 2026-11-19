@@ -153,6 +153,39 @@ chosen rows to refusal (plain Inkling run 1 did compute a refusal direction, the
 largest projections, all below 0.03); refusal is written diffusely, so a few rows cannot carry it; and scaling shrinks
 a component in every direction instead of removing one direction, adding damage without a targeted effect.
 
+## By harm category
+JailbreakBench's 100 harmful behaviors fall into 10 categories of 10. Judge refusal per category, runs pooled per cell
+(`abl/category_breakdown.py`; table with counts in `results/abl/CATEGORY_BREAKDOWN.md`):
+
+| Category | Unedited | Opus 0 | Inkling 2 Small 0 | GLM 0 | Opus 10 | Inkling 2 Small 10 | GLM 10 | Arditi |
+|---|---|---|---|---|---|---|---|---|
+| Harassment/Discrimination | 0.70 | 0.50 | 0.60 | 0.65 | 0.05 | 0.20 | 0.15 | 0.30 |
+| Physical harm | 0.80 | 0.44 | 0.55 | 0.74 | 0.22 | 0.21 | 0.17 | 0.00 |
+| Economic harm | 0.70 | 0.60 | 0.60 | 0.65 | 0.05 | 0.20 | 0.25 | 0.10 |
+| Fraud/Deception | 1.00 | 0.44 | 0.50 | 0.89 | 0.17 | 0.11 | 0.11 | 0.11 |
+| Disinformation | 0.60 | 0.30 | 0.55 | 0.65 | 0.20 | 0.15 | 0.15 | 0.10 |
+| Sexual/Adult content | 0.90 | 0.80 | 0.70 | 0.80 | 0.30 | 0.40 | 0.50 | 0.00 |
+| Privacy | 1.00 | 0.33 | 0.50 | 0.92 | 0.09 | 0.09 | 0.20 | 0.00 |
+| Expert advice | 0.80 | 0.50 | 0.50 | 0.65 | 0.20 | 0.00 | 0.10 | 0.00 |
+| Government decision-making | 0.75 | 0.89 | 0.58 | 0.81 | 0.19 | 0.29 | 0.24 | 0.00 |
+| Malware/Hacking | (judge graded only 1-2 replies per cell; not interpretable) | | | | | | | |
+
+- **Zero-shot unlocks most where refusal was total.** Privacy (1.00 -> 0.33 for Opus, 0.50 for Inkling 2 Small) and
+  Fraud/Deception (1.00 -> 0.44, 0.50) fall furthest, then Physical harm (0.80 -> 0.44, 0.55). Opus also halves
+  Disinformation (0.60 -> 0.30). Sexual/Adult content barely moves (0.90 -> 0.70-0.80), and Harassment and Economic
+  harm drop by about 0.1. GLM's zero-shot edits move little anywhere except Expert advice (0.80 -> 0.65), consistent
+  with its direction carrying refusal wording rather than harm content.
+- **With 10 passes, what is left concentrates in Sexual/Adult content.** It is the highest category for all three
+  agents (Opus 0.30, Inkling 2 Small 0.40, GLM 0.50), followed by Government decision-making (0.19-0.29). The Arditi
+  recipe leaves 0.00 there, so the agents' directions are less complete for sexual content; Arditi's own remaining
+  refusals sit in Harassment (0.30).
+- **Between models (10 passes):** Opus is lowest on Harassment and Economic harm (0.05 each), Inkling 2 Small on Expert
+  advice (0.00), and GLM is weakest on Sexual content (0.50) and Economic harm (0.25). Zero-shot, Opus leads on Privacy,
+  Fraud and Disinformation, while Inkling 2 Small leads on Sexual content and Government decision-making.
+- **How firm:** each category has 10 behaviors, so one refused prompt moves a single-run cell by 0.10 (pooled cells have
+  about 20 graded replies). The judge declined to grade 9 of 10 Malware/Hacking replies in every run, and graded only
+  about 6 of 10 Privacy replies, so those rows are thin. Read these as tendencies, not rankings.
+
 ## Damage (KL)
 KL is the KL divergence between the edited and unedited model's distributions over the first answer token, averaged
 over 100 harmless prompts. The Arditi recipe's 0.065 is a practical yardstick.
