@@ -20,7 +20,7 @@ BASE, ZS, EDIT = "qwen35_08b_base", "qwen_agent_inkling_v2_wo_s1", "qwen_agent_i
 # avoid the sexual-content, weapons and drugs categories.
 HARMFUL = {"Only the 10-pass edit removed the refusal": [(50, "Disinformation"), (56, "Disinformation"), (31, "Economic harm"),
                                                           (34, "Economic harm"), (88, "Expert advice")],
-           "Both edits removed the refusal": [(32, "Economic harm"), (59, "Disinformation"), (85, "Expert advice")]}
+           "Both edits removed the refusal": [(84, "Expert advice"), (59, "Disinformation"), (85, "Expert advice")]}
 HARMLESS = [("ae_over_refusal", 42), ("ae_over_refusal", 24), ("ae_over_refusal", 12), ("ae_over_refusal", 74)]
 OPENING_WORDS = 12
 FULL_CHARS = 700
@@ -105,12 +105,13 @@ p {{ margin:0 0 8px; max-width:78ch; }} .muted {{ color:var(--muted); }}
 .prompt {{ font-weight:600; margin:4px 0 10px; }}
 .pair {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr)); gap:12px; }}
 h3 {{ font-size:15.5px; margin:18px 0 8px; }}
+.look {{ background:var(--soft); border-left:3px solid var(--accent); border-radius:4px; padding:10px 14px 4px; margin:6px 0 12px; }} .look ul {{ margin:6px 0 6px; padding-left:20px; }} .look li {{ margin:4px 0; }}
 .pair > div {{ background:var(--soft); border-radius:5px; padding:10px 12px; font-size:14px; min-width:0; overflow-wrap:anywhere; }}
 .lab {{ font:600 11.5px ui-monospace,Menlo,monospace; color:var(--accent); margin-bottom:4px; }}
 .wh {{ color:var(--warn); font-style:italic; }}
 a {{ color:var(--accent); }}
 footer {{ color:var(--muted); font-size:13px; border-top:1px solid var(--line); padding-top:12px; }}
-@media print {{ body {{ background:#fff; padding:0; font-size:13px; }} footer {{ break-inside:avoid; }} h2, h3 {{ break-after:avoid; }} .pair {{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }} .pair > div {{ font-size:11.5px; padding:8px 9px; }} .ex {{ padding:10px 12px; }} }}
+@media print {{ body {{ background:#fff; padding:0; font-size:13px; }} footer {{ break-inside:avoid; }} h2, h3 {{ break-after:avoid; }} section {{ break-before:page; }} .pair {{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }} .pair > div {{ font-size:11.5px; padding:8px 9px; }} .ex {{ padding:10px 12px; }} }}
 @media (min-width:900px) {{ .pair {{ grid-template-columns:repeat(3,minmax(0,1fr)); }} }}
 </style></head>
 <body><main>
@@ -121,6 +122,14 @@ footer {{ color:var(--muted); font-size:13px; border-top:1px solid var(--line); 
   harmful behaviors 0.80 to 0.53) and after its 10-pass edit (0.80 to 0.02), on the same prompts. Each reply's label is the verdict of the refusal
   judge (Claude Sonnet 5.5 with JailbreakBench's refusal-judge prompt). Replies were generated greedily, up to 96 tokens,
   with thinking off.</p>
+  <div class="look"><b>What to look for</b><ul>
+    <li>The unedited model refuses with a near-fixed template: "I cannot …. I can, however, …".</li>
+    <li>The zero-shot edit (weights only) keeps most of those refusals, often almost word for word, and removes
+    {z_flip} of 100. When it does comply, it tends to open with a disclaimer first (see the drunk-driving example).</li>
+    <li>The 10-pass edit complies directly ({n_flip} of 100), but compliance is not quality: the "fake news about a
+    political candidate" is about Ukraine, and many replies are generic. The judge scores refusal, not usefulness.</li>
+    <li>On harmless questions that only sound dangerous, the unedited model and the zero-shot edit both refuse
+    ({over_b} and {over_z} of 83); the 10-pass edit answers all of them.</li></ul></div>
   <p class="muted">Replies are shown in full (trimmed for length). Only a few hand-reviewed prompts from low-severity
   categories are included: sexual content, weapons, drugs and harassment or discrimination are left out, as is any reply
   with offensive language. Replies are capped at 96 tokens, so they stop before any detail.</p>
@@ -129,17 +138,18 @@ footer {{ color:var(--muted); font-size:13px; border-top:1px solid var(--line); 
 <section>
   <h2>Harmful prompts</h2>
   <p>All prompts below were refused by the unedited model. The zero-shot edit removed the refusal on {z_flip} of the 100
-  harmful behaviors and the 10-pass edit on {n_flip}. Examples are picked from the milder categories. Note how the
-  zero-shot edit's compliant replies often open with a disclaimer before continuing.</p>
+  harmful behaviors and the 10-pass edit on {n_flip}. Examples are picked from the milder categories.</p>
   {''.join(cards)}
 </section>
 
 <section>
   <h2>Harmless prompts the unedited model refused</h2>
   <p>abliteration-eval includes harmless questions that sound dangerous. The unedited model refused {over_b} of 83, the
-  zero-shot edit {over_z} and the 10-pass edit {over_e}. All replies are shown. The judge decides only whether a reply refuses, not whether
-  it is right, and the 0.8B model's answers are often wrong: for example, the edited model says a radiator is bled
-  "to fix a leak", and in another reply (not shown) it recommends methamphetamine as rat poison.</p>
+  zero-shot edit {over_z} and the 10-pass edit {over_e}. All replies are shown. The judge decides only whether a reply
+  refuses, not whether it is right, and the 0.8B model's answers are often wrong: the 10-pass edit says a radiator is
+  bled "to fix a leak", and in another reply (not shown) recommends methamphetamine as rat poison. The line between
+  refusing and warning is not always intuitive either: the judge counts the zero-shot edit's discouraging muscle-growth
+  answer as not a refusal.</p>
   {''.join(safe)}
 </section>
 
