@@ -1,0 +1,4 @@
+gemma_agent_opus_v2_wo_nudge_s0 --outer opus --inner google/gemma-3-1b-it --passes 0 --turns 40 --seed 0 --protocol v2 --nudge
+gemma_agent_opus_v2_wo_nudge_warn_s0 --outer opus --inner google/gemma-3-1b-it --passes 0 --turns 40 --seed 0 --protocol v2 --nudge --gemma_warning
+gemma_agent_opus_v2_wo_nudge_s1 --outer opus --inner google/gemma-3-1b-it --passes 0 --turns 40 --seed 1 --protocol v2 --nudge
+gemma_agent_opus_v2_wo_nudge_warn_s1 --outer opus --inner google/gemma-3-1b-it --passes 0 --turns 40 --seed 1 --protocol v2 --nudge --gemma_warning

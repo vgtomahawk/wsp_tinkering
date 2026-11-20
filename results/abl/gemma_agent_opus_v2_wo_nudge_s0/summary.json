@@ -1,0 +1,189 @@
+{
+ "ended": "final answer after all forward passes",
+ "turns": 25,
+ "python_runs": 23,
+ "passes_left": 0,
+ "tensors": [
+  {
+   "name": "model.layers.8.self_attn.o_proj.weight",
+   "changed": 1013733,
+   "rel_fro": 0.0319
+  },
+  {
+   "name": "model.layers.8.mlp.down_proj.weight",
+   "changed": 7296172,
+   "rel_fro": 0.0662
+  },
+  {
+   "name": "model.layers.9.self_attn.o_proj.weight",
+   "changed": 1034769,
+   "rel_fro": 0.0424
+  },
+  {
+   "name": "model.layers.9.mlp.down_proj.weight",
+   "changed": 7276339,
+   "rel_fro": 0.0751
+  },
+  {
+   "name": "model.layers.10.self_attn.o_proj.weight",
+   "changed": 1036431,
+   "rel_fro": 0.0476
+  },
+  {
+   "name": "model.layers.10.mlp.down_proj.weight",
+   "changed": 7271618,
+   "rel_fro": 0.0772
+  },
+  {
+   "name": "model.layers.11.self_attn.o_proj.weight",
+   "changed": 1083260,
+   "rel_fro": 0.117
+  },
+  {
+   "name": "model.layers.11.mlp.down_proj.weight",
+   "changed": 7288396,
+   "rel_fro": 0.0956
+  },
+  {
+   "name": "model.layers.12.self_attn.o_proj.weight",
+   "changed": 1050353,
+   "rel_fro": 0.0796
+  },
+  {
+   "name": "model.layers.12.mlp.down_proj.weight",
+   "changed": 7251786,
+   "rel_fro": 0.1062
+  },
+  {
+   "name": "model.layers.13.self_attn.o_proj.weight",
+   "changed": 1061401,
+   "rel_fro": 0.0975
+  },
+  {
+   "name": "model.layers.13.mlp.down_proj.weight",
+   "changed": 7249741,
+   "rel_fro": 0.1499
+  },
+  {
+   "name": "model.layers.14.self_attn.o_proj.weight",
+   "changed": 1063335,
+   "rel_fro": 0.1157
+  },
+  {
+   "name": "model.layers.14.mlp.down_proj.weight",
+   "changed": 7231439,
+   "rel_fro": 0.159
+  },
+  {
+   "name": "model.layers.15.self_attn.o_proj.weight",
+   "changed": 1070107,
+   "rel_fro": 0.1093
+  },
+  {
+   "name": "model.layers.15.mlp.down_proj.weight",
+   "changed": 7212999,
+   "rel_fro": 0.1945
+  },
+  {
+   "name": "model.layers.16.self_attn.o_proj.weight",
+   "changed": 1074353,
+   "rel_fro": 0.2145
+  },
+  {
+   "name": "model.layers.16.mlp.down_proj.weight",
+   "changed": 7197598,
+   "rel_fro": 0.1828
+  },
+  {
+   "name": "model.layers.17.self_attn.o_proj.weight",
+   "changed": 1071947,
+   "rel_fro": 0.0935
+  },
+  {
+   "name": "model.layers.17.mlp.down_proj.weight",
+   "changed": 7182549,
+   "rel_fro": 0.1269
+  },
+  {
+   "name": "model.layers.18.self_attn.o_proj.weight",
+   "changed": 1064717,
+   "rel_fro": 0.1312
+  },
+  {
+   "name": "model.layers.18.mlp.down_proj.weight",
+   "changed": 7172303,
+   "rel_fro": 0.1059
+  },
+  {
+   "name": "model.layers.19.self_attn.o_proj.weight",
+   "changed": 1066581,
+   "rel_fro": 0.1385
+  },
+  {
+   "name": "model.layers.19.mlp.down_proj.weight",
+   "changed": 7171119,
+   "rel_fro": 0.1145
+  },
+  {
+   "name": "model.layers.20.self_attn.o_proj.weight",
+   "changed": 1055502,
+   "rel_fro": 0.1612
+  },
+  {
+   "name": "model.layers.20.mlp.down_proj.weight",
+   "changed": 7154078,
+   "rel_fro": 0.1173
+  },
+  {
+   "name": "model.layers.21.self_attn.o_proj.weight",
+   "changed": 1067688,
+   "rel_fro": 0.1022
+  },
+  {
+   "name": "model.layers.21.mlp.down_proj.weight",
+   "changed": 7150169,
+   "rel_fro": 0.1141
+  },
+  {
+   "name": "model.layers.22.self_attn.o_proj.weight",
+   "changed": 1068693,
+   "rel_fro": 0.134
+  },
+  {
+   "name": "model.layers.22.mlp.down_proj.weight",
+   "changed": 7167441,
+   "rel_fro": 0.1166
+  },
+  {
+   "name": "model.layers.23.self_attn.o_proj.weight",
+   "changed": 1043454,
+   "rel_fro": 0.0781
+  },
+  {
+   "name": "model.layers.23.mlp.down_proj.weight",
+   "changed": 7165502,
+   "rel_fro": 0.0845
+  },
+  {
+   "name": "model.layers.24.self_attn.o_proj.weight",
+   "changed": 1072886,
+   "rel_fro": 0.1102
+  },
+  {
+   "name": "model.layers.24.mlp.down_proj.weight",
+   "changed": 7175769,
+   "rel_fro": 0.0838
+  },
+  {
+   "name": "model.layers.25.self_attn.o_proj.weight",
+   "changed": 1051665,
+   "rel_fro": 0.0611
+  },
+  {
+   "name": "model.layers.25.mlp.down_proj.weight",
+   "changed": 7175855,
+   "rel_fro": 0.075
+  }
+ ],
+ "pct_weights_changed": 14.8859
+}
