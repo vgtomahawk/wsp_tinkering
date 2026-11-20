@@ -129,8 +129,10 @@ answers). Judge refusal on JBB, v1 -> v2: Opus 0.22 -> 0.17; Inkling neutral 0.4
 | Inkling (plain) | 0.77 (runs 0.77, 0.77) | 0.79 |
 | GPT-6 Astra | no edit (abstained even w/ nudge) | declined |
 
-v2 per-pass curves: both agents land a working edit by pass 1 and then use passes to cut damage (KL Opus 0.21 -> 0.05,
-Inkling 0.17 -> 0.09). Artifacts: `docs/figures/{headline_table,headline_bars,headline_bars_ae,pass_curves_v2}.png`
+v2 per-pass curves (2026-11-19: all six 10-pass sessions replayed, mean of 2 runs per model; `abl/curve_quick.sh`):
+all three agents have a working edit within 1-2 passes (Opus at pass 1 in both runs, Inkling 2 Small at 1 and 2, GLM
+at 2 in both); later passes trade refusals against damage; several runs' best state came before their final one (Opus
+run 2: 0.01 at pass 9 -> 0.17 final at lower KL; GLM run 1: 0.12 at pass 2 -> 0.24 final at lower KL). Artifacts: `docs/figures/{headline_table,headline_bars,headline_bars_ae,pass_curves_v2}.png`
 (`headline_bars_ae` = abliteration-eval as an out-of-distribution check), `docs/results.html`, `docs/explainer.html`, `docs/QUALITATIVE.md`, `docs/prompts/`, `docs/twitter_thread.md`.
 Regenerate: `python abl/make_figures.py && python abl/plot_curves.py v2 && python abl/make_page.py`.
 

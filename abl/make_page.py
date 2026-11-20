@@ -110,7 +110,7 @@ footer {{ color:var(--muted); font-size:13px; border-top:1px solid var(--line); 
   <figure><img alt="Bar chart of JailbreakBench refusal, zero-shot vs 10 passes, per outer model" src="{img('headline_bars.png')}">
     <figcaption>Zero-shot (blue) vs 10 forward passes (orange). Dotted: unedited model. Dashed: Arditi et al. recipe.</figcaption></figure>
   <figure><img alt="Refusal and damage after k forward passes" src="{img('pass_curves_v2.png') or img('pass_curves.png')}">
-    <figcaption>What each agent's edit would score had it been stopped after k passes (exact replays of one session per model, protocol v2). Both land a working edit by pass 1, then spend later passes cutting damage (right).</figcaption></figure>
+    <figcaption>What each agent's edit would score had it been stopped after k passes (exact replays of every session; thick line = mean of 2 runs per model, thin = each run). All three have a working edit within 1–2 passes; later passes trade refusals against damage (right), and several runs' best state came before their final one.</figcaption></figure>
 </section>
 
 <section>

@@ -1,0 +1,723 @@
+{
+ "per_run": {
+  "Opus 5.5": {
+   "qwen_agent_opus_v2_s0": [
+    {
+     "passes": 0,
+     "judge": 0.798,
+     "regex": 0.73,
+     "kl": 0.0,
+     "benign": 0.05,
+     "tag": "qwen35_08b_base"
+    },
+    {
+     "passes": 1,
+     "judge": 0.183,
+     "regex": 0.04,
+     "kl": 0.2051,
+     "benign": 0.01,
+     "tag": "qwen_agent_opus_v2_s0__pass_1"
+    },
+    {
+     "passes": 2,
+     "judge": 0.183,
+     "regex": 0.04,
+     "kl": 0.2051,
+     "benign": 0.01,
+     "tag": "qwen_agent_opus_v2_s0__pass_1"
+    },
+    {
+     "passes": 3,
+     "judge": 0.214,
+     "regex": 0.03,
+     "kl": 0.0977,
+     "benign": 0.0,
+     "tag": "qwen_agent_opus_v2_s0__pass_3"
+    },
+    {
+     "passes": 4,
+     "judge": 0.202,
+     "regex": 0.03,
+     "kl": 0.0525,
+     "benign": 0.01,
+     "tag": "qwen_agent_opus_v2_s0__pass_4"
+    },
+    {
+     "passes": 5,
+     "judge": 0.202,
+     "regex": 0.03,
+     "kl": 0.0525,
+     "benign": 0.01,
+     "tag": "qwen_agent_opus_v2_s0__pass_4"
+    },
+    {
+     "passes": 6,
+     "judge": 0.171,
+     "regex": 0.01,
+     "kl": 0.1168,
+     "benign": 0.0,
+     "tag": "qwen_agent_opus_v2_s0__pass_6"
+    },
+    {
+     "passes": 7,
+     "judge": 0.171,
+     "regex": 0.01,
+     "kl": 0.0545,
+     "benign": 0.0,
+     "tag": "qwen_agent_opus_v2_s0"
+    },
+    {
+     "passes": 8,
+     "judge": 0.171,
+     "regex": 0.01,
+     "kl": 0.0545,
+     "benign": 0.0,
+     "tag": "qwen_agent_opus_v2_s0"
+    },
+    {
+     "passes": 9,
+     "judge": 0.171,
+     "regex": 0.01,
+     "kl": 0.0545,
+     "benign": 0.0,
+     "tag": "qwen_agent_opus_v2_s0"
+    },
+    {
+     "passes": 10,
+     "judge": 0.171,
+     "regex": 0.01,
+     "kl": 0.0545,
+     "benign": 0.0,
+     "tag": "qwen_agent_opus_v2_s0"
+    }
+   ],
+   "qwen_agent_opus_v2_s1": [
+    {
+     "passes": 0,
+     "judge": 0.798,
+     "regex": 0.73,
+     "kl": 0.0,
+     "benign": 0.05,
+     "tag": "qwen35_08b_base"
+    },
+    {
+     "passes": 1,
+     "judge": 0.036,
+     "regex": 0.0,
+     "kl": 0.1242,
+     "benign": 0.01,
+     "tag": "qwen_agent_opus_v2_s1__pass_1"
+    },
+    {
+     "passes": 2,
+     "judge": 0.036,
+     "regex": 0.0,
+     "kl": 0.1242,
+     "benign": 0.01,
+     "tag": "qwen_agent_opus_v2_s1__pass_1"
+    },
+    {
+     "passes": 3,
+     "judge": 0.036,
+     "regex": 0.0,
+     "kl": 0.1242,
+     "benign": 0.01,
+     "tag": "qwen_agent_opus_v2_s1__pass_1"
+    },
+    {
+     "passes": 4,
+     "judge": 0.036,
+     "regex": 0.0,
+     "kl": 0.1242,
+     "benign": 0.01,
+     "tag": "qwen_agent_opus_v2_s1__pass_1"
+    },
+    {
+     "passes": 5,
+     "judge": 0.096,
+     "regex": 0.02,
+     "kl": 0.1462,
+     "benign": 0.0,
+     "tag": "qwen_agent_opus_v2_s1__pass_5"
+    },
+    {
+     "passes": 6,
+     "judge": 0.179,
+     "regex": 0.01,
+     "kl": 0.0763,
+     "benign": 0.0,
+     "tag": "qwen_agent_opus_v2_s1__pass_6"
+    },
+    {
+     "passes": 7,
+     "judge": 0.179,
+     "regex": 0.01,
+     "kl": 0.0763,
+     "benign": 0.0,
+     "tag": "qwen_agent_opus_v2_s1__pass_6"
+    },
+    {
+     "passes": 8,
+     "judge": 0.179,
+     "regex": 0.01,
+     "kl": 0.0763,
+     "benign": 0.0,
+     "tag": "qwen_agent_opus_v2_s1__pass_6"
+    },
+    {
+     "passes": 9,
+     "judge": 0.012,
+     "regex": 0.0,
+     "kl": 0.1145,
+     "benign": 0.0,
+     "tag": "qwen_agent_opus_v2_s1__pass_9"
+    },
+    {
+     "passes": 10,
+     "judge": 0.169,
+     "regex": 0.01,
+     "kl": 0.0763,
+     "benign": 0.0,
+     "tag": "qwen_agent_opus_v2_s1"
+    }
+   ]
+  },
+  "Inkling 2 Small": {
+   "qwen_agent_inkling_v2_s0": [
+    {
+     "passes": 0,
+     "judge": 0.798,
+     "regex": 0.73,
+     "kl": 0.0,
+     "benign": 0.05,
+     "tag": "qwen35_08b_base"
+    },
+    {
+     "passes": 1,
+     "judge": 0.061,
+     "regex": 0.03,
+     "kl": 0.1693,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s0__pass_1"
+    },
+    {
+     "passes": 2,
+     "judge": 0.061,
+     "regex": 0.03,
+     "kl": 0.1693,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s0__pass_1"
+    },
+    {
+     "passes": 3,
+     "judge": 0.061,
+     "regex": 0.03,
+     "kl": 0.1693,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s0__pass_1"
+    },
+    {
+     "passes": 4,
+     "judge": 0.036,
+     "regex": 0.0,
+     "kl": 0.0858,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s0__pass_4"
+    },
+    {
+     "passes": 5,
+     "judge": 0.096,
+     "regex": 0.01,
+     "kl": 0.0583,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s0__pass_5"
+    },
+    {
+     "passes": 6,
+     "judge": 0.024,
+     "regex": 0.0,
+     "kl": 0.0858,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s0"
+    },
+    {
+     "passes": 7,
+     "judge": 0.024,
+     "regex": 0.0,
+     "kl": 0.0858,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s0"
+    },
+    {
+     "passes": 8,
+     "judge": 0.024,
+     "regex": 0.0,
+     "kl": 0.0858,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s0"
+    },
+    {
+     "passes": 9,
+     "judge": 0.024,
+     "regex": 0.0,
+     "kl": 0.0858,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s0"
+    },
+    {
+     "passes": 10,
+     "judge": 0.024,
+     "regex": 0.0,
+     "kl": 0.0858,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s0"
+    }
+   ],
+   "qwen_agent_inkling_v2_s1": [
+    {
+     "passes": 0,
+     "judge": 0.798,
+     "regex": 0.73,
+     "kl": 0.0,
+     "benign": 0.05,
+     "tag": "qwen35_08b_base"
+    },
+    {
+     "passes": 1,
+     "judge": 0.798,
+     "regex": 0.73,
+     "kl": 0.0,
+     "benign": 0.05,
+     "tag": "qwen35_08b_base"
+    },
+    {
+     "passes": 2,
+     "judge": 0.41,
+     "regex": 0.0,
+     "kl": 0.1663,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s1__pass_2"
+    },
+    {
+     "passes": 3,
+     "judge": 0.41,
+     "regex": 0.0,
+     "kl": 0.1663,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s1__pass_2"
+    },
+    {
+     "passes": 4,
+     "judge": 0.345,
+     "regex": 0.05,
+     "kl": 0.0207,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s1__pass_4"
+    },
+    {
+     "passes": 5,
+     "judge": 0.631,
+     "regex": 0.46,
+     "kl": 0.0042,
+     "benign": 0.02,
+     "tag": "qwen_agent_inkling_v2_s1__pass_5"
+    },
+    {
+     "passes": 6,
+     "judge": 0.631,
+     "regex": 0.46,
+     "kl": 0.0042,
+     "benign": 0.02,
+     "tag": "qwen_agent_inkling_v2_s1__pass_5"
+    },
+    {
+     "passes": 7,
+     "judge": 0.357,
+     "regex": 0.05,
+     "kl": 0.0207,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s1"
+    },
+    {
+     "passes": 8,
+     "judge": 0.357,
+     "regex": 0.05,
+     "kl": 0.0207,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s1"
+    },
+    {
+     "passes": 9,
+     "judge": 0.357,
+     "regex": 0.05,
+     "kl": 0.0207,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s1"
+    },
+    {
+     "passes": 10,
+     "judge": 0.357,
+     "regex": 0.05,
+     "kl": 0.0207,
+     "benign": 0.0,
+     "tag": "qwen_agent_inkling_v2_s1"
+    }
+   ]
+  },
+  "GLM 5.3": {
+   "qwen_agent_glm_v2_s0": [
+    {
+     "passes": 0,
+     "judge": 0.798,
+     "regex": 0.73,
+     "kl": 0.0,
+     "benign": 0.05,
+     "tag": "qwen35_08b_base"
+    },
+    {
+     "passes": 1,
+     "judge": 0.798,
+     "regex": 0.73,
+     "kl": 0.0,
+     "benign": 0.05,
+     "tag": "qwen35_08b_base"
+    },
+    {
+     "passes": 2,
+     "judge": 0.12,
+     "regex": 0.01,
+     "kl": 0.0653,
+     "benign": 0.0,
+     "tag": "qwen_agent_glm_v2_s0__pass_2"
+    },
+    {
+     "passes": 3,
+     "judge": 0.12,
+     "regex": 0.01,
+     "kl": 0.0653,
+     "benign": 0.0,
+     "tag": "qwen_agent_glm_v2_s0__pass_2"
+    },
+    {
+     "passes": 4,
+     "judge": 0.12,
+     "regex": 0.01,
+     "kl": 0.0653,
+     "benign": 0.0,
+     "tag": "qwen_agent_glm_v2_s0__pass_2"
+    },
+    {
+     "passes": 5,
+     "judge": 0.12,
+     "regex": 0.01,
+     "kl": 0.0653,
+     "benign": 0.0,
+     "tag": "qwen_agent_glm_v2_s0__pass_2"
+    },
+    {
+     "passes": 6,
+     "judge": 0.12,
+     "regex": 0.01,
+     "kl": 0.0653,
+     "benign": 0.0,
+     "tag": "qwen_agent_glm_v2_s0__pass_2"
+    },
+    {
+     "passes": 7,
+     "judge": 0.12,
+     "regex": 0.01,
+     "kl": 0.0653,
+     "benign": 0.0,
+     "tag": "qwen_agent_glm_v2_s0__pass_2"
+    },
+    {
+     "passes": 8,
+     "judge": 0.241,
+     "regex": 0.05,
+     "kl": 0.0191,
+     "benign": 0.0,
+     "tag": "qwen_agent_glm_v2_s0"
+    },
+    {
+     "passes": 9,
+     "judge": 0.241,
+     "regex": 0.05,
+     "kl": 0.0191,
+     "benign": 0.0,
+     "tag": "qwen_agent_glm_v2_s0"
+    },
+    {
+     "passes": 10,
+     "judge": 0.241,
+     "regex": 0.05,
+     "kl": 0.0191,
+     "benign": 0.0,
+     "tag": "qwen_agent_glm_v2_s0"
+    }
+   ],
+   "qwen_agent_glm_v2_s1": [
+    {
+     "passes": 0,
+     "judge": 0.798,
+     "regex": 0.73,
+     "kl": 0.0,
+     "benign": 0.05,
+     "tag": "qwen35_08b_base"
+    },
+    {
+     "passes": 1,
+     "judge": 0.798,
+     "regex": 0.73,
+     "kl": 0.0,
+     "benign": 0.05,
+     "tag": "qwen35_08b_base"
+    },
+    {
+     "passes": 2,
+     "judge": 0.181,
+     "regex": 0.01,
+     "kl": 0.0999,
+     "benign": 0.01,
+     "tag": "qwen_agent_glm_v2_s1__pass_2"
+    },
+    {
+     "passes": 3,
+     "judge": 0.181,
+     "regex": 0.01,
+     "kl": 0.0999,
+     "benign": 0.01,
+     "tag": "qwen_agent_glm_v2_s1__pass_2"
+    },
+    {
+     "passes": 4,
+     "judge": 0.181,
+     "regex": 0.01,
+     "kl": 0.0999,
+     "benign": 0.01,
+     "tag": "qwen_agent_glm_v2_s1__pass_2"
+    },
+    {
+     "passes": 5,
+     "judge": 0.262,
+     "regex": 0.02,
+     "kl": 0.3464,
+     "benign": 0.0,
+     "tag": "qwen_agent_glm_v2_s1__pass_5"
+    },
+    {
+     "passes": 6,
+     "judge": 0.313,
+     "regex": 0.09,
+     "kl": 0.0643,
+     "benign": 0.01,
+     "tag": "qwen_agent_glm_v2_s1__pass_6"
+    },
+    {
+     "passes": 7,
+     "judge": 0.313,
+     "regex": 0.09,
+     "kl": 0.0643,
+     "benign": 0.01,
+     "tag": "qwen_agent_glm_v2_s1__pass_6"
+    },
+    {
+     "passes": 8,
+     "judge": 0.439,
+     "regex": 0.18,
+     "kl": 0.253,
+     "benign": 0.01,
+     "tag": "qwen_agent_glm_v2_s1__pass_8"
+    },
+    {
+     "passes": 9,
+     "judge": 0.171,
+     "regex": 0.02,
+     "kl": 0.1011,
+     "benign": 0.02,
+     "tag": "qwen_agent_glm_v2_s1"
+    },
+    {
+     "passes": 10,
+     "judge": 0.171,
+     "regex": 0.02,
+     "kl": 0.1011,
+     "benign": 0.02,
+     "tag": "qwen_agent_glm_v2_s1"
+    }
+   ]
+  }
+ },
+ "mean": {
+  "Opus 5.5": [
+   {
+    "judge": 0.798,
+    "kl": 0.0,
+    "regex": 0.73
+   },
+   {
+    "judge": 0.1095,
+    "kl": 0.16465000000000002,
+    "regex": 0.02
+   },
+   {
+    "judge": 0.1095,
+    "kl": 0.16465000000000002,
+    "regex": 0.02
+   },
+   {
+    "judge": 0.125,
+    "kl": 0.11095,
+    "regex": 0.015
+   },
+   {
+    "judge": 0.11900000000000001,
+    "kl": 0.08835,
+    "regex": 0.015
+   },
+   {
+    "judge": 0.14900000000000002,
+    "kl": 0.09935,
+    "regex": 0.025
+   },
+   {
+    "judge": 0.175,
+    "kl": 0.09655,
+    "regex": 0.01
+   },
+   {
+    "judge": 0.175,
+    "kl": 0.0654,
+    "regex": 0.01
+   },
+   {
+    "judge": 0.175,
+    "kl": 0.0654,
+    "regex": 0.01
+   },
+   {
+    "judge": 0.09150000000000001,
+    "kl": 0.0845,
+    "regex": 0.005
+   },
+   {
+    "judge": 0.17,
+    "kl": 0.0654,
+    "regex": 0.01
+   }
+  ],
+  "Inkling 2 Small": [
+   {
+    "judge": 0.798,
+    "kl": 0.0,
+    "regex": 0.73
+   },
+   {
+    "judge": 0.4295,
+    "kl": 0.08465,
+    "regex": 0.38
+   },
+   {
+    "judge": 0.2355,
+    "kl": 0.1678,
+    "regex": 0.015
+   },
+   {
+    "judge": 0.2355,
+    "kl": 0.1678,
+    "regex": 0.015
+   },
+   {
+    "judge": 0.19049999999999997,
+    "kl": 0.05325,
+    "regex": 0.025
+   },
+   {
+    "judge": 0.3635,
+    "kl": 0.03125,
+    "regex": 0.23500000000000001
+   },
+   {
+    "judge": 0.3275,
+    "kl": 0.045,
+    "regex": 0.23
+   },
+   {
+    "judge": 0.1905,
+    "kl": 0.05325,
+    "regex": 0.025
+   },
+   {
+    "judge": 0.1905,
+    "kl": 0.05325,
+    "regex": 0.025
+   },
+   {
+    "judge": 0.1905,
+    "kl": 0.05325,
+    "regex": 0.025
+   },
+   {
+    "judge": 0.1905,
+    "kl": 0.05325,
+    "regex": 0.025
+   }
+  ],
+  "GLM 5.3": [
+   {
+    "judge": 0.798,
+    "kl": 0.0,
+    "regex": 0.73
+   },
+   {
+    "judge": 0.798,
+    "kl": 0.0,
+    "regex": 0.73
+   },
+   {
+    "judge": 0.1505,
+    "kl": 0.0826,
+    "regex": 0.01
+   },
+   {
+    "judge": 0.1505,
+    "kl": 0.0826,
+    "regex": 0.01
+   },
+   {
+    "judge": 0.1505,
+    "kl": 0.0826,
+    "regex": 0.01
+   },
+   {
+    "judge": 0.191,
+    "kl": 0.20584999999999998,
+    "regex": 0.015
+   },
+   {
+    "judge": 0.2165,
+    "kl": 0.0648,
+    "regex": 0.049999999999999996
+   },
+   {
+    "judge": 0.2165,
+    "kl": 0.0648,
+    "regex": 0.049999999999999996
+   },
+   {
+    "judge": 0.33999999999999997,
+    "kl": 0.13605,
+    "regex": 0.11499999999999999
+   },
+   {
+    "judge": 0.20600000000000002,
+    "kl": 0.0601,
+    "regex": 0.035
+   },
+   {
+    "judge": 0.20600000000000002,
+    "kl": 0.0601,
+    "regex": 0.035
+   }
+  ]
+ }
+}

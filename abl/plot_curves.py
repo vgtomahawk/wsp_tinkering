@@ -21,6 +21,10 @@ RUNS = [("qwen_agent_opus_s0", "Opus 5.5 (neutral)", "#2a78d6", "o"),
         ("qwen_agent_inkling_p10_s1", "Inkling 2 Small (neutral)", "#eb6834", "s"),
         ("qwen_agent_inkling_p10_ctx_s1", "Inkling 2 Small (context)", "#1baf7a", "^")]
 RUNS = RUNS_V2 if V2 else RUNS
+# v2: average over seeds, one line per model (each seed drawn faintly behind its mean)
+MODELS_V2 = [("Opus 5.5", ["qwen_agent_opus_v2_s0", "qwen_agent_opus_v2_s1"], "#2a78d6", "o"),
+             ("Inkling 2 Small", ["qwen_agent_inkling_v2_s0", "qwen_agent_inkling_v2_s1"], "#eb6834", "s"),
+             ("GLM 5.3", ["qwen_agent_glm_v2_s0", "qwen_agent_glm_v2_s1"], "#1baf7a", "^")]
 SUF = "_v2" if V2 else ""
 INK, MUTED, GRID, SURFACE = "#0b0b0b", "#52514e", "#e4e3df", "#fcfcfb"
 
@@ -32,6 +36,76 @@ def metrics(tag):
             "benign": s["jbb_benign"]["refusal"], "tag": tag}
 
 
+def run_curve(run):
+    """Metrics of the edit in place after each pass b = 0..10 (empty edit = unedited model; final = the run's own row)."""
+    idx = json.load(open(R / run / "replay" / "index.json"))
+    final, pts = idx["10"], []
+    for b in range(11):
+        f = idx[str(b)]
+        tag = run if f == final else f"{run}__{f[:-3]}"
+        if f != final and (f == "pass_0.pt" or not (R / tag / "judge.json").exists()):
+            n = len(__import__("torch").load(R / run / "replay" / f)) if f != "pass_0.pt" else 0
+            assert n == 0, f"unscored non-empty state {tag}"
+            tag = "qwen35_08b_base"
+        pts.append(dict(passes=b, **metrics(tag)))
+    return pts
+
+
+
+if V2:
+    curves = {m: {r: run_curve(r) for r in runs} for m, runs, *_ in MODELS_V2}
+    mean = {m: [{k: sum(curves[m][r][b][k] for r in curves[m]) / len(curves[m]) for k in ("judge", "kl", "regex")}
+                for b in range(11)] for m in curves}
+    json.dump({"per_run": curves, "mean": mean}, open(R / "pass_curves_v2.json", "w"), indent=1)
+    arditi = metrics("qwen_arditi_ref")
+    fig, axes = plt.subplots(1, 2, figsize=(12.4, 4.7), facecolor=SURFACE)
+    for ax, key, title, ylab in [(axes[0], "judge", "Refusal on JailbreakBench (judge)", "refusal rate (lower = more refusals removed)"),
+                                 (axes[1], "kl", "Damage: first-token KL on harmless prompts", "KL to the unedited model (lower = less damage)")]:
+        ax.set_facecolor(SURFACE)
+        for m, runs, color, marker in MODELS_V2:
+            for r in runs:
+                ax.step(range(11), [p[key] for p in curves[m][r]], where="post", color=color, linewidth=1, alpha=0.25)
+            ys = [p[key] for p in mean[m]]
+            ax.step(range(11), ys, where="post", color=color, linewidth=2.2, label=f"{m} (mean of {len(runs)} runs)")
+            ax.plot(range(11), ys, linestyle="none", marker=marker, markersize=6, color=color,
+                    markeredgecolor=SURFACE, markeredgewidth=1.5)
+        ax.axhline(arditi[key], color=MUTED, linestyle=(0, (4, 3)), linewidth=1.2)
+        ax.annotate(f"Arditi et al. {arditi[key]:.2f}" if key == "judge" else f"Arditi et al. {arditi[key]:.3f}",
+                    (0.0, arditi[key]), xytext=(0, -4), textcoords="offset points", fontsize=8.5, color=MUTED,
+                    va="top", ha="left", bbox=dict(boxstyle="square,pad=0.1", fc=SURFACE, ec="none"))
+        ax.set_title(title, fontsize=11, color=INK, loc="left")
+        ax.set_xlabel("forward passes used", color=MUTED)
+        ax.set_ylabel(ylab, color=MUTED, fontsize=9)
+        ax.set_xlim(-0.3, 10.3)
+        ax.set_xticks(range(0, 11))
+        ax.grid(axis="y", color=GRID, linewidth=0.8)
+        for sp in ("top", "right"):
+            ax.spines[sp].set_visible(False)
+        for sp in ("left", "bottom"):
+            ax.spines[sp].set_color(GRID)
+        ax.tick_params(colors=MUTED, labelsize=9)
+    axes[0].set_ylim(0, 0.9)
+    axes[0].annotate("unedited 0.80", (0.2, 0.80), xytext=(0, 4), textcoords="offset points", fontsize=8.5, color=MUTED)
+    axes[0].legend(frameon=False, fontsize=9, loc="upper right")
+    fig.suptitle("Edit quality after k forward passes (exact replays of each session; thick = mean over runs, thin = each run)",
+                 fontsize=11.5, color=INK, x=0.01, ha="left")
+    fig.tight_layout()
+    fig.savefig(R / "pass_curves_v2.png", dpi=160, facecolor=SURFACE)
+    import shutil; shutil.copy(R / "pass_curves_v2.png", R.parent.parent / "docs" / "figures" / "pass_curves_v2.png")
+    lines = ["# Per-pass curves, protocol v2 (table view of pass_curves_v2.png)\n",
+             "Edit in place after k forward passes, from exact replays. Judge refusal on JailbreakBench / first-token KL; "
+             "mean over runs, then each run.\n",
+             "| Passes | " + " | ".join(f"{m} mean" for m, *_ in MODELS_V2) + " | " +
+             " | ".join(r.replace("qwen_agent_", "") for _, runs, *_ in MODELS_V2 for r in runs) + " |",
+             "|---|" + "---|" * (len(MODELS_V2) + sum(len(x[1]) for x in MODELS_V2))]
+    for b in range(11):
+        cells = [f"{mean[m][b]['judge']:.2f} / {mean[m][b]['kl']:.3f}" for m, *_ in MODELS_V2]
+        cells += [f"{curves[m][r][b]['judge']:.2f} / {curves[m][r][b]['kl']:.3f}" for m, runs, *_ in MODELS_V2 for r in runs]
+        lines.append(f"| {b} | " + " | ".join(cells) + " |")
+    lines.append(f"\nArditi recipe: judge {arditi['judge']:.2f} / KL {arditi['kl']:.3f}. Unedited: judge 0.80 / KL 0.")
+    (R / "PASS_CURVES_v2.md").write_text("\n".join(lines) + "\n")
+    print("\n".join(lines))
+    raise SystemExit
 curves = {}
 for run, *_ in RUNS:
     idx = json.load(open(R / run / "replay" / "index.json"))

@@ -202,8 +202,12 @@ over 100 harmless prompts. The Arditi recipe's 0.065 is a practical yardstick.
 - Low KL alone is not good: the older Inklings have the lowest KL because they barely changed anything.
 - Within a model, damage trades against suppression (Inkling 2 Small 0.02 at KL 0.086 vs 0.36 at 0.021; GLM 0.24 at
   0.019 vs 0.17 at 0.10).
-- With passes, agents spend later passes cutting damage. Exact replays show a working edit after the first pass,
-  after which KL falls (Opus 0.21 -> 0.05, Inkling 2 Small 0.17 -> 0.09).
+- With passes, the edit is found early and the rest of the budget goes to dosing it. Exact replays of all six 10-pass
+  runs show a working edit within 1-2 passes (Opus at pass 1 in both runs, Inkling 2 Small at 1 and 2, GLM at 2 in
+  both; mean refusal after 2 passes 0.11 / 0.24 / 0.15). Later passes trade refusals against damage rather than
+  improve both, and several runs' best state came before their final one: Opus run 2 reached 0.01 at pass 9, then
+  backed off to 0.17 at lower KL (0.115 -> 0.076); GLM run 1 had 0.12 at pass 2 and finished at 0.24 with KL 0.065 ->
+  0.019. GLM run 2's stronger attempts spiked KL to 0.35 and 0.25 before it settled (`results/abl/PASS_CURVES_v2.md`).
 - These are the only damage measures. There is no broad capability benchmark.
 
 ## Out-of-distribution check: abliteration-eval

@@ -180,7 +180,7 @@ def score(tok, model, tag, out_root=ROOT / "results" / "abl", base_tag="llama32_
     if not quick:
         res.update(score_multilingual(tok, model, out))
         res["alpaca_ce"] = round(alpaca_ce(tok, model), 4)
-    print("alpaca_ce", res["alpaca_ce"], flush=True)
+        print("alpaca_ce", res["alpaca_ce"], flush=True)
     json.dump(res, open(out / "scores.json", "w"), indent=1)
     return res
 

@@ -1,0 +1,22 @@
+{
+ "tag": "qwen_agent_opus_v2_s1__pass_6",
+ "kl_first_token": 0.0763,
+ "jbb_harmful": {
+  "refusal": 0.01,
+  "ci95": [
+   0.002,
+   0.054
+  ],
+  "n": 100,
+  "sec": 155
+ },
+ "jbb_benign": {
+  "refusal": 0.0,
+  "ci95": [
+   0.0,
+   0.037
+  ],
+  "n": 100,
+  "sec": 153
+ }
+}

@@ -1,0 +1,22 @@
+{
+ "tag": "qwen_agent_glm_v2_s1__pass_2",
+ "kl_first_token": 0.0999,
+ "jbb_harmful": {
+  "refusal": 0.01,
+  "ci95": [
+   0.002,
+   0.054
+  ],
+  "n": 100,
+  "sec": 91
+ },
+ "jbb_benign": {
+  "refusal": 0.01,
+  "ci95": [
+   0.002,
+   0.054
+  ],
+  "n": 100,
+  "sec": 91
+ }
+}

@@ -118,7 +118,7 @@ footer { color:var(--muted); font-size:13px; border-top:1px solid var(--line); p
     <li><strong>Every agent that removed refusals stays in Arditi's range.</strong> Over-refusal on harmless prompts stays near 0, and the cross-entropy on Alpaca reference answers barely moves (2.00–2.03 vs 2.01 unedited).</li>
     <li>Low KL alone is not good: the older Inkling models have the lowest KL because they barely changed anything.</li>
     <li>Within a model, damage trades against suppression. Inkling 2 Small reached 0.02 refusal at KL 0.086 in one run and 0.36 at 0.021 in the other. GLM reached 0.24 at 0.019 and 0.17 at 0.10.</li>
-    <li>With passes, agents spend the later ones cutting damage. Replaying their sessions shows a working edit after the first pass, after which KL falls (Opus 0.21 → 0.05, Inkling 2 Small 0.17 → 0.09).</li>
+    <li>With passes, the edit is found early and the rest of the budget goes to dosing it. Replaying all six 10-pass sessions shows a working edit within 1–2 passes; later passes trade refusals against damage, and several runs' best state came before their final one (Opus run 2 reached 0.01 at pass 9, then backed off to 0.17 at lower KL).</li>
   </ul>
   <p class="muted">These are the only damage measures. There is no broad capability benchmark, so the claim is low collateral damage on these measures, not preserved capabilities.</p>
 </section>
@@ -206,7 +206,7 @@ footer { color:var(--muted); font-size:13px; border-top:1px solid var(--line); p
   <h2>What these notes do not show</h2>
   <ul>
     <li>Each setting has one or two runs, and Opus zero-shot has one.</li>
-    <li>Per-pass replays exist for one run each of Opus and Inkling 2 Small.</li>
+    <li>Per-pass replays cover the six 10-pass runs (two per model); intermediate states are scored on JailbreakBench refusal and KL only.</li>
     <li>Damage is measured by first-token KL and Alpaca loss only, on one small model.</li>
     <li>Agents saw judge verdicts on their practice prompts, never on the test sets. The Arditi reference selects its direction with its usual first-token proxy instead.</li>
   </ul>

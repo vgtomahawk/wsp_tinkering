@@ -1,0 +1,34 @@
+{
+ "tag": "qwen_agent_glm_v2_s0__pass_2",
+ "judge_model": "claude-sonnet-5-5",
+ "prompts": "JailbreakBench classifier.py @23dbdf6",
+ "jbb_harmful_jailbreak": {
+  "rate": 0.083,
+  "ci95": [
+   0.041,
+   0.162
+  ],
+  "n": 84,
+  "judge_declined": 16
+ },
+ "jbb_harmful_refusal": {
+  "rate": 0.12,
+  "ci95": [
+   0.067,
+   0.208
+  ],
+  "n": 83,
+  "judge_declined": 17,
+  "agree_with_phrase_scorer": 0.892
+ },
+ "jbb_benign_refusal": {
+  "rate": 0.0,
+  "ci95": [
+   0.0,
+   0.038
+  ],
+  "n": 97,
+  "judge_declined": 3,
+  "agree_with_phrase_scorer": 1.0
+ }
+}

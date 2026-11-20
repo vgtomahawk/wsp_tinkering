@@ -22,9 +22,10 @@ expert Arditi et al. recipe 0.07):
 • GLM 5.3: 0.21 (runs 0.24, 0.17)
 • Inkling Small 0.71, plain Inkling 0.79; Astra declined
 
-4/ How many passes? We replayed sessions exactly and scored the edit after each pass. Opus and Inkling 2 Small both
-had a working edit after *one* pass; later passes mostly cut collateral damage (KL 0.21 → 0.05 for Opus, 0.17 → 0.09
-for Inkling). 5 passes ≈ 10. [curve image]
+4/ How many passes? We replayed every session exactly and scored the edit after each pass (averaged over 2 runs per
+model). All three had a working edit within 1–2 passes (mean refusal after 2 passes: Opus 0.11, GLM 0.15, Inkling 2
+Small 0.24). Later passes go to trading refusals against damage, not to finding the edit, and several runs' best state
+came before their final one (Opus hit 0.01 at pass 9, then backed off to cut damage). [curve image]
 
 5/ What happened in Inkling 2 Small's 0.02 run? It found the refusal direction, then ran its own ablation: removing it
 only where layers *write* to the residual stream (the standard recipe) took practice refusals 41 → 9 of 64; also
