@@ -1,0 +1,4 @@
+gemma_agent_inkling_v2_wo_warn_s0 --outer inkling --inner google/gemma-3-1b-it --passes 0 --turns 40 --seed 0 --protocol v2 --gemma_warning
+gemma_agent_inkling_v2_wo_warn_s1 --outer inkling --inner google/gemma-3-1b-it --passes 0 --turns 40 --seed 1 --protocol v2 --gemma_warning
+gemma_agent_inkling_v2_wo_warn_s2 --outer inkling --inner google/gemma-3-1b-it --passes 0 --turns 40 --seed 2 --protocol v2 --gemma_warning
+gemma_agent_inkling_v2_wo_warn_s3 --outer inkling --inner google/gemma-3-1b-it --passes 0 --turns 40 --seed 3 --protocol v2 --gemma_warning

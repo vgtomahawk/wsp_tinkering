@@ -1,0 +1,8 @@
+{
+ "ended": "limit: the maximum of 40 replies",
+ "turns": 44,
+ "python_runs": 40,
+ "passes_left": 0,
+ "tensors": [],
+ "pct_weights_changed": 0.0
+}
