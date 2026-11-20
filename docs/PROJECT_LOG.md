@@ -22,7 +22,7 @@ References for the benchmarks:
 | What | Path |
 |---|---|
 | Results table (generated) | `results/abl/RESULTS_TABLE.md` (`abl/make_table.py`) |
-| Shareable docs (HTML + PDF each) | `docs/results`, `docs/behavior_notes` (mechanisms, KL, variation, categories), `docs/examples` (before/after replies, redacted), `docs/explainer`, `docs/code_guide`; `docs/QUALITATIVE.md`; `docs/twitter_thread.md`; `docs/prompts/` |
+| Shareable docs (HTML + PDF each) | `docs/results`, `docs/behavior_notes` (mechanisms, KL, variation, categories), `docs/examples` (before/after replies, hand-reviewed low-severity prompts), `docs/explainer`, `docs/code_guide`; `docs/QUALITATIVE.md`; `docs/twitter_thread.md`; `docs/prompts/` |
 | Figures | `docs/figures/`: headline_table, headline_bars (JailbreakBench), headline_bars_ae (abliteration-eval, OOD check), pass_curves_v2 |
 | Per-pass curves | v2: `results/abl/pass_curves_v2.png` + `PASS_CURVES_v2.md`; v1: `pass_curves.png` + `PASS_CURVES.md`; `abl/plot_curves.py`; replay snapshots `results/abl/<run>__pass_<k>/` |
 | Refusal by harm category | `results/abl/CATEGORY_BREAKDOWN.md` (`abl/category_breakdown.py`) |
@@ -45,7 +45,7 @@ References for the benchmarks:
 | `abl/arditi.py` | reference recipe (diff-in-means, selection on val, orthogonalize all writers) |
 | `abl/replay.py`, `abl/curve_pipeline.sh` | rebuild the edit after each pass from logs; full-suite score + judge each state |
 | `abl/score_and_judge.sh` | score + judge one or more runs |
-| `abl/make_table.py`, `abl/make_figures.py`, `abl/make_page.py`, `abl/make_examples.py` | results table, figures, results page, before/after examples page (redacts edited replies to harmful prompts) |
+| `abl/make_table.py`, `abl/make_figures.py`, `abl/make_page.py`, `abl/make_examples.py` | results table, figures, results page, before/after examples page (unedited, zero-shot and 10-pass replies for hand-reviewed low-severity prompts) |
 | `abl/category_breakdown.py`, `abl/zero_shot_directions.py`, `abl/embed_baseline.py` | per-category refusal; recover zero-shot edit directions from saved edits; fixed word-list control |
 | `wspt/` | Exp 5 runner and outer-model clients |
 
@@ -159,7 +159,7 @@ Regenerate: `python abl/make_figures.py && python abl/plot_curves.py v2 && pytho
   refusals cluster in Sexual/Adult content for all three agents (0.30-0.50; Arditi 0.00). The judge declined to grade
   9 of 10 Malware/Hacking replies per run, so that row is not interpretable.
 - Before/after examples (`docs/examples.pdf`): real prompts; unedited refusals in full; edited replies to harmful
-  prompts redacted to their opening words; harmless over-refusal cases in full.
+  prompts shown in full for hand-reviewed low-severity prompts (unedited, Inkling 2 Small zero-shot and 10-pass); harmless over-refusal cases in full.
 - Docs pass: QUALITATIVE.md reorganized; behaviour notes (HTML + PDF); PDFs of every HTML doc; explainer diagrams fixed
   (Mermaid loader was missing); code guide lists all clients and scripts; benchmark citations verified at the source.
 - Authors: Varun Gangal, Atharva Naik, Yoshinari Fujinuma, Arnhav Datar, Emmy Liu, Sally Dong, Darshan Deshpande.

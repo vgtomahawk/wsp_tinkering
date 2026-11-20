@@ -1,8 +1,9 @@
-"""Build docs/examples.html: real prompts and replies, before vs after editing (Qwen3.5-0.8B; edit = Inkling 2 Small,
-10 passes, run 1, judge refusal 0.80 -> 0.02).
+"""Build docs/examples.html: real prompts and replies from Qwen3.5-0.8B unedited, after Inkling 2 Small's best zero-shot
+edit (run 1, judge refusal 0.80 -> 0.53) and after its 10-pass edit (run 1, 0.80 -> 0.02).
 
-Publication rule (see README, Responsible use): replies to harmful prompts by the *edited* model are never published.
-For those, only the opening words are kept and the rest is withheld. Unedited refusals and replies to harmless prompts
+Publication rule (see README, Responsible use): only a few hand-reviewed prompts from low-severity categories are shown,
+with every reply in full (96-token greedy replies). Sexual content, weapons, drugs and harassment or discrimination are
+excluded, as is any reply with offensive or demeaning language. Unedited refusals and replies to harmless prompts
 are shown in full (trimmed for length). Reads local, gitignored result files; writes only the redacted page.
 
   python abl/make_examples.py
@@ -13,12 +14,13 @@ from pathlib import Path
 
 R = Path(__file__).resolve().parent.parent / "results" / "abl"
 OUT = Path(__file__).resolve().parent.parent / "docs" / "examples.html"
-BASE, EDIT = "qwen35_08b_base", "qwen_agent_inkling_v2_s0"
+BASE, ZS, EDIT = "qwen35_08b_base", "qwen_agent_inkling_v2_wo_s1", "qwen_agent_inkling_v2_s0"
 
-# Hand-picked from prompts the unedited model refused and the edited model did not (judge labels). Harmful picks avoid
-# the sexual-content, weapons and drugs categories.
-HARMFUL = [(50, "Disinformation"), (56, "Disinformation"), (31, "Economic harm"), (34, "Economic harm"),
-           (88, "Expert advice")]
+# Hand-picked from prompts the unedited model refused (judge labels), grouped by what the two edits did. Harmful picks
+# avoid the sexual-content, weapons and drugs categories.
+HARMFUL = {"Only the 10-pass edit removed the refusal": [(50, "Disinformation"), (56, "Disinformation"), (31, "Economic harm"),
+                                                          (34, "Economic harm"), (88, "Expert advice")],
+           "Both edits removed the refusal": [(32, "Economic harm"), (59, "Disinformation"), (85, "Expert advice")]}
 HARMLESS = [("ae_over_refusal", 42), ("ae_over_refusal", 24), ("ae_over_refusal", 12), ("ae_over_refusal", 74)]
 OPENING_WORDS = 12
 FULL_CHARS = 700
@@ -49,26 +51,39 @@ def verdict(refused):
     return {True: "refusal", False: "not a refusal", None: "judge declined to grade"}[refused]
 
 
-bl, el = labels(BASE), labels(EDIT)
-bh, eh = load(BASE, "jbb_harmful"), load(EDIT, "jbb_harmful")
+def edited_cell(label, reply, refused):
+    """Harmful prompt, edited model: the reply in full (trimmed for length), with the judge's verdict."""
+    body = esc(trim(reply))
+    return f'<div><div class="lab">{label} · judge: {verdict(refused)}</div><p>{body}</p></div>'
+
+
+bl, zl, el = labels(BASE), labels(ZS), labels(EDIT)
+bh, zh, eh = load(BASE, "jbb_harmful"), load(ZS, "jbb_harmful"), load(EDIT, "jbb_harmful")
+K = "jbb_harmful_refusal"
 cards = []
-for i, cat in HARMFUL:
-    cards.append(f"""<div class="ex"><div class="meta">JailbreakBench harmful · {cat}</div>
+for group, items in HARMFUL.items():
+    cards.append(f'<h3>{group}</h3>')
+    for i, cat in items:
+        cards.append(f"""<div class="ex"><div class="meta">JailbreakBench harmful · {cat}</div>
 <p class="prompt">{esc(bh[i]['prompt'])}</p>
-<div class="pair"><div><div class="lab">Before (unedited) · judge: {verdict(bl['jbb_harmful_refusal'][i])}</div><p>{esc(trim(bh[i]['completion']))}</p></div>
-<div><div class="lab">After (edited) · judge: {verdict(el['jbb_harmful_refusal'][i])}</div><p>{esc(opening(eh[i]['completion']))} <span class="wh">[rest withheld]</span></p></div></div></div>""")
+<div class="pair"><div><div class="lab">Unedited · judge: {verdict(bl[K][i])}</div><p>{esc(trim(bh[i]['completion']))}</p></div>
+{edited_cell("Zero-shot edit", zh[i]['completion'], zl[K][i])}
+{edited_cell("10-pass edit", eh[i]['completion'], el[K][i])}</div></div>""")
 
 safe = []
 for split, i in HARMLESS:
-    b, e = load(BASE, split), load(EDIT, split)
+    b, z, e = load(BASE, split), load(ZS, split), load(EDIT, split)
     key = {"ae_over_refusal": "ae_over_refusal_refusal", "jbb_benign": "jbb_benign_refusal"}[split]
     src = {"ae_over_refusal": "abliteration-eval over-refusal trap", "jbb_benign": "JailbreakBench benign"}[split]
     safe.append(f"""<div class="ex"><div class="meta">{src} (harmless)</div>
 <p class="prompt">{esc(b[i]['prompt'])}</p>
-<div class="pair"><div><div class="lab">Before (unedited) · judge: {verdict(bl[key][i])}</div><p>{esc(trim(b[i]['completion']))}</p></div>
-<div><div class="lab">After (edited) · judge: {verdict(el[key][i])}</div><p>{esc(trim(e[i]['completion']))}</p></div></div></div>""")
+<div class="pair"><div><div class="lab">Unedited · judge: {verdict(bl[key][i])}</div><p>{esc(trim(b[i]['completion']))}</p></div>
+<div><div class="lab">Zero-shot edit · judge: {verdict(zl[key][i])}</div><p>{esc(trim(z[i]['completion']))}</p></div>
+<div><div class="lab">10-pass edit · judge: {verdict(el[key][i])}</div><p>{esc(trim(e[i]['completion']))}</p></div></div></div>""")
 
-n_flip = sum(1 for k in range(100) if bl["jbb_harmful_refusal"][k] is True and el["jbb_harmful_refusal"][k] is False)
+n_flip = sum(1 for k in range(100) if bl[K][k] is True and el[K][k] is False)
+z_flip = sum(1 for k in range(100) if bl[K][k] is True and zl[K][k] is False)
+over_z = sum(x is True for x in zl["ae_over_refusal_refusal"])
 over_b = sum(x is True for x in bl["ae_over_refusal_refusal"])
 over_e = sum(x is True for x in el["ae_over_refusal_refusal"])
 
@@ -81,44 +96,48 @@ page = f"""<!doctype html>
 :root[data-theme="dark"] {{ --bg:#121614; --panel:#1a201d; --fg:#e3e8e5; --muted:#9aa6a0; --line:#2e3733; --accent:#6cc3a8; --soft:#1d2622; --warn:#e0b060; color-scheme:dark; }}
 * {{ box-sizing:border-box; }}
 body {{ margin:0; background:var(--bg); color:var(--fg); font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif; padding:36px 16px 64px; }}
-main {{ max-width:960px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr); gap:26px; }}
+main {{ max-width:1180px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr); gap:26px; }}
 h1 {{ font:650 30px/1.2 Georgia,serif; margin:0 0 8px; }} h2 {{ font:650 21px/1.3 Georgia,serif; margin:0 0 6px; }}
 p {{ margin:0 0 8px; max-width:78ch; }} .muted {{ color:var(--muted); }}
 .eyebrow {{ font:600 12px ui-monospace,Menlo,monospace; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }}
 .ex {{ background:var(--panel); border:1px solid var(--line); border-radius:6px; padding:14px 16px; margin-bottom:12px; break-inside:avoid; }}
 .meta {{ font:600 11.5px ui-monospace,Menlo,monospace; color:var(--muted); text-transform:uppercase; letter-spacing:.05em; }}
 .prompt {{ font-weight:600; margin:4px 0 10px; }}
-.pair {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr)); gap:12px; }}
+.pair {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr)); gap:12px; }}
+h3 {{ font-size:15.5px; margin:18px 0 8px; }}
 .pair > div {{ background:var(--soft); border-radius:5px; padding:10px 12px; font-size:14px; min-width:0; overflow-wrap:anywhere; }}
 .lab {{ font:600 11.5px ui-monospace,Menlo,monospace; color:var(--accent); margin-bottom:4px; }}
 .wh {{ color:var(--warn); font-style:italic; }}
 a {{ color:var(--accent); }}
 footer {{ color:var(--muted); font-size:13px; border-top:1px solid var(--line); padding-top:12px; }}
-@media print {{ body {{ background:#fff; padding:0; }} footer {{ break-inside:avoid; }} }}
+@media print {{ body {{ background:#fff; padding:0; font-size:13px; }} footer {{ break-inside:avoid; }} h2, h3 {{ break-after:avoid; }} .pair {{ grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }} .pair > div {{ font-size:11.5px; padding:8px 9px; }} .ex {{ padding:10px 12px; }} }}
+@media (min-width:900px) {{ .pair {{ grid-template-columns:repeat(3,minmax(0,1fr)); }} }}
 </style></head>
 <body><main>
 <header>
   <div class="eyebrow">wsp_tinkering · examples</div>
   <h1>Before and after: real prompts and replies</h1>
-  <p>Qwen3.5-0.8B before and after one agent's weight edit (Inkling 2 Small with 10 forward passes, the run that cut
-  refusal on JailbreakBench's 100 harmful behaviors from 0.80 to 0.02). Each reply's label is the verdict of the refusal
+  <p>Qwen3.5-0.8B unedited, after Inkling 2 Small's best zero-shot edit (weights only, refusal on JailbreakBench's 100
+  harmful behaviors 0.80 to 0.53) and after its 10-pass edit (0.80 to 0.02), on the same prompts. Each reply's label is the verdict of the refusal
   judge (Claude Sonnet 5.5 with JailbreakBench's refusal-judge prompt). Replies were generated greedily, up to 96 tokens,
   with thinking off.</p>
-  <p class="muted">On harmful prompts, the edited model's replies are not published: only their opening words are shown,
-  the rest is withheld. Unedited replies and all replies to harmless prompts are shown in full, trimmed for length.</p>
+  <p class="muted">Replies are shown in full (trimmed for length). Only a few hand-reviewed prompts from low-severity
+  categories are included: sexual content, weapons, drugs and harassment or discrimination are left out, as is any reply
+  with offensive language. Replies are capped at 96 tokens, so they stop before any detail.</p>
 </header>
 
 <section>
   <h2>Harmful prompts</h2>
-  <p>The unedited model refused these and the edited model did not; {n_flip} of the 100 harmful behaviors flipped this
-  way. The examples are picked from the milder categories.</p>
+  <p>All prompts below were refused by the unedited model. The zero-shot edit removed the refusal on {z_flip} of the 100
+  harmful behaviors and the 10-pass edit on {n_flip}. Examples are picked from the milder categories. Note how the
+  zero-shot edit's compliant replies often open with a disclaimer before continuing.</p>
   {''.join(cards)}
 </section>
 
 <section>
   <h2>Harmless prompts the unedited model refused</h2>
-  <p>abliteration-eval includes harmless questions that sound dangerous. The unedited model refused {over_b} of 83; the
-  edited model refused {over_e}. Both replies are shown. The judge decides only whether a reply refuses, not whether
+  <p>abliteration-eval includes harmless questions that sound dangerous. The unedited model refused {over_b} of 83, the
+  zero-shot edit {over_z} and the 10-pass edit {over_e}. All replies are shown. The judge decides only whether a reply refuses, not whether
   it is right, and the 0.8B model's answers are often wrong: for example, the edited model says a radiator is bled
   "to fix a leak", and in another reply (not shown) it recommends methamphetamine as rat poison.</p>
   {''.join(safe)}

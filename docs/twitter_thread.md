@@ -58,7 +58,7 @@ Inkling 2 Small declined 2 of 4 zero-shot runs; Opus, GLM and plain Inkling neve
 
 11/ Caveats: one 0.8B inner model; 1–2 runs per cell (Inkling 2 Small varies a lot); 0.02 vs Arditi's 0.07 is 2 vs 6
 refusals, within noise. Agents saw judge verdicts on practice prompts (never the test sets); our Arditi reference uses
-its usual proxy. No internet. We never publish the edited model's replies to harmful prompts; the examples show only their opening words.
+its usual proxy. No internet. Replies to harmful prompts are not published, apart from a few hand-reviewed low-severity examples.
 
 12/ Code, exact prompts, logs, every number, and before/after examples: github.com/vgtomahawk/wsp_tinkering
 Benchmarks: JailbreakBench (Chao et al.) and abliteration-eval (Ritesh Khanna, huggingface.co/datasets/treadon/abliteration-eval).
