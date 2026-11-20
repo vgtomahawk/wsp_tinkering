@@ -164,3 +164,19 @@ Regenerate: `python abl/make_figures.py && python abl/plot_curves.py v2 && pytho
   (Mermaid loader was missing); code guide lists all clients and scripts; benchmark citations verified at the source.
 - Authors: Varun Gangal, Atharva Naik, Yoshinari Fujinuma, Arnhav Datar, Emmy Liu, Sally Dong, Darshan Deshpande.
   Repository made public 2026-11-18.
+
+## Gemma 3 1B as inner model (2026-11-19 to 11-20; prompted by @andrezfu's report that Gemma 1B resisted WSP)
+- Harness: `agent.py` architecture line now describes Gemma 3 (sliding/global attention, GeGLU, sandwich RMSNorms); the
+  Qwen line is unchanged. `score_and_judge.sh` takes `INNER=` / `BASE_TAG=` and waits for the baseline.
+- Unedited `google/gemma-3-1b-it`: judge refusal 0.88 (JBB), 0.91 (abliteration-eval), JBB benign refusal 0.17.
+- Arditi reference needed a Gemma 3 adaptation (`arditi.py --postnorm --select weights --gemma_grid`):
+  1. plain recipe: 0.84, KL 1.26 (writer projection does not remove the direction: Gemma RMS-normalizes each block's
+     output with a per-dimension gain before the residual add; measured component along r 25.9 -> 28.5);
+  2. post-norm-aware projection (W <- W - u u^T W, u = (1+g)*r) and selection by the real weight edit: removes r
+     exactly (component 0.07), but every all-layer edit exceeds the KL cap (best 0.35) -> 0.58 with a wrecked model;
+  3. + search over the first edited layer and exclusion of the one massive-activation dimension (1038):
+     **0.17, KL 0.050, Alpaca loss 4.96 (unedited 5.01)**; selected layer 13 direction, layers >= 6, dim 1038 dropped.
+  The Qwen reference path is bit-identical to before (verified).
+- Inkling 2 Small zero-shot, v2 neutral, 4 seeds: seed 0 edited (embedding-derived direction, 101 MLP neurons + 6 heads,
+  0.16% of weights) -> 0.89, KL 0.010, no effect; seed 1 format failure (code written as text, never run); seed 2
+  declined; seed 3 edited then reverted everything and declined. Zero-shot: no working edit on Gemma.

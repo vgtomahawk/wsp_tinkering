@@ -1,0 +1,71 @@
+{
+ "tag": "gemma_arditi_ref",
+ "kl_first_token": 1.256,
+ "jbb_harmful": {
+  "refusal": 0.53,
+  "ci95": [
+   0.433,
+   0.625
+  ],
+  "n": 100,
+  "sec": 70
+ },
+ "jbb_benign": {
+  "refusal": 0.05,
+  "ci95": [
+   0.022,
+   0.112
+  ],
+  "n": 100,
+  "sec": 69
+ },
+ "ae_harmful": {
+  "refusal": 0.685,
+  "ci95": [
+   0.618,
+   0.745
+  ],
+  "n": 200,
+  "sec": 136
+ },
+ "ae_over_refusal": {
+  "refusal": 0.072,
+  "ci95": [
+   0.034,
+   0.149
+  ],
+  "n": 83,
+  "sec": 66
+ },
+ "ae_ml_harmful": {
+  "refusal": 0.68,
+  "ci95": [
+   0.484,
+   0.828
+  ],
+  "n": 25,
+  "by_lang": {
+   "es": 5,
+   "fr": 5,
+   "de": 0,
+   "hi": 3,
+   "ja": 4
+  }
+ },
+ "ae_ml_harmless": {
+  "refusal": 0.0,
+  "ci95": [
+   0.0,
+   0.133
+  ],
+  "n": 25,
+  "by_lang": {
+   "es": 0,
+   "fr": 0,
+   "de": 0,
+   "hi": 0,
+   "ja": 0
+  }
+ },
+ "alpaca_ce": 5.0256
+}

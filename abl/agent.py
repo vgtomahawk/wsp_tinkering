@@ -440,11 +440,20 @@ def arch_text(cfg):
                 f"{cfg.num_attention_heads} query heads and {cfg.num_key_value_heads} key/value heads of size {hd} and "
                 f"a gated output, the other {n - len(full)} are Gated DeltaNet linear-attention layers with "
                 f"{cfg.linear_num_value_heads} heads of size {cfg.linear_value_head_dim}")
+    elif types and "sliding_attention" in types:   # Gemma 3: local sliding-window layers with periodic global layers
+        full = [i for i, t in enumerate(types) if t == "full_attention"]
+        attn = (f"layers {', '.join(map(str, full[:-1]))} and {full[-1]} use global attention, the other {n - len(full)} "
+                f"use local sliding-window attention (window {cfg.sliding_window}); {cfg.num_attention_heads} query heads "
+                f"and {cfg.num_key_value_heads} key/value head{'s' if cfg.num_key_value_heads > 1 else ''} of size {hd}")
     else:
         attn = (f"grouped-query attention with {cfg.num_attention_heads} query heads and {cfg.num_key_value_heads} "
                 f"key/value heads of size {hd}")
     tied = "input embedding and output layer tied" if getattr(cfg, "tie_word_embeddings", False) else \
         "separate input embedding and output layer"
+    if str(getattr(cfg, "model_type", "")).startswith("gemma"):
+        # Gemma: GeGLU MLP and RMSNorm both before and after each attention and MLP block (sandwich norms)
+        return (f"{n} layers of width {d}; {attn}; each layer has a GeGLU MLP of width {cfg.intermediate_size}; RMSNorm "
+                f"before and after each attention and MLP block; vocabulary {cfg.vocab_size:,}; {tied}")
     return (f"{n} layers of width {d}; {attn}; each layer has a SwiGLU MLP of width {cfg.intermediate_size}; RMSNorm; "
             f"vocabulary {cfg.vocab_size:,}; {tied}")
 
