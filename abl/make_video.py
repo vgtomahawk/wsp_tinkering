@@ -1,4 +1,4 @@
-"""Silent slide video walking through docs/behavior_notes.pdf -> docs/behavior_notes_video.mp4 (about 157 s).
+"""Silent slide video walking through docs/behavior_notes.pdf -> docs/behavior_notes_video.mp4 (about 115 s).
 
 Slides are HTML rendered with Playwright and held for fixed reading times (SECS); ffmpeg assembles them. --narrate adds
 macOS `say` narration instead (longer).
@@ -117,18 +117,6 @@ Inkling, GLM 5.3 and GPT-6 Astra.</p>
              "What separated them is content: directions carrying harm judgement worked better than pure refusal wording. "
              "And the direction that actually works with passes is nearly orthogonal to every one of these stand-ins, which "
              "is why zero-shot is hard."),
-    dict(eye="Damage", body="""
-<h2>How to read KL</h2>
-<div class="row"><div><ul>
-<li>KL: how much the first word of an ordinary answer shifts. The expert recipe's <b>0.065</b> is the yardstick</li>
-<li>Every agent that removed refusals stays in that range; over-refusal stays near zero</li>
-<li>Low KL alone is not good: the older Inklings barely changed anything</li>
-<li>Within a model, damage trades against suppression: 0.02 at KL 0.086 vs 0.36 at 0.021</li>
-</ul></div></div>""",
-         say="Damage. We measure how much the first word of an ordinary answer shifts, as a KL divergence. The expert "
-             "recipe's 0.065 is a practical yardstick, and every agent that removed refusals stays in that range, with "
-             "over-refusal on harmless prompts near zero. Low damage alone is not a win: the older Inkling models have the "
-             "lowest damage because they barely changed anything. And within a model, damage trades against suppression."),
     dict(eye="Which refusals, and does it hold up?", body=f"""
 <div class="row"><div style="flex:0.75"><ul>
 <li>Zero-shot unlocks <b>Privacy</b> and <b>Fraud</b> most (1.00 to about 0.4)</li>
@@ -168,7 +156,7 @@ Inkling, GLM 5.3 and GPT-6 Astra.</p>
 ]
 
 
-SECS = [8, 16, 16, 13, 18, 16, 16, 13, 14, 13, 14]   # reading time per slide, 157 s in total
+SECS = [6, 10, 11, 9, 16, 13, 16, 11, 13, 10]   # reading time per slide, 115 s; most time on behaviour slides
 
 
 def main():
