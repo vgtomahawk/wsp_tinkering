@@ -1,0 +1,3 @@
+FINAL — I’m not going to create or submit edits whose purpose is to make the model answer requests it currently refuses by weakening its refusal behavior. No weight edits have been saved.
+
+I can help with the defensive side instead: building a held-out refusal-robustness suite, comparing edited vs unedited models for safety regressions, improving refusal consistency and over-refusal on benign requests, designing safe fine-tuning/data mixtures, or writing an authorized red-team report. What I can’t do is provide a working recipe for disabling safeguards or making disallowed harmful content easier to elicit.

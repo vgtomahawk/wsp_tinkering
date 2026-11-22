@@ -458,6 +458,13 @@ def arch_text(cfg):
                 f"key/value heads of size {hd}")
     tied = "input embedding and output layer tied" if getattr(cfg, "tie_word_embeddings", False) else \
         "separate input embedding and output layer"
+    if str(getattr(cfg, "model_type", "")).startswith("granite"):
+        # Granite: fixed scalar multipliers on embeddings, block outputs (before the residual add) and logits
+        return (f"{n} layers of width {d}; {attn}; each layer has a SwiGLU MLP of width {cfg.intermediate_size} "
+                f"(shared_mlp.input_linear holds gate and up, shared_mlp.output_linear is the output); RMSNorm; "
+                f"embeddings are multiplied by {cfg.embedding_multiplier:g}, each attention and MLP output by "
+                f"{cfg.residual_multiplier:g} before it is added to the residual stream, and logits are divided by "
+                f"{cfg.logits_scaling:g}; vocabulary {cfg.vocab_size:,}; {tied}")
     if str(getattr(cfg, "model_type", "")).startswith("gemma"):
         # Gemma: GeGLU MLP and RMSNorm both before and after each attention and MLP block (sandwich norms)
         return (f"{n} layers of width {d}; {attn}; each layer has a GeGLU MLP of width {cfg.intermediate_size}; RMSNorm "

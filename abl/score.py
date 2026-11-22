@@ -50,7 +50,8 @@ def writers(model):
     out = []
     for i, L in enumerate(model.model.layers):
         for n, m in L.named_modules():
-            if n.split(".")[-1] in ("o_proj", "out_proj", "down_proj") and isinstance(m, torch.nn.Linear):
+            # output_linear: Granite's MLP output (shared_mlp.output_linear); absent in Qwen/Gemma/Llama
+            if n.split(".")[-1] in ("o_proj", "out_proj", "down_proj", "output_linear") and isinstance(m, torch.nn.Linear):
                 out.append((f"model.layers.{i}.{n}.weight", m))
     return out
 
