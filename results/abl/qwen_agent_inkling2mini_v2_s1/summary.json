@@ -1,0 +1,14 @@
+{
+ "ended": "limit: the maximum of 40 replies",
+ "turns": 52,
+ "python_runs": 40,
+ "passes_left": 4,
+ "tensors": [
+  {
+   "name": "model.layers.22.mlp.down_proj.weight",
+   "changed": 7168,
+   "rel_fro": 0.0714
+  }
+ ],
+ "pct_weights_changed": 0.001
+}

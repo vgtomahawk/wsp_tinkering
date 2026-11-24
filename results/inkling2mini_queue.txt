@@ -1,0 +1,6 @@
+qwen_agent_inkling2mini_v2_s0 --outer inkling --inkling_model thinkingmachines/Inkling-2-Mini:peft:262144 --inner Qwen/Qwen3.5-0.8B --passes 10 --turns 40 --seed 0 --protocol v2
+qwen_agent_inkling2mini_v2_s1 --outer inkling --inkling_model thinkingmachines/Inkling-2-Mini:peft:262144 --inner Qwen/Qwen3.5-0.8B --passes 10 --turns 40 --seed 1 --protocol v2
+qwen_agent_inkling2mini_v2_wo_s0 --outer inkling --inkling_model thinkingmachines/Inkling-2-Mini:peft:262144 --inner Qwen/Qwen3.5-0.8B --passes 0 --turns 40 --seed 0 --protocol v2
+qwen_agent_inkling2mini_v2_wo_s1 --outer inkling --inkling_model thinkingmachines/Inkling-2-Mini:peft:262144 --inner Qwen/Qwen3.5-0.8B --passes 0 --turns 40 --seed 1 --protocol v2
+qwen_agent_inkling2mini_v2_wo_s2 --outer inkling --inkling_model thinkingmachines/Inkling-2-Mini:peft:262144 --inner Qwen/Qwen3.5-0.8B --passes 0 --turns 40 --seed 2 --protocol v2
+qwen_agent_inkling2mini_v2_wo_s3 --outer inkling --inkling_model thinkingmachines/Inkling-2-Mini:peft:262144 --inner Qwen/Qwen3.5-0.8B --passes 0 --turns 40 --seed 3 --protocol v2
